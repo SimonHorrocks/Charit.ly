@@ -1,3 +1,4 @@
+
 from app import db
 
 
@@ -18,9 +19,10 @@ class Page(db.Model):
     PageID = db.Column(db.Integer, primary_key=True)
     PageName = db.Column(db.VARCHAR(100), nullable=False)
     PageDescription = db.Column(db.TEXT)
-    PageOwner = db.Column(db.Integer, nullable=False)
+    PageOwner = db.Column(db.Integer, db.ForeignKey('User.UserID'))
     TimeCreated = db.Column(db.DateTime)
     Followers = db.Column(db.Integer, nullable=False, default=0)
+
 
 class Post(db.Model):
     __tablename__ = 'Post'
@@ -28,8 +30,9 @@ class Post(db.Model):
     PostID = db.column(db.Integer, primary_key=True)
     PostTitle = db.Column(db.VARCHAR(100), nullable=False)
     PostContent = db.Column(db.VARCHAR(100))
-    Page = db.column(db.Integer, nullable=False)
+    Page = db.column(db.Integer, db.ForeignKey('Page.PageID'))
     TimeCreated = db.Column(db.DateTime)
+
 
 class Event(db.Model):
     __tablename__ = 'Event'
@@ -39,20 +42,29 @@ class Event(db.Model):
     EventDescription = db.Column(db.VARCHAR(100))
     EventTime = db.Column(db.VARCHAR(100))
     TimeCreated = db.Column(db.VARCHAR(100))
-    Page = db.column(db.Intger)
+    Page = db.column(db.Integer, db.ForeignKey('Page.PageID'))
     EventLocation = db.Column(db.VARCHAR(100))
 
-class Follows(db.Model):
-    __tablename__ = 'Follows'
 
-    UserID = db.column(db.Integer)
-    PageID = db.column(db.Integer)
+class Interest(db.Model):
+    __tablename__ = 'Interest'
 
-class Attending(db.Model):
-    __tablename__ = 'Attending'
-
-    UserID = db.column(db.Integer)
-    EventID = db.column(db.Integer)
+    InterestID = db.column(db.Integer, primary_key=True)
+    Interest = db.column(db.VARCHAR(100))
 
 
+# Many to Many Relationships
+Follows = db.table('Follows',
+                   db.column('UserID', db.Integer, db.ForeignKey('User.UserID'), primary_key=True),
+                   db.column('PageID', db.Integer, db.ForeignKey('Page.PageID'), primary_key=True)
+                   )
 
+Attending = db.table('Attending',
+                     db.column('UserID', db.Integer, db.ForeignKey('User.UserID'), primary_key=True),
+                     db.column('EventID', db.Integer, db.ForeignKey('Event.EventID'), primary_key=True)
+                     )
+
+UserInterest = db.table('UserInterest',
+                        db.column('UserID', db.Integer, db.ForeignKey('User.UserID'), primary_key=True),
+                        db.column('InterestID', db.Integer, db.ForeignKey('Interest.InterestID'), primary_key=True)
+                        )
