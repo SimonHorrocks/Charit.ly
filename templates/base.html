@@ -19,9 +19,6 @@
             <div class="container">
                 <div id="navbarMenuHeroA" class="navbar-menu">
                     <div class="navbar-end">
-                        <a href="{{ url_for('index') }}" class="navbar-item">
-                            Home
-                        </a>
                         <a href="{{ url_for('register') }}" class="navbar-item">
                             Sign Up
                         </a>
@@ -31,7 +28,29 @@
                         <a href="" class="navbar-item">
                             Log out
                         </a>
+                        <a href="{{ url_for('login') }}" class="navbar-item">
+                            Profile
+                        </a>
                     </div>
+                </div>
+            </div>
+        </nav>
+
+        <nav class="navbar">
+            <div id="subnav" class="navbar-menu">
+                <div class="navbar-end">
+                    <a href="{{ url_for('index') }}" class="navbar-item">
+                        Main Page
+                    </a>
+                    <a href="" class="navbar-item">
+                        Explore
+                    </a>
+                    <a href="" class="navbar-item">
+                        Map
+                    </a>
+                    <a href="" class="navbar-item">
+                        Search
+                    </a>
                 </div>
             </div>
         </nav>
