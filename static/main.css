@@ -12,14 +12,14 @@ h2 {
 }
 
  /* navigation bar */
-.navbar {
+#navbarMenuHeroA {
     display: table;
     margin: auto 0 auto auto;
     text-align: center;
 
 }
 
-.navbar a{
+#navbarMenuHeroA a{
     padding:5px;
     link: 30px;
     border-bottom-style: solid;
@@ -30,7 +30,7 @@ h2 {
     font-weight: bolder;
     text-decoration: none;
 }
-.navbar a:hover{
+#navbarMenuHeroA a:hover{
     background-color:  #0f580a;
     padding:5px;
     link: 30px;
