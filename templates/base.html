@@ -25,10 +25,10 @@
                         <a href="{{ url_for('login') }}" class="navbar-item">
                             Login
                         </a>
-                        <a href="" class="navbar-item">
+                        <a href="{{ url_for('logout') }}" class="navbar-item">
                             Log out
                         </a>
-                        <a href="{{ url_for('login') }}" class="navbar-item">
+                        <a href="{{ url_for('profile') }}" class="navbar-item">
                             Profile
                         </a>
                     </div>
@@ -37,18 +37,18 @@
         </nav>
 
         <nav class="navbar">
-            <div id="subnav" class="navbar-menu">
+            <div id="navbarB" class="navbar-menu">
                 <div class="navbar-end">
                     <a href="{{ url_for('index') }}" class="navbar-item">
                         Main Page
                     </a>
-                    <a href="" class="navbar-item">
+                    <a href="{{ url_for('explore') }}" class="navbar-item">
                         Explore
                     </a>
-                    <a href="" class="navbar-item">
+                    <a href="{{ url_for('map') }}" class="navbar-item">
                         Map
                     </a>
-                    <a href="" class="navbar-item">
+                    <a href="{{ url_for('search') }}" class="navbar-item">
                         Search
                     </a>
                 </div>
