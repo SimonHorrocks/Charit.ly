@@ -1,0 +1,56 @@
+body {
+    background-color: #fffcb3;
+}
+
+h1 {
+    color: darkgreen;
+    text-align: center;
+
+}
+h2 {
+    text-align: center;
+}
+
+ /* navigation bar */
+.navbar {
+    display: table;
+    margin: auto 0 auto auto;
+    text-align: center;
+
+}
+
+.navbar a{
+    padding:5px;
+    link: 30px;
+    border-bottom-style: solid;
+    border-bottom-color: #0f580a;
+    background-color: #D5D170;
+    font-size: 20px;
+    font-family: monospace;
+    font-weight: bolder;
+    text-decoration: none;
+}
+.navbar a:hover{
+    background-color:  #0f580a;
+    padding:5px;
+    link: 30px;
+    border-bottom-style: solid;
+    border-bottom-color: #D5D170;
+    transition: 1s;
+
+}
+
+ /* unvisited link */
+a:link {
+    color:#0f580a;
+}
+ /* visited link */
+a:visited {
+    color: #0f580a;
+}
+ /* hovering over link */
+a:hover {
+    color: #D5D170;
+}
+/*TODO: work on the color palette */
+/*TODO: background */
