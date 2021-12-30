@@ -1,5 +1,13 @@
+html {
+    background-color: #A5A58D;
+}
 body {
-    background-color: #fffcb3;
+    width: auto;
+    margin: 0 auto;
+    background-color: #ffe8d6;
+    padding: 0 20px 20px 20px;
+    border: 2px solid #3f4238;
+    border-top: none;
 }
 
 h1 {
@@ -16,66 +24,70 @@ h2 {
     display: table;
     margin: auto 0 auto auto;
     text-align: center;
+
+
 }
 
 #navbarMenuHeroA a{
-    padding:5px;
-    border-bottom-style: solid;
-    border-bottom-color: #0f580a;
-    background-color: #D5D170;
+    padding:10px;
+    /*border-bottom-style: solid;
+    border-bottom-color: #3f4238;*/
+    background-color: #ffe8d6;
     font-size: 20px;
     font-family: monospace;
     font-weight: bolder;
     text-decoration: none;
 }
 #navbarMenuHeroA a:hover{
-    background-color:  #0f580a;
-    padding:5px;
-    border-bottom-style: solid;
-    border-bottom-color: #D5D170;
+    background-color:  #3f4238;
+    padding:10px;
+/*    border-bottom-style: solid;
+    border-bottom-color: #ffe8d6;*/
     transition: 1s;
 
 }
+
 /* second navigation bar */
 #navbarB{
-    margin: 40px auto 0 auto;
+    margin: 0 auto 0 auto;
     text-align: center;
-    background-color: #D5D170;
+    background-color: #ffe8d6;
     border-bottom-style: solid;
-    border-bottom-color: #0f580a;
+    border-bottom-color: #3f4238;
     border-width: 3px;
-    padding:8px;
+    padding:10px;
 }
 
 #navbarB a{
-    padding:8px;
+    padding:10px;
     border-bottom-style: solid;
-    border-bottom-color: #0f580a;
-    background-color: #D5D170;
+    border-bottom-color: #3f4238;
+    background-color: #ffe8d6;
     font-size: 20px;
     font-family: monospace;
     font-weight: bolder;
     text-decoration: none;
+
 }
 #navbarB a:hover{
-    background-color:  #0f580a;
-    padding:8px;
+    background-color:  #3f4238;
+    padding:10px;
     border-bottom-style: solid;
-    border-bottom-color: #D5D170;
+    border-bottom-color: #ffe8d6;
     transition: 1s;
 }
 
  /* unvisited link */
 a:link {
-    color:#0f580a;
+    color:#3f4238;
 }
  /* visited link */
 a:visited {
-    color: #0f580a;
+    color: #3f4238;
 }
  /* hovering over link */
 a:hover {
-    color: #D5D170;
+    color: #ffe8d6;
 }
 /*TODO: work on the color palette */
 /*TODO: background */
