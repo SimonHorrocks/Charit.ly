@@ -8,7 +8,6 @@ setuptools
 Werkzeug~=2.0.1
 Flask-SQLAlchemy==2.5.1
 Flask-Login
-Flask-Talisman
 pyotp
 crypto~=1.4.1
 pycryptodome==3.10.1
@@ -18,5 +17,7 @@ cryptography==3.4.7
 flask_wtf==0.15.1
 email-validator
 pymysql
-
-
+mariadb
+WTForms~=2.3.3
+Flask-WTF
+email-validator
