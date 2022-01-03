@@ -13,13 +13,24 @@
 
 
 <section class="hero is-primary is-fullheight">
-{# TODO: Make nav bars at the same hight  #}
-{# TODO: Add drop down menu for the first nav bar for phone view #}
+    {# TODO: Add drop down menu for the second part of nav bar for phone view #}
     <div class="hero-head">
         <nav class="navbar">
             <div class="container">
                 <div id="navbarMenuHeroA" class="navbar-menu">
                     <div class="navbar-end">
+                        <a href="{{ url_for('index') }}" class="navbar-item">
+                            Main Page
+                        </a>
+                        <a href="{{ url_for('explore') }}" class="navbar-item">
+                            Explore
+                        </a>
+                        <a href="{{ url_for('map') }}" class="navbar-item">
+                            Map
+                        </a>
+                        <a href="{{ url_for('search') }}" class="navbar-item">
+                            Search
+                        </a>
                         <a href="{{ url_for('register') }}" class="navbar-item">
                             Sign Up
                         </a>
@@ -33,25 +44,6 @@
                             Profile
                         </a>
                     </div>
-                </div>
-            </div>
-        </nav>
-
-        <nav class="navbar">
-            <div id="navbarB" class="navbar-menu">
-                <div class="navbar-end">
-                    <a href="{{ url_for('index') }}" class="navbar-item">
-                        Main Page
-                    </a>
-                    <a href="{{ url_for('explore') }}" class="navbar-item">
-                        Explore
-                    </a>
-                    <a href="{{ url_for('map') }}" class="navbar-item">
-                        Map
-                    </a>
-                    <a href="{{ url_for('search') }}" class="navbar-item">
-                        Search
-                    </a>
                 </div>
             </div>
         </nav>

@@ -19,61 +19,34 @@ h2 {
     text-align: center;
 }
 
- /* navigation bar */
-#navbarMenuHeroA {
-    display: table;
-    margin: auto 0 auto auto;
+
+/*  navigation bar */
+#navbarMenuHeroA{
+    margin: auto auto 0 auto;
     text-align: center;
-
-
-}
-
-#navbarMenuHeroA a{
-    padding:10px;
-    /*border-bottom-style: solid;
-    border-bottom-color: #3f4238;*/
-    background-color: #ffe8d6;
-    font-size: 20px;
-    font-family: monospace;
-    font-weight: bolder;
-    text-decoration: none;
-}
-#navbarMenuHeroA a:hover{
-    background-color:  #3f4238;
-    padding:10px;
-/*    border-bottom-style: solid;
-    border-bottom-color: #ffe8d6;*/
-    transition: 1s;
-
-}
-
-/* second navigation bar */
-#navbarB{
-    margin: 0 auto 0 auto;
-    text-align: center;
-    background-color: #ffe8d6;
+    background-color: #B7B7A4;
     border-bottom-style: solid;
     border-bottom-color: #3f4238;
     border-width: 3px;
     padding:10px;
 }
 
-#navbarB a{
+#navbarMenuHeroA a{
     padding:10px;
     border-bottom-style: solid;
     border-bottom-color: #3f4238;
-    background-color: #ffe8d6;
+    background-color: #B7B7A4;
     font-size: 20px;
     font-family: monospace;
     font-weight: bolder;
     text-decoration: none;
 
 }
-#navbarB a:hover{
+#navbarMenuHeroA a:hover{
     background-color:  #3f4238;
     padding:10px;
     border-bottom-style: solid;
-    border-bottom-color: #ffe8d6;
+    border-bottom-color: #B7B7A4;
     transition: 1s;
 }
 
