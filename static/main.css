@@ -24,7 +24,7 @@ h2 {
 #navbarMenuHeroA{
     margin: auto auto 0 auto;
     text-align: center;
-    background-color: #B7B7A4;
+    background-color: #D4C7B0;
     border-bottom-style: solid;
     border-bottom-color: #3f4238;
     border-width: 3px;
@@ -35,7 +35,7 @@ h2 {
     padding:10px;
     border-bottom-style: solid;
     border-bottom-color: #3f4238;
-    background-color: #B7B7A4;
+    background-color: #D4C7B0;
     font-size: 20px;
     font-family: monospace;
     font-weight: bolder;
@@ -46,7 +46,7 @@ h2 {
     background-color:  #3f4238;
     padding:10px;
     border-bottom-style: solid;
-    border-bottom-color: #B7B7A4;
+    border-bottom-color: #D4C7B0;
     transition: 1s;
 }
 
@@ -62,5 +62,6 @@ a:visited {
 a:hover {
     color: #ffe8d6;
 }
+
 /*TODO: work on the color palette */
 /*TODO: background */
