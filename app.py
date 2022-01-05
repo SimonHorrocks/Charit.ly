@@ -1,9 +1,6 @@
-import socket
-
-from flask import Flask, render_template, request
+from flask import Flask, render_template
+from flask_login import LoginManager
 from flask_sqlalchemy import SQLAlchemy
-
-from users.forms import RegisterForm, LoginForm
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'LongAndRandomSecretKey'
@@ -12,33 +9,10 @@ app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
 db = SQLAlchemy(app)
 
+
 @app.route('/')
 def index():
     return render_template('index.html')
-
-
-# Blueprints were not working for me so I put the registration view here for now
-# TODO: add blueprints for register and login forms
-@app.route('/register', methods=['GET', 'POST'])
-def register():
-    form = RegisterForm()
-
-    if form.validate_on_submit():
-        print(request.form.get('username'))
-        print(request.form.get('password'))
-        return login()
-
-    return render_template('register.html', form=form)
-
-
-@app.route('/login', methods=['GET', 'POST'])
-def login():
-    form = LoginForm()
-
-    if form.validate_on_submit():
-        return index()
-
-    return render_template('login.html', form=form)
 
 
 @app.route('/explore')
@@ -67,11 +41,21 @@ def search():
 
 
 if __name__ == '__main__':
-    my_host = "127.0.0.1"
-    free_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-    free_socket.bind((my_host, 0))
-    free_socket.listen(5)
-    free_port = free_socket.getsockname()[1]
-    free_socket.close()
+    # setup login manager to handle user logins
+    login_manager = LoginManager()
+    # login view to redirect users to
+    login_manager.login_view = 'auth.login'
+    login_manager.init_app(app)
 
-    app.run(host=my_host, port=free_port, debug=True)
+    from models import User
+
+    # setup user loader (load user by id)
+    @login_manager.user_loader
+    def load_user(id):
+        return User.query.get(int(id)) # TODO: test that this works since id field is UserID
+
+    from auth.views import auth_blueprint
+
+    app.register_blueprint(auth_blueprint)
+
+    app.run()
