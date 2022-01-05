@@ -19,9 +19,9 @@ def index():
     return render_template('index.html')
 
 
-# Blueprints were not working for me so I put the registration form here for now
+# Blueprints were not working for me so I put the registration view here for now
 # TODO: add blueprints for register and login forms
-@app.route('/register')
+@app.route('/register', methods=['GET', 'POST'])
 def register():
     form = RegisterForm()
 
