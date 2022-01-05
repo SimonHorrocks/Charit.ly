@@ -56,3 +56,11 @@ class RegisterForm(FlaskForm):
                                          check_password_digit])
     confirm_password = PasswordField(validators=[DataRequired(), EqualTo("password", "passwords do not match")])
     submit = SubmitField()
+
+
+class LoginForm(FlaskForm):
+    # Set up fields
+    email = StringField(validators=[DataRequired(), Email()])
+    password = PasswordField(validators=[DataRequired()])
+    pin = StringField(validators=[DataRequired()])
+    submit = SubmitField()
