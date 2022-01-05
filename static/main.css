@@ -17,12 +17,12 @@ h1 {
 }
 h2 {
     text-align: center;
+    color: #D4C7B0;
+    font-size: 30px;
+    font-family: monospace;
+
 }
 
-h3 {
-    text-align: center;
-    color: #3f4238;
-}
 /*  navigation bar */
 #navbarMenuHeroA{
     margin: auto auto 0 auto;
@@ -53,6 +53,26 @@ h3 {
     transition: 0.5s;
 }
 
+/*form box*/
+.box{
+    display: table;
+    padding: 20px 150px;
+    background-color: #3f4238;
+    margin: 20px auto 20px auto;
+    text-align: center;
+    border-radius: 10px;
+}
+
+input {
+    padding: 10px 30px;
+    background: #A5A58D;
+    margin-top: 10px;
+    border: none;
+    color: #3f4238;
+    font-size: 20px;
+    border-radius: 2px;
+}
+
 /*button*/
 .button{
     background: #FFE8D6;
@@ -60,6 +80,8 @@ h3 {
     color: #B98B73;
     padding: 10px 20px;
     text-align: center;
+    border-radius: 2px;
+
 }
 .button:hover{
     background: #B98B73;
@@ -78,23 +100,6 @@ h3 {
     transition: 0.5s;
 }
 
-/*form box*/
-.box{
-    display: table;
-    padding: 20px;
-
-    background-color: #3f4238;
-    margin: 20px auto 20px auto;
-    text-align: center;
-    border-radius: 10px;
-}
-
-input {
-    padding: 10px 30px;
-    background: #A5A58D;
-    margin-top: 10px;
-    border: none;
-}
  /* unvisited link */
 a:link {
     color:#3f4238;
