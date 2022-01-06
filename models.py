@@ -1,6 +1,7 @@
 from app import db
 import datetime
 
+
 def init_db():
     db.drop_all()
     db.create_all()
@@ -44,12 +45,3 @@ class Post(db.Model):
 
     def __repr__(self):
         return f"Post('{self.title})', '{self.content}')"
-
-
-
-
-
-
-
-
-

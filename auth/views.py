@@ -17,7 +17,7 @@ def register():
 
     # if request method is POST and form is valid
     if form.validate_on_submit():
-        user = User.query.filter_by(Email=form.email.data).first()
+        user = User.query.filter_by(email=form.email.data).first()
         # if this returns a user, then the email already exists in database
 
         # if email already exists redirect user back to signup page with error message so user can try again
@@ -29,7 +29,7 @@ def register():
         new_user = User(email=form.email.data,
                         username=form.username.data,
                         password=form.password.data,
-                        roleid="user")
+                        roleID="user")
 
         # add the new user to the database
         db.session.add(new_user)
@@ -61,9 +61,9 @@ def login():
         # increment the number of login attempts
         session['logins'] += 1
         # query for the user who matches the given email
-        user = User.query.filter_by(Email=form.email.data).first()
+        user = User.query.filter_by(email=form.email.data).first()
 
-        if not user or not check_password_hash(user.Password, form.password.data):
+        if not user or not check_password_hash(user.password, form.password.data):
             # if no match create appropriate error message based on login attempts
             if session['logins'] == 3:
                 flash('Number of incorrect logins exceeded')
@@ -82,7 +82,7 @@ def login():
             db.session.add(user)
             db.session.commit()
             # log successful login attempt
-            logging.warning('SECURITY - Log in [%s, %s, %s]', current_user.UserID, current_user.Email,
+            logging.warning('SECURITY - Log in [%s, %s, %s]', current_user.id, current_user.email,
                             request.remote_addr)
 
             if user.roleid == 'admin':
@@ -90,7 +90,7 @@ def login():
                 return redirect(url_for('admin.admin'))
             else:
                 # otherwise redirect to profile
-                return redirect(url_for('users.profile'))
+                return redirect(url_for('profile'))
 
     return render_template('login.html', form=form)
 
@@ -99,7 +99,7 @@ def login():
 @login_required
 def logout():
     # log user logout
-    logging.warning('SECURITY - Log out [%s, %s, %s]', current_user.UserID, current_user.Email, request.remote_addr)
+    logging.warning('SECURITY - Log out [%s, %s, %s]', current_user.id, current_user.email, request.remote_addr)
     # logout the user from the flask login manager
     logout_user()
     # redirect to the home page
