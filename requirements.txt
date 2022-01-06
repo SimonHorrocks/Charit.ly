@@ -20,4 +20,4 @@ pymysql
 mariadb
 WTForms~=2.3.3
 Flask-WTF
-email-validator
+
