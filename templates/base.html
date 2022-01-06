@@ -7,18 +7,30 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Charity Website</title>
     <link rel="stylesheet" href="static\main.css" type="text/css"/>
+    <script>
+        function responsiveNav() {
+            var x = document.getElementById("navbarMenuHeroA");
+                if (x.className === "navbar-menu") {
+                    x.className += " responsive";
+                }
+                else {
+                    x.className = "navbar-menu";
+                }
+        }
+
+    </script>
 </head>
 
 <body>
 
 
 <section class="hero is-primary is-fullheight">
-    {# TODO: Add drop down menu for the second part of nav bar for phone view #}
     <div class="hero-head">
         <nav class="navbar">
             <div class="container">
                 <div id="navbarMenuHeroA" class="navbar-menu">
                     <div class="navbar-end">
+                                                  <a href="javascript:void(0);" class="icon" onclick="responsiveNav()">&#9776;</a>
                         <a href="{{ url_for('index') }}" class="navbar-item">
                             Main Page
                         </a>
@@ -57,6 +69,7 @@
     </div>
 
 </section>
+
 </body>
 
 </html>

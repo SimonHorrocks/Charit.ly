@@ -3,9 +3,8 @@ html {
 }
 body {
     width: auto;
-    margin: 0 auto;
+    margin: 0;
     background-color: #ffe8d6;
-    padding: 0 20px 20px 20px;
     border: 2px solid #3f4238;
     border-top: none;
 }
@@ -20,24 +19,20 @@ h2 {
     color: #D4C7B0;
     font-size: 30px;
     font-family: monospace;
-
 }
 
+.navbar {
+    width: 100%;
+}
 /*  navigation bar */
-#navbarMenuHeroA{
-    margin: auto auto 0 auto;
-    text-align: center;
+.navbar-menu{
     background-color: #D4C7B0;
-    border-bottom-style: solid;
-    border-bottom-color: #3f4238;
-    border-width: 3px;
     padding:10px;
 }
 
-#navbarMenuHeroA a{
+.navbar-menu a{
+    text-align: left;
     padding:10px;
-    border-bottom-style: solid;
-    border-bottom-color: #3f4238;
     background-color: #D4C7B0;
     font-size: 20px;
     font-family: monospace;
@@ -45,12 +40,14 @@ h2 {
     text-decoration: none;
 
 }
-#navbarMenuHeroA a:hover{
+.navbar-menu a:hover{
     background-color:  #3f4238;
     padding:10px;
-    border-bottom-style: solid;
-    border-bottom-color: #D4C7B0;
     transition: 0.5s;
+}
+
+.navbar-menu .icon{
+    display: none;
 }
 
 /*form box*/
@@ -113,7 +110,68 @@ a:hover {
     color: #ffe8d6;
 }
 
+/*mobile view for max 850px */
+@media screen and (max-width: 850px){
+    .navbar-menu{
+    background-color: #D4C7B0;
+    padding:10px;
+    }
+
+    .navbar-menu a:not(:nth-child(1), :nth-child(2), :nth-child(3), :nth-child(4), :nth-child(5)){
+        display: none;
+    }
+    .navbar-menu a.icon{
+        display: inline;
+    }
+}
+@media screen and (max-width: 850px) {
+  .navbar-menu.responsive {position: relative;}
+  .navbar-menu.responsive a.icon {
+    position: relative;
+  }
+  .navbar-menu.responsive a {
+      transition: 0.5s;
+    float: none;
+    display: block;
+    text-align: center;
+  }
+}
+
+/*mobile view for max 650px */
+@media screen and (max-width: 650px){
+    .navbar-menu{
+    background-color: #D4C7B0;
+    padding:10px;
+    }
+
+    .navbar-menu a:not(:nth-child(1), :nth-child(2), :nth-child(3), :nth-child(4)){
+        display: none;
+    }
+
+    .navbar-menu a.icon{
+        display: inline;
+    }
+
+}
+@media screen and (max-width: 650px) {
+  .navbar-menu.responsive {
+      position: relative;
+  }
+
+  .navbar-menu.responsive a.icon {
+    position: relative;
+  }
+
+  .navbar-menu.responsive a {
+      transition: 0.5s;
+    float: none;
+    display: block;
+    text-align: center;
+  }
+}
+
+/*TODO: figure out why navbar doesn't cover the whole screen width*/
 /*TODO: work on the color palette */
 /*TODO: background */
-/*TODO: change the look of the button*/
+/*TODO: potentially change the look of the button*/
 /*TODO: make forms' error messages appear below input fields*/
