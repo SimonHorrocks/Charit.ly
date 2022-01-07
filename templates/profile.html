@@ -4,4 +4,24 @@
 
     <h1 class="title is-1">Profile</h1>
 
+    <div class="tab">
+        <button class="tablink" onclick="tabView('Profile')" id="default">Profile</button>
+        <button class="tablink" onclick="tabView('MyCharities')">My Charities</button>
+        <button class="tablink" onclick="tabView('Settings')">Settings</button>
+
+        <div id="Profile" class="tabcontent">
+            <h3> Profile </h3>
+        </div>
+
+        <div id="MyCharities" class="tabcontent">
+            <h3> MyCharities </h3>
+        </div>
+
+        <div id="Settings" class="tabcontent">
+            <h3> Settings </h3>
+        </div>
+    </div>
+<script>
+    document.getElementById("default").click();
+</script>
 {% endblock %}
