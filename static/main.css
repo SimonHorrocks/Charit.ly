@@ -51,7 +51,7 @@ h2 {
 }
 
 /*form box*/
-.box{
+.box {
     display: table;
     padding: 20px 150px;
     background-color: #3f4238;
@@ -61,6 +61,7 @@ h2 {
 }
 
 input {
+    position: static;
     padding: 10px 30px;
     background: #A5A58D;
     margin-top: 10px;
@@ -70,14 +71,24 @@ input {
     border-radius: 2px;
 }
 
+/*error messages in forms*/
+.error{
+    color:  #ffe8d6;
+    font-family: monospace;
+    display: inline;
+    position: relative;
+}
+
 /*button*/
 .button{
     background: #FFE8D6;
     border: none;
     color: #B98B73;
+    width: auto;
     padding: 10px 20px;
     text-align: center;
     border-radius: 2px;
+    margin: 10px auto;
 
 }
 .button:hover{
@@ -139,6 +150,9 @@ a:hover {
 
 /*mobile view for max 650px */
 @media screen and (max-width: 650px){
+    .box{
+        padding: 20px 60px;
+    }
     .navbar-menu{
     background-color: #D4C7B0;
     padding:10px;
@@ -170,8 +184,8 @@ a:hover {
   }
 }
 
-/*TODO: figure out why navbar doesn't cover the whole screen width*/
+
 /*TODO: work on the color palette */
 /*TODO: background */
 /*TODO: potentially change the look of the button*/
-/*TODO: make forms' error messages appear below input fields*/
+/*TODO: make forms' error messages more compact */
