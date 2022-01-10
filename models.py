@@ -1,6 +1,7 @@
 from app import db
 import datetime
 
+
 def init_db():
     db.drop_all()
     db.create_all()
@@ -16,7 +17,7 @@ class User(db.Model):
     pages = db.relationship('Page', backref='author', lazy=True)
 
     def __repr__(self):
-        return f"User('{self.username})', '{self.email}' , '{self.role}')"
+        return f"User('{self.username})', '{self.email}' , '{self.roleID}')"
 
 
 class Page(db.Model):
