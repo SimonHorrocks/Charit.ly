@@ -62,5 +62,4 @@ class LoginForm(FlaskForm):
     # Set up fields
     email = StringField(validators=[DataRequired(), Email()])
     password = PasswordField(validators=[DataRequired()])
-    pin = StringField(validators=[DataRequired()])
     submit = SubmitField()
