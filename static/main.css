@@ -122,23 +122,23 @@ input {
     padding: 10px 20px;
 }
 .tab button {
-    color: #A5A58D;
+    color: #3f4238;
     border-top-left-radius: 5px;
     border-top-right-radius: 5px;
-    background-color: #3f4238;
+    background-color: #A5A58D;
     border: none;
     padding: 10px 20px;
     font-family: monospace;
 
 }
 .tab button:hover{
-    background-color: #A5A58D;
-    color: #3f4238;
+    background-color: #3f4238;
+    color: #A5A58D;
     transition: 0.5s;
 }
 .tab button:focus{
-    background-color: #A5A58D;
-    color: #3f4238;
+    background-color: #3f4238;
+    color: #A5A58D;
 }
 
  /* unvisited link */
