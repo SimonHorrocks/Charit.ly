@@ -1,4 +1,5 @@
 import copy
+from datetime import datetime
 
 from flask import Blueprint, render_template
 from sqlalchemy import desc
@@ -19,7 +20,8 @@ def create():
     form = PostForm()
 
     if form.validate_on_submit():
-        new_post = Post(username=None, title=form.title.data, body=form.body.data)
+        time = datetime.now()
+        new_post = Post(id=None, title=form.title.data, content=form.body.data, page="placeholder", time_created=time)
 
         db.session.add(new_post)
         db.session.commit()

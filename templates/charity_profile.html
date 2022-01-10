@@ -24,16 +24,16 @@
                                 <h1>{{ post.title }}</h1>
                                 <p>
                                     <strong>{{ post.username }}</strong>
-                                    <small>{{ post.created.strftime('%d-%m-%Y') }}</small>
+                                    <small>{{ post.time_created.strftime('%d-%m-%Y %H:%M') }}</small>
                                     <br>
                                     {{ post.body }}
                                     <br>
                                 <div id="navbarMenuHeroA" class="navbar-menu">
                                     <div class="navbar-start">
                                         <a class="navbar-item"
-                                           href="{{ url_for('blog.update', id=post.id) }}">Update</a>
+                                           href="{{ url_for('charity.update', id=post.id) }}">Update</a>
                                         <a class="navbar-item"
-                                           href="{{ url_for('blog.delete', id=post.id) }}">Delete</a>
+                                           href="{{ url_for('charity.delete', id=post.id) }}">Delete</a>
                                     </div>
                                 </div>
                                 </p>
