@@ -20,7 +20,11 @@ h2 {
     font-size: 30px;
     font-family: monospace;
 }
-
+h3{
+    text-align: left;
+    font-size: 30px;
+    font-family: monospace;
+}
 .navbar {
     width: 100%;
 }
@@ -121,7 +125,7 @@ input {
     color: #A5A58D;
     padding: 10px 20px;
 }
-.tab button {
+.tablink {
     color: #3f4238;
     border-top-left-radius: 5px;
     border-top-right-radius: 5px;
@@ -131,14 +135,21 @@ input {
     font-family: monospace;
 
 }
-.tab button:hover{
+.tablink:hover{
     background-color: #3f4238;
     color: #A5A58D;
     transition: 0.5s;
 }
-.tab button:focus{
+.tablink:focus{
     background-color: #3f4238;
     color: #A5A58D;
+}
+
+/* blog post */
+.content{
+        color: #3f4238;
+    border-radius: 10px;
+    background-color: #A5A58D;
 }
 
  /* unvisited link */
@@ -151,7 +162,7 @@ a:visited {
 }
  /* hovering over link */
 a:hover {
-    color: #ffe8d6;
+    color: #A5A58D;
 }
 
 /*mobile view for max 850px */
