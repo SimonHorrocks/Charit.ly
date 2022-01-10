@@ -15,8 +15,11 @@
 
         <div id="Posts" class="tabcontent">
             <h3> MyCharities </h3>
+            <a href="{{ url_for('charity.create') }}" class="button2">
+                <button>New Post</button>
+            </a>
+
             <div class="box">
-            <input type="button" onclick="location.href='create';" value="Add new post" />
                 {% for post in posts %}
                     <article class="media">
                         <div class="media-content">
@@ -48,7 +51,4 @@
             <h3> Settings </h3>
         </div>
     </div>
-    <script>
-        document.getElementById("default").click();
-    </script>
 {% endblock %}
