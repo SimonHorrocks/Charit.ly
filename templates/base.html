@@ -20,7 +20,7 @@
             <div class="container">
                 <div id="navbarMenuHeroA" class="navbar-menu">
                     <div class="navbar-end">
-                                                  <a href="javascript:void(0);" class="icon" onclick="responsiveNav()">&#9776;</a>
+                        <a href="javascript:void(0);" class="icon" onclick="responsiveNav()">&#9776;</a>
                         <a href="{{ url_for('index') }}" class="navbar-item">
                             Main Page
                         </a>
@@ -45,6 +45,9 @@
                         <a href="{{ url_for('profile') }}" class="navbar-item">
                             Profile
                         </a>
+                        <a href="{{ url_for('charity.create') }}" class="navbar-item">
+                            Charity Profile
+                        </a> {#TODO: Change Charity Profile name to profile#}
                     </div>
                 </div>
             </div>
