@@ -85,7 +85,7 @@ input {
 }
 
 /*button*/
-.button{
+.button {
     background: #FFE8D6;
     border: none;
     color: #B98B73;
@@ -96,20 +96,15 @@ input {
     margin: 10px auto;
 
 }
+
 .button:hover{
     background: #B98B73;
-    border: none;
     color: #FFE8D6;
-    padding: 10px 20px;
-    text-align: center;
     transition: 0.5s;
 }
 .button:active{
     background: #B98B73;
-    border: none;
     color: #FFE8D6;
-    padding: 10px 20px;
-    text-align: center;
     transition: 0.5s;
 }
 
@@ -147,7 +142,7 @@ input {
 
 /* blog post */
 .content{
-        color: #3f4238;
+    color: #3f4238;
     border-radius: 10px;
     background-color: #A5A58D;
 }
