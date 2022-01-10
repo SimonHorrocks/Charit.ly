@@ -1,5 +1,6 @@
 html {
     background-color: #A5A58D;
+    font-family: monospace;
 }
 body {
     width: auto;
@@ -18,12 +19,10 @@ h2 {
     text-align: center;
     color: #D4C7B0;
     font-size: 30px;
-    font-family: monospace;
 }
 h3{
     text-align: left;
     font-size: 30px;
-    font-family: monospace;
 }
 .navbar {
     width: 100%;
@@ -39,7 +38,6 @@ h3{
     padding:10px;
     background-color: #D4C7B0;
     font-size: 20px;
-    font-family: monospace;
     font-weight: bolder;
     text-decoration: none;
 
@@ -79,7 +77,6 @@ input {
 /*error messages in forms*/
 .error{
     color:  #ffe8d6;
-    font-family: monospace;
     display: inline;
     position: relative;
 }
@@ -117,7 +114,7 @@ input {
 
 .tab {
     border: none;
-    color: #A5A58D;
+    color: #D4C7B0;
     padding: 10px 20px;
 }
 .tablink {
@@ -127,7 +124,6 @@ input {
     background-color: #A5A58D;
     border: none;
     padding: 10px 20px;
-    font-family: monospace;
 
 }
 .tablink:hover{
@@ -147,6 +143,18 @@ input {
     background-color: #A5A58D;
 }
 
+.tabcontent button{
+    border: none;
+    color: #3f4238;
+    background: #D4C7B0;
+    padding: 5px 10px;
+    font-size: 15px;
+}
+
+.tabcontent button:hover{
+    background: #A5A58D;
+    transition: 0.5s;
+}
  /* unvisited link */
 a:link {
     color:#3f4238;
@@ -157,7 +165,7 @@ a:visited {
 }
  /* hovering over link */
 a:hover {
-    color: #A5A58D;
+    color: #D4C7B0;
 }
 
 /*mobile view for max 850px */
