@@ -9,6 +9,7 @@ from models import Post
 
 charity_blueprint = Blueprint("charity", __name__, template_folder="templates")
 
+# TODO: fix blueprint not working for update and delete pages
 @charity_blueprint.route('/blog')
 def blog():
     posts = Post.query.order_by(desc('id')).all()
@@ -21,7 +22,7 @@ def create():
 
     if form.validate_on_submit():
         time = datetime.now()
-        new_post = Post(id=None, title=form.title.data, content=form.body.data, page="placeholder", time_created=time)
+        new_post = Post(id=None, title=form.title.data, content=form.content.data, page="placeholder", time_created=time)
 
         db.session.add(new_post)
         db.session.commit()
@@ -40,7 +41,7 @@ def update(id):
 
     if form.validate_on_submit():
         Post.query.filter_by(id=id).update({"title": form.title.data})
-        Post.query.filter_by(id=id).update({"body": form.body.data})
+        Post.query.filter_by(id=id).update({"content": form.content.data})
 
         db.session.commit()
 
@@ -51,7 +52,7 @@ def update(id):
 
     # set update form with title and body of copied post object
     form.title.data = post_copy.title
-    form.body.data = post_copy.body
+    form.content.data = post_copy.content
 
     return render_template('update.html', form=form)
 
