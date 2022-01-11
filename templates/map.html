@@ -4,4 +4,39 @@
 
     <h1 class="title is-1">Map</h1>
 
+    <div id="map" style="height: 600px; width: 100%"></div>
+
+    <script src="https://cdn.jsdelivr.net/gh/openlayers/openlayers.github.io@master/en/v6.11.0/build/ol.js"></script>
+
+    <script type="text/javascript">
+        const source = new ol.source.Vector();
+        const markers = new ol.layer.Vector({
+          source: source,
+        });
+        var view = new ol.View({
+          center: ol.proj.fromLonLat([0, 0]),
+          zoom: 4
+        })
+        var map = new ol.Map({
+            target: 'map',
+            layers: [
+                new ol.layer.Tile({
+                    source: new ol.source.OSM()
+                }), markers
+            ],
+            view: view
+        });
+        let pos = navigator.geolocation.getCurrentPosition(
+            function (pos) {
+                const coords = [pos.coords.longitude, pos.coords.latitude];
+                source.clear(true);
+                source.addFeature(
+                  new ol.Feature(new ol.geom.Point(ol.proj.fromLonLat(coords))),
+                );
+                view.setCenter(ol.proj.fromLonLat(coords))
+            }
+        );
+
+    </script>
+
 {% endblock %}
