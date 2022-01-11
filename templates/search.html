@@ -4,4 +4,13 @@
 
     <h1 class="title is-1">Search</h1>
 
+    {% if results %}
+        {% for result in results %}
+            {{ result.username }}
+        {% endfor %}
+
+    {% else %}
+        No results.
+    {% endif %}
+
 {% endblock %}

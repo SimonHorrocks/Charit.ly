@@ -9,7 +9,7 @@ class User(db.Model):
     roleID = db.Column(db.String(100), nullable=False, default='user')
     pages = db.relationship('Page', backref='author', lazy=True)
 
-    tags = db.relationship('Tag', secondary='interests', lazy='subquery', backref=db.backref('users', lazy=True))
+    tags = db.relationship('Tag', secondary='interests', lazy='subquery', backref=db.backref('users', lazy='dynamic'))
 
     def __repr__(self):
         return f"User('{self.username})', '{self.email}' , '{self.roleID}')"
@@ -25,8 +25,8 @@ class Page(db.Model):
 
     # relationships
     tags = db.relationship('Tag', secondary='tags', lazy='subquery', backref=db.backref('pages', lazy=True))
-    posts = db.relationship('Post', backref='page', lazy=True)
-    events = db.relationship('Post', backref='page', lazy=True)
+    posts = db.relationship('Post', backref='charity_posts', lazy=True)
+    events = db.relationship('Post', backref='charity_events', lazy=True)
 
     def __repr__(self):
         return f"Page('{self.name})', '{self.description}' , '{self.followers}')"
