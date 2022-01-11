@@ -1,5 +1,8 @@
-from flask import Flask, render_template
-from flask_login import LoginManager
+import logging
+from functools import wraps
+
+from flask import Flask, render_template, request
+from flask_login import current_user, login_required
 from flask_sqlalchemy import SQLAlchemy
 
 from helpers import setup_app
@@ -10,6 +13,26 @@ app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///charityForum.db'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
 db = SQLAlchemy(app)
+
+
+def requires_roles(*roles):
+    def wrapper(f):  # create wrapper
+        @wraps(f)
+        def wrapped(*args, **kwargs):  # wrap function to check the user's role
+            if current_user.roleID not in roles:  # if the role is not in the list of roles required
+                # log unauthorised access attempt
+                logging.warning('SECURITY - Unauthorised access attempt [%s, %s, %s, %s]',
+                                current_user.id,
+                                current_user.firstname,
+                                current_user.roleID,
+                                request.remote_addr)
+                # Redirect the user to an unauthorised notice!
+                return render_template('403.html') # add 403 page
+            return f(*args, **kwargs)
+
+        return wrapped
+
+    return wrapper
 
 
 @app.route('/')
@@ -23,6 +46,7 @@ def explore():
 
 
 @app.route('/logout')
+@login_required
 def logout():
     return render_template('logout.html')
 
@@ -33,6 +57,7 @@ def map():
 
 
 @app.route('/profile')
+@login_required
 def profile():
     return render_template('profile.html')
 
