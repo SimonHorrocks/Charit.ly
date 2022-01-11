@@ -37,11 +37,6 @@ def profile():
     return render_template('profile.html')
 
 
-@app.route('/search')
-def search():
-    return render_template('search.html')
-
-
 if __name__ == '__main__':
     setup_app(app, db)
     app.run()
