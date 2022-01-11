@@ -19,12 +19,12 @@ def requires_roles(*roles):
     def wrapper(f):  # create wrapper
         @wraps(f)
         def wrapped(*args, **kwargs):  # wrap function to check the user's role
-            if current_user.role not in roles:  # if the role is not in the list of roles required
+            if current_user.roleID not in roles:  # if the role is not in the list of roles required
                 # log unauthorised access attempt
                 logging.warning('SECURITY - Unauthorised access attempt [%s, %s, %s, %s]',
                                 current_user.id,
                                 current_user.firstname,
-                                current_user.role,
+                                current_user.roleID,
                                 request.remote_addr)
                 # Redirect the user to an unauthorised notice!
                 return render_template('403.html') # add 403 page
