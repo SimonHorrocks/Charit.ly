@@ -21,4 +21,5 @@ mariadb
 WTForms
 Flask-WTF
 pytest
+geopy
 

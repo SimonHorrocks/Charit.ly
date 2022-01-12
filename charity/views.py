@@ -3,11 +3,13 @@ from datetime import datetime
 
 from flask import Blueprint, render_template
 from sqlalchemy import desc
+from geopy import distance
 from app import db
 from charity.forms import PostForm
-from models import Post
+from models import Post, Event
 
 charity_blueprint = Blueprint("charity", __name__, template_folder="templates")
+
 
 # TODO: fix blueprint not working for update and delete pages
 @charity_blueprint.route('/blog')
@@ -22,7 +24,8 @@ def create():
 
     if form.validate_on_submit():
         time = datetime.now()
-        new_post = Post(id=None, title=form.title.data, content=form.content.data, page="placeholder", time_created=time)
+        new_post = Post(id=None, title=form.title.data, content=form.content.data, page="placeholder",
+                        time_created=time)
 
         db.session.add(new_post)
         db.session.commit()
@@ -56,9 +59,18 @@ def update(id):
 
     return render_template('update.html', form=form)
 
+
 @charity_blueprint.route('/<int:id>/delete')
 def delete(id):
     Post.query.filter_by(id=id).delete()
     db.session.commit()
 
     return blog()
+
+
+# returns json list of all events within a certain distance of the coords
+@charity_blueprint.route('/<string:coords>/<int:threshold>/nearby')
+def nearby(coords, threshold):
+    lon, lat = filter(float, coords.split(":"))
+    return list(filter(lambda event: distance.distance((event.lat, event.lon), (lat, lon)).miles < threshold, Event.query.all()))
+

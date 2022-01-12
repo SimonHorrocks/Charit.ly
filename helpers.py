@@ -4,7 +4,6 @@ from flask_sqlalchemy import SQLAlchemy
 
 
 def setup_app(app, db):
-
     # setup login manager to handle user logins
     login_manager = LoginManager()
     # login view to redirect users to
@@ -23,3 +22,4 @@ def setup_app(app, db):
 
     app.register_blueprint(auth_blueprint)
     app.register_blueprint(charity_blueprint)
+

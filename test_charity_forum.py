@@ -12,6 +12,7 @@ setup_app(app, db)
 app.config["WTF_CSRF_ENABLED"] = False
 app.config["TESTING"] = True
 
+
 @pytest.fixture
 def client():
     db.create_all()
@@ -22,19 +23,20 @@ def client():
 
     db.drop_all()
 
+
 def create_test_user(role):
     test_user = User(email="test@email.com",
-         username="test",
-         password="Password1!",
-         roleID=role)
+                     username="test",
+                     password="Password1!",
+                     roleID=role)
     db.session.add(test_user)
     db.session.commit()
     return test_user
 
-def test_register(client):
 
+def test_register(client):
     client.post("/register", data=dict(username="test", email="test@email.com", password="Password1!",
-                                                  confirm_password="Password1!"))
+                                       confirm_password="Password1!"))
     assert User.query.filter_by(username="test").first() is not None
 
 
@@ -51,4 +53,3 @@ def test_login_attempts(client):
     for _ in range(3):
         response = client.post("/login", data=dict(email="test@email.com", password="Password2!"))
     assert "Number of incorrect logins exceeded" in response.data.decode("utf-8")
-
