@@ -4,7 +4,6 @@ from flask_sqlalchemy import SQLAlchemy
 
 
 def setup_app(app, db):
-
     # setup login manager to handle user logins
     login_manager = LoginManager()
     # login view to redirect users to
@@ -19,5 +18,7 @@ def setup_app(app, db):
         return User.query.get(int(id))  # TODO: test that this works since id field is UserID
 
     from auth.views import auth_blueprint
+    from charity.views import charity_blueprint
 
+    app.register_blueprint(charity_blueprint)
     app.register_blueprint(auth_blueprint)

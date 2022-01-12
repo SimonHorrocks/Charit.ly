@@ -1,5 +1,6 @@
 html {
     background-color: #A5A58D;
+    font-family: monospace;
 }
 body {
     width: auto;
@@ -10,43 +11,56 @@ body {
 }
 
 h1 {
-    color: darkgreen;
     text-align: center;
-
+    color: #3f4238;
+    font-size: 30px;
 }
 h2 {
     text-align: center;
     color: #D4C7B0;
     font-size: 30px;
-    font-family: monospace;
+}
+h3{
+    text-align: left;
+    font-size: 30px;
 }
 
-.navbar {
+/*blog title*/
+h4{
+    text-align: center;
+    color: #3f4238;
+    font-size: 30px;
+    padding: 5px;
+    background: #D4C7B0;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+
+}
+#navbarMenuHeroA {
     width: 100%;
 }
 /*  navigation bar */
-.navbar-menu{
+#navbarMenuHeroA{
     background-color: #D4C7B0;
     padding:10px;
 }
 
-.navbar-menu a{
+#navbarMenuHeroA a{
     text-align: left;
     padding:10px;
     background-color: #D4C7B0;
     font-size: 20px;
-    font-family: monospace;
     font-weight: bolder;
     text-decoration: none;
 
 }
-.navbar-menu a:hover{
+#navbarMenuHeroA a:hover{
     background-color:  #3f4238;
     padding:10px;
     transition: 0.5s;
 }
 
-.navbar-menu .icon{
+#navbarMenuHeroA .icon{
     display: none;
 }
 
@@ -57,8 +71,8 @@ h2 {
     background-color: #3f4238;
     margin: 20px auto 20px auto;
     text-align: center;
-    border-radius: 10px;
-    width: 200px;
+    border-radius: 5px;
+    width: 400px;
 }
 
 input {
@@ -67,7 +81,6 @@ input {
     background: #A5A58D;
     margin-top: 10px;
     border: none;
-    color: #3f4238;
     font-size: 20px;
     border-radius: 2px;
 }
@@ -75,13 +88,12 @@ input {
 /*error messages in forms*/
 .error{
     color:  #ffe8d6;
-    font-family: monospace;
     display: inline;
     position: relative;
 }
 
 /*button*/
-.button{
+.button {
     background: #FFE8D6;
     border: none;
     color: #B98B73;
@@ -92,20 +104,15 @@ input {
     margin: 10px auto;
 
 }
+
 .button:hover{
     background: #B98B73;
-    border: none;
     color: #FFE8D6;
-    padding: 10px 20px;
-    text-align: center;
     transition: 0.5s;
 }
 .button:active{
     background: #B98B73;
-    border: none;
     color: #FFE8D6;
-    padding: 10px 20px;
-    text-align: center;
     transition: 0.5s;
 }
 
@@ -118,29 +125,73 @@ input {
 
 .tab {
     border: none;
-    color: #A5A58D;
+    color: #D4C7B0;
     padding: 10px 20px;
 }
-.tab button {
-    color: #A5A58D;
+.tablink {
+    color: #3f4238;
     border-top-left-radius: 5px;
     border-top-right-radius: 5px;
-    background-color: #3f4238;
+    background-color: #A5A58D;
     border: none;
     padding: 10px 20px;
-    font-family: monospace;
 
 }
-.tab button:hover{
-    background-color: #A5A58D;
-    color: #3f4238;
+.tablink:hover{
+    background-color: #3f4238;
+    color: #A5A58D;
     transition: 0.5s;
 }
-.tab button:focus{
-    background-color: #A5A58D;
-    color: #3f4238;
+.tablink:focus{
+    background-color: #3f4238;
+    color: #A5A58D;
 }
 
+/* blog posts */
+.content{
+    color: #3f4238;
+    border-radius: 10px;
+    background-color: #A5A58D;
+    height: 200px;
+    width: 600px;
+}
+
+/* new post button*/
+
+.tabcontent button{
+    border: none;
+    color: #3f4238;
+    background: #D4C7B0;
+    padding: 5px 10px;
+    font-size: 15px;
+}
+
+.tabcontent button:hover{
+    background: #A5A58D;
+    transition: 0.5s;
+}
+
+
+/* create page */
+.field {
+    padding: 5px;
+}
+
+/* TODO: Add padding and make contents centered */
+textarea{
+    background: #A5A58D;
+    width: 100%;
+    height: 250px;
+    font-size: 15px;
+    border-radius: 3px;
+}
+/* TODO: make it appear on bottom*/
+/*update and delete buttons*/
+#post-navbar{
+    text-align: left;
+    background: #D4C7B0;
+    padding: 5px;
+}
  /* unvisited link */
 a:link {
     color:#3f4238;
@@ -151,29 +202,32 @@ a:visited {
 }
  /* hovering over link */
 a:hover {
-    color: #ffe8d6;
+    color: #D4C7B0;
 }
 
 /*mobile view for max 850px */
 @media screen and (max-width: 850px){
-    .navbar-menu{
+        .box{
+        padding: 20px 60px;
+    }
+    #navbarMenuHeroA{
     background-color: #D4C7B0;
     padding:10px;
     }
 
-    .navbar-menu a:not(:nth-child(1), :nth-child(2), :nth-child(3), :nth-child(4), :nth-child(5)){
+    #navbarMenuHeroA a:not(:nth-child(1), :nth-child(2), :nth-child(3), :nth-child(4), :nth-child(5)){
         display: none;
     }
-    .navbar-menu a.icon{
+    #navbarMenuHeroA a.icon{
         display: inline;
     }
 }
 @media screen and (max-width: 850px) {
-  .navbar-menu.responsive {position: relative;}
-  .navbar-menu.responsive a.icon {
+  #navbarMenuHeroA.responsive {position: relative;}
+  #navbarMenuHeroA.responsive a.icon {
     position: relative;
   }
-  .navbar-menu.responsive a {
+  #navbarMenuHeroA.responsive a {
       transition: 0.5s;
     float: none;
     display: block;
@@ -184,32 +238,33 @@ a:hover {
 /*mobile view for max 650px */
 @media screen and (max-width: 650px){
     .box{
-        padding: 20px 60px;
+        padding:0;
+        width: 350px;
     }
-    .navbar-menu{
+    #navbarMenuHeroA{
     background-color: #D4C7B0;
     padding:10px;
     }
 
-    .navbar-menu a:not(:nth-child(1), :nth-child(2), :nth-child(3), :nth-child(4)){
+    #navbarMenuHeroA a:not(:nth-child(1), :nth-child(2), :nth-child(3), :nth-child(4)){
         display: none;
     }
 
-    .navbar-menu a.icon{
+    #navbarMenuHeroA a.icon{
         display: inline;
     }
 
 }
 @media screen and (max-width: 650px) {
-  .navbar-menu.responsive {
+  #navbarMenuHeroA.responsive {
       position: relative;
   }
 
-  .navbar-menu.responsive a.icon {
+  #navbarMenuHeroA.responsive a.icon {
     position: relative;
   }
 
-  .navbar-menu.responsive a {
+  #navbarMenuHeroA.responsive a {
       transition: 0.5s;
     float: none;
     display: block;
