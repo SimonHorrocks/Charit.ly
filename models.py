@@ -12,7 +12,7 @@ class User(db.Model, UserMixin):
     roleID = db.Column(db.String(100), nullable=False, default='user')
     pages = db.relationship('Page', backref='author', lazy=True)
 
-    tags = db.relationship('Tag', secondary='interests', lazy='subquery', backref=db.backref('users', lazy=True))
+    tags = db.relationship('Tag', secondary='interests', lazy='subquery', backref=db.backref('users', lazy='dynamic'))
 
     def __init__(self, username, email, password, roleID):
         self.username = username

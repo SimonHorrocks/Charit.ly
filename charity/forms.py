@@ -8,3 +8,8 @@ class PostForm(FlaskForm):
     title = StringField(validators=[DataRequired()])
     content = TextAreaField(validators=[DataRequired()])
     submit = SubmitField()
+
+
+class SearchForm(FlaskForm):
+    search = StringField()
+    submit = SubmitField()

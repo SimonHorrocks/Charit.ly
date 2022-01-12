@@ -22,4 +22,3 @@ def setup_app(app, db):
 
     app.register_blueprint(auth_blueprint)
     app.register_blueprint(charity_blueprint)
-

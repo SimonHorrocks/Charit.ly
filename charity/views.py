@@ -4,14 +4,17 @@ from datetime import datetime
 from flask import Blueprint, render_template
 from sqlalchemy import desc
 from geopy import distance
+
 from app import db
-from charity.forms import PostForm
-from models import Post, Event
+from charity.forms import PostForm, SearchForm
+from models import Post, User, Tag, Event
 
 charity_blueprint = Blueprint("charity", __name__, template_folder="templates")
 
 
+
 # TODO: fix blueprint not working for update and delete pages
+
 @charity_blueprint.route('/blog')
 def blog():
     posts = Post.query.order_by(desc('id')).all()
@@ -74,3 +77,22 @@ def nearby(coords, threshold):
     lon, lat = filter(float, coords.split(":"))
     return list(filter(lambda event: distance.distance((event.lat, event.lon), (lat, lon)).miles < threshold, Event.query.all()))
 
+
+@charity_blueprint.route('/search', methods=["GET", "POST"])
+def search():
+    form = SearchForm()
+    results = []
+
+    if form.validate_on_submit():
+        search_text = form.search.data.strip()
+        charity = User.query.filter_by(username=search_text, roleID="charity").first()
+        words = search_text.split(" ")
+        search_tags = []
+        for word in words:
+            for tag in Tag.query.filter_by(subject=word).all():
+                search_tags.append(tag)
+
+        charities = [tag.users.filter_by(roleID="charity").first() for tag in search_tags]
+        results = list(filter(lambda x: x is not None, [charity] + charities))
+
+    return render_template('search.html', form=form, results=results)
