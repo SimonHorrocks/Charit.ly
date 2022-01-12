@@ -6,21 +6,45 @@ from werkzeug.security import generate_password_hash
 from app import db
 
 
+def init_db():
+    db.drop_all()
+    db.create_all()
+    admin = User(username='admin',
+                 email='admin@email.com',
+                 password='Admin1!',
+                 roleID='admin')
+    db.session.add(admin)
+    db.session.commit()
+
+
 class User(db.Model, UserMixin):
-    id = db.Column(db.Integer, primary_key=True)
+    __tablename__ = 'user'
+    id = db.Column(db.Integer, primary_key=True, autoincrement=True)
+
+    # User authentication information
     username = db.Column(db.String(30), nullable=False, unique=True)
     email = db.Column(db.String(100), nullable=False, unique=True)
     password = db.Column(db.String(100), nullable=False)
+
+    # User activity information
+    registered_on = db.Column(db.DateTime, nullable=False)
+    last_logged_in = db.Column(db.DateTime, nullable=True)
+    current_logged_in = db.Column(db.DateTime, nullable=True)
+
+    # User information
     roleID = db.Column(db.String(100), nullable=False, default='user')
     pages = db.relationship('Page', backref='author', lazy=True)
-
     tags = db.relationship('Tag', secondary='interests', lazy='subquery', backref=db.backref('users', lazy='dynamic'))
+
 
     def __init__(self, username, email, password, roleID):
         self.username = username
         self.email = email
         self.password = generate_password_hash(password)
         self.roleID = roleID
+        self.registered_on = datetime.now()
+        self.last_logged_in = None
+        self.current_logged_in = None
 
     def __repr__(self):
         return f"User('{self.username})', '{self.email}' , '{self.roleID}')"
@@ -97,8 +121,3 @@ interests = db.Table('interests',
                      db.Column('tag_id', db.Integer, db.ForeignKey(Tag.id), primary_key=True),
                      db.Column('user_id', db.Integer, db.ForeignKey(User.id), primary_key=True)
                      )
-
-
-def init_db():
-    db.drop_all()
-    db.create_all()
