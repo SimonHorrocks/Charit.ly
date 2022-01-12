@@ -56,7 +56,8 @@ class Event(db.Model):
     time = db.Column(db.DateTime)
     time_created = db.Column(db.DateTime)
     Page = db.Column(db.Integer, db.ForeignKey(Page.id), nullable=False)
-    location = db.Column(db.String(100))
+    lat = db.Column(db.Float)
+    lon = db.Column(db.Float)
 
 
 # Tags for pages to help with searching, user interests etc.
