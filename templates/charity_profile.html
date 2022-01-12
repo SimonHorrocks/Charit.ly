@@ -24,14 +24,14 @@
                     <article class="media">
                         <div class="media-content">
                             <div class="content">
-                                <h1>{{ post.title }}</h1>
+                                <h4>{{ post.title }}</h4>
                                 <p>
                                     <strong>{{ post.username }}</strong>
                                     <small>{{ post.time_created.strftime('%d-%m-%Y %H:%M') }}</small>
                                     <br>
                                     {{ post.content }}
                                     <br>
-                                <div id="navbarMenuHeroA" class="navbar-menu">
+                                <div id="post-navbar" class="navbar-menu">
                                     <div class="navbar-start">
                                         <a class="navbar-item"
                                            href="{{ url_for('charity.update', id=post.id) }}">Update</a>
