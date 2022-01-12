@@ -1,5 +1,5 @@
 import logging
-
+from datetime import datetime
 from flask import Blueprint, redirect, url_for, render_template, flash, request, session
 from flask_login import login_user, current_user, logout_user, login_required
 from werkzeug.security import check_password_hash
@@ -79,13 +79,15 @@ def login():
             session['logins'] = 0
             # log the user in with the flask login manager
             login_user(user)
+            user.last_logged_in = user.current_logged_in
+            user.current_logged_in = datetime.now()
             db.session.add(user)
             db.session.commit()
             # log successful login attempt
             logging.warning('SECURITY - Log in [%s, %s, %s]', current_user.id, current_user.email,
                             request.remote_addr)
 
-            if user.roleid == 'admin':
+            if user.roleID == 'admin':
                 # if user is admin redirect to admin page
                 return redirect(url_for('admin.admin'))
             else:
