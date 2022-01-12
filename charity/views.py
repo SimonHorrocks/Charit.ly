@@ -6,7 +6,7 @@ from sqlalchemy import desc
 from geopy import distance
 from app import db
 from charity.forms import PostForm
-from models import Post
+from models import Post, Event
 
 charity_blueprint = Blueprint("charity", __name__, template_folder="templates")
 
