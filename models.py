@@ -1,3 +1,5 @@
+import datetime
+
 from flask_login import UserMixin
 from werkzeug.security import generate_password_hash
 
@@ -37,6 +39,12 @@ class Page(db.Model):
     tags = db.relationship('Tag', secondary='tags', lazy='subquery', backref=db.backref('pages', lazy=True))
     events = db.relationship('Post', backref='event_page', lazy=True)
 
+    def __init__(self, name, description, user_id):
+        self.name = name
+        self.description = description
+        self.user_id = user_id
+        self.time_created = datetime.datetime.now()
+
     def __repr__(self):
         return f"Page('{self.name})', '{self.description}' , '{self.followers}')"
 
@@ -61,6 +69,15 @@ class Event(db.Model):
     Page = db.Column(db.Integer, db.ForeignKey(Page.id), nullable=False)
     lat = db.Column(db.Float)
     lon = db.Column(db.Float)
+
+    def __init__(self, name, description, time, page, lat, lon):
+        self.name = name
+        self.description = description
+        self.time = time
+        self.time_created = datetime.datetime.now()
+        self.Page = page
+        self.lat = lat
+        self.lon = lon
 
 
 # Tags for pages to help with searching, user interests etc.
