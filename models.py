@@ -7,6 +7,12 @@ from werkzeug.security import generate_password_hash
 def init_db():
     db.drop_all()
     db.create_all()
+    admin = User(username='admin',
+                 email='admin@email.com',
+                 password='Admin1!',
+                 roleID='admin')
+    db.session.add(admin)
+    db.session.commit()
 
 
 class User(db.Model, UserMixin):
