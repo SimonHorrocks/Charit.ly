@@ -1,5 +1,6 @@
 from app import db
 import datetime
+from werkzeug.security import generate_password_hash
 
 
 def init_db():
@@ -10,11 +11,22 @@ def init_db():
 class User(db.Model):
     __tablename__ = 'user'
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
+
+    # User authentication information
     username = db.Column(db.String(30), nullable=False, unique=True)
     email = db.Column(db.String(100), nullable=False, unique=True)
     password = db.Column(db.String(100), nullable=False)
+
+    # User information
     roleID = db.Column(db.String(100), nullable=False, default='user')
     pages = db.relationship('Page', backref='author', lazy=True)
+
+
+    def __init__(self, username, email, password, roleID):
+        self.username = username
+        self.email = email
+        self.password = generate_password_hash(password)
+        self.roleID = roleID
 
     def __repr__(self):
         return f"User('{self.username})', '{self.email}' , '{self.roleID}')"
