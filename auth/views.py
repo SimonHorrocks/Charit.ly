@@ -78,16 +78,16 @@ def login():
             # reset login attempts
             session['logins'] = 0
             # log the user in with the flask login manager
-            login_user(user)
+            login_user(user, force=True)
             db.session.add(user)
             db.session.commit()
             # log successful login attempt
             logging.warning('SECURITY - Log in [%s, %s, %s]', current_user.id, current_user.email,
                             request.remote_addr)
 
-            if user.roleid == 'admin':
+            if user.roleID == 'admin':
                 # if user is admin redirect to admin page
-                return redirect(url_for('admin.admin'))
+                return redirect(url_for('auth.admin'))
             else:
                 # otherwise redirect to profile
                 return redirect(url_for('profile'))

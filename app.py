@@ -45,12 +45,6 @@ def explore():
     return render_template('explore.html')
 
 
-@app.route('/logout')
-@login_required
-def logout():
-    return render_template('logout.html')
-
-
 @app.route('/map')
 def map():
     return render_template('map.html')

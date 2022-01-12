@@ -1,9 +1,10 @@
+from flask_login import UserMixin
 from werkzeug.security import generate_password_hash
 
 from app import db
 
 
-class User(db.Model):
+class User(db.Model, UserMixin):
     id = db.Column(db.Integer, primary_key=True)
     username = db.Column(db.String(30), nullable=False, unique=True)
     email = db.Column(db.String(100), nullable=False, unique=True)
@@ -34,7 +35,7 @@ class Page(db.Model):
     posts = db.relationship('Post', backref='parent_page', lazy=True)
     # relationships
     tags = db.relationship('Tag', secondary='tags', lazy='subquery', backref=db.backref('pages', lazy=True))
-    events = db.relationship('Post', backref='page', lazy=True)
+    events = db.relationship('Post', backref='event_page', lazy=True)
 
     def __repr__(self):
         return f"Page('{self.name})', '{self.description}' , '{self.followers}')"
