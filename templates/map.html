@@ -4,20 +4,41 @@
 
     <h1 class="title is-1">Map</h1>
 
+    <label for="distance">Distance: </label><input type="range" value="5" id="distance">
+
     <div id="map" style="height: 600px; width: 100%"></div>
 
     <script src="https://cdn.jsdelivr.net/gh/openlayers/openlayers.github.io@master/en/v6.11.0/build/ol.js"></script>
 
     <script type="text/javascript">
+        var distanceSlider = document.getElementById("distance");
+        var labelStyle = new ol.style.Style({
+            text: new ol.style.Text({
+                font: '12px Calibri,sans-serif',
+                overflow: true,
+                fill: new ol.style.Fill({
+                  color: '#F00'
+                }),
+                stroke: new ol.style.Stroke({
+                    color: '#fff',
+                    width: 3
+                }),
+                offsetY: -12
+            })
+        });
         const source = new ol.source.Vector();
         const markers = new ol.layer.Vector({
-          source: source,
+            source: source,
+            style: function (feature) {
+                labelStyle.getText().setText(feature.get('name'));
+                return labelStyle;
+            }
         });
-        var view = new ol.View({
-          center: ol.proj.fromLonLat([0, 0]),
-          zoom: 4
-        })
-        var map = new ol.Map({
+        const view = new ol.View({
+            center: ol.proj.fromLonLat([0, 0]),
+            zoom: 4
+        });
+        const map = new ol.Map({
             target: 'map',
             layers: [
                 new ol.layer.Tile({
@@ -26,16 +47,46 @@
             ],
             view: view
         });
-        let pos = navigator.geolocation.getCurrentPosition(
+        var coords = [];
+        var you = null;
+        navigator.geolocation.getCurrentPosition(
             function (pos) {
-                const coords = [pos.coords.longitude, pos.coords.latitude];
+                coords = [pos.coords.longitude, pos.coords.latitude];
                 source.clear(true);
-                source.addFeature(
-                  new ol.Feature(new ol.geom.Point(ol.proj.fromLonLat(coords))),
-                );
+                httpGetAsync("/" + coords[1] + ":" + coords[0] + "/" + distanceSlider.value + "/nearby", function (response){
+                    for(const event of response.events) {
+                        source.addFeature(
+                          new ol.Feature({
+                              geometry: new ol.geom.Point(ol.proj.fromLonLat([event.lon, event.lat])),
+                              name: event.name
+                          }),
+                        );
+                    }
+                });
+                you = new ol.Feature({
+                    geometry: new ol.geom.Point(ol.proj.fromLonLat(coords)),
+                    name: "You"
+                })
+                source.addFeature(you);
                 view.setCenter(ol.proj.fromLonLat(coords))
+
+                distanceSlider.onchange = function (event) {
+                source.clear(true);
+                source.addFeature(you);
+                httpGetAsync("/" + coords[1] + ":" + coords[0] + "/"+ distanceSlider.value +"/nearby", function (response){
+                    for(const event of response.events) {
+                        source.addFeature(
+                            new ol.Feature({
+                                geometry: new ol.geom.Point(ol.proj.fromLonLat([event.lon, event.lat])),
+                                name: event.name
+                                }),
+                            );
+                        }
+                    });
+                };
             }
         );
+
 
     </script>
 

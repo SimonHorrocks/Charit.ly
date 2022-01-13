@@ -16,3 +16,14 @@ function tabView(page) {
     }
     document.getElementById(page).style.display = "block";
 }
+
+function httpGetAsync(url, callback)
+{
+    var xmlHttp = new XMLHttpRequest();
+    xmlHttp.onreadystatechange = function() {
+        if (xmlHttp.readyState === 4 && xmlHttp.status === 200)
+            callback(JSON.parse(xmlHttp.response));
+    }
+    xmlHttp.open("GET", url, true);
+    xmlHttp.send(null);
+}
