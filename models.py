@@ -20,10 +20,10 @@ class User(db.Model):
         return f"User('{self.username})', '{self.email}' , '{self.role}')"
 
     def __init__(self, username, email, password, roleid):
-        self.Username = username
-        self.Email = email
-        self.Password = generate_password_hash(password)
-        self.RoleID = roleid
+        self.username = username
+        self.email = email
+        self.password = generate_password_hash(password)
+        self.roleID = roleid
 
 
 class Page(db.Model):
@@ -42,6 +42,12 @@ class Page(db.Model):
     def __repr__(self):
         return f"Page('{self.name})', '{self.description}' , '{self.followers}')"
 
+    def __init__(self, name, description, user_id):
+        self.name = name
+        self.description = description
+        self.user_id = user_id
+        self.time_created = datetime.now()
+
 
 class Post(db.Model):
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
@@ -54,10 +60,10 @@ class Post(db.Model):
         return f"Post('{self.title})', '{self.content}')"
 
     def __init__(self, title, content, page):
-        self.PostTitle = title
-        self.PostContent = content
-        self.Page = page
-        self.TimeCreated = datetime.now()
+        self.title = title
+        self.content = content
+        self.post = page
+        self.time_created = datetime.now()
 
 
 class Event(db.Model):
