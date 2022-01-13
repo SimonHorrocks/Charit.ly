@@ -1,3 +1,6 @@
+from sqlalchemy.orm import backref
+from sqlalchemy.orm.collections import attribute_mapped_collection
+
 from app import db
 from werkzeug.security import generate_password_hash
 
@@ -12,11 +15,11 @@ class User(db.Model):
 
     tags = db.relationship('Tag', secondary='interests', lazy='subquery', backref=db.backref('users', lazy=True))
 
-    def __init__(self, username, email, password, roleID):
+    def __init__(self, username, email, password, roleid):
         self.username = username
         self.email = email
         self.password = generate_password_hash(password)
-        self.roleID = roleID
+        self.roleID = roleid
 
     def __repr__(self):
         return f"User('{self.username})', '{self.email}' , '{self.role}')"
@@ -71,6 +74,17 @@ class Event(db.Model):
 class Tag(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     subject = db.Column(db.String(100), unique=True, nullable=False)
+
+
+# Tree structure for comments
+class Comment(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    content = db.column(db.String(100), nullable=False)
+    parent_id = db.Column(db.integer, db.ForeignKey('comment.id'))
+
+    children = db.relationship('Comment', backref=backref('parent', remote_side=[id]))
+
+# TODO: Add query to retrieve/add comments
 
 
 # Junction table for tags and pages
