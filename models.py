@@ -1,4 +1,5 @@
 from app import db
+from werkzeug.security import generate_password_hash
 
 
 class User(db.Model):
@@ -13,6 +14,12 @@ class User(db.Model):
 
     def __repr__(self):
         return f"User('{self.username})', '{self.email}' , '{self.role}')"
+
+    def __init__(self, username, email, password, roleid):
+        self.Username = username
+        self.Email = email
+        self.Password = generate_password_hash(password)
+        self.RoleID = roleid
 
 
 class Page(db.Model):

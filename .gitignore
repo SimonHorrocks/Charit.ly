@@ -1,3 +1,10 @@
 /venv/
 /env/
 charityForum.db
+master/xyz/**/*.xml
+/.idea/dataSources.xml
+/.idea/modules.xml
+/.idea/inspectionProfiles/profiles_settings.xml
+/.idea/Project.iml
+/.idea/vcs.xml
+/.idea/misc.xml
