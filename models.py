@@ -15,12 +15,6 @@ class User(db.Model):
 
     tags = db.relationship('Tag', secondary='interests', lazy='subquery', backref=db.backref('users', lazy=True))
 
-    def __init__(self, username, email, password, roleid):
-        self.username = username
-        self.email = email
-        self.password = generate_password_hash(password)
-        self.roleID = roleid
-
     def __repr__(self):
         return f"User('{self.username})', '{self.email}' , '{self.role}')"
 
