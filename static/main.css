@@ -74,7 +74,6 @@ h4{
     border-radius: 5px;
     width: 400px;
 }
-
 input {
     position: static;
     padding: 10px 30px;
@@ -205,6 +204,18 @@ textarea{
     padding: 20px 150px;
 
 }
+/* TODO: make width work better with different sizes */
+#allUsers{
+    width:700px;
+}
+#userColumn {
+    float: left;
+    width: 25%;
+}
+
+#userRow{
+    color: #D4C7B0;
+}
  /* unvisited link */
 a:link {
     color:#3f4238;
@@ -226,6 +237,9 @@ a:hover {
     #navbarMenuHeroA{
     background-color: #D4C7B0;
     padding:10px;
+    }
+    #allUsers{
+        width: 450px;
     }
 
     #navbarMenuHeroA a:not(:nth-child(1), :nth-child(2), :nth-child(3), :nth-child(4), :nth-child(5)){
@@ -257,6 +271,9 @@ a:hover {
     #results{
         padding: 20px;
         width: 350px;
+    }
+    #allUsers{
+        width:450px;
     }
     #navbarMenuHeroA{
     background-color: #D4C7B0;

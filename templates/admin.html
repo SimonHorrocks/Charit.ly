@@ -2,6 +2,27 @@
 
 {% block content %}
 
-     <h1 class="title is-2">Admin</h1>
-
+    <h1 class="title is-2">Admin</h1>
+    <div class="box", id="allUsers">
+        {% for user in users %}
+                    <div class="row", id="userRow">
+                        <div class="column", id="userColumn">
+                            <h2>ID</h2>
+                            <p>{{ user.id }}</p>
+                        </div>
+                        <div class="column", id="userColumn">
+                            <h2>Name</h2>
+                            <p>{{ user.username }}</p>
+                        </div>
+                        <div class="column", id="userColumn">
+                            <h2>Email</h2>
+                            <p>{{ user.email }}</p>
+                        </div>
+                        <div class="column", id="userColumn">
+                            <h2>Role</h2>
+                            <p>{{ user.roleID }}</p>
+                        </div>
+                    </div>
+        {% endfor %}
+    </div>
 {% endblock %}
