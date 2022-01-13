@@ -15,7 +15,7 @@ def setup_app(app, db):
     # setup user loader (load user by id)
     @login_manager.user_loader
     def load_user(id):
-        return User.query.get(int(id))  # TODO: test that this works since id field is UserID
+        return User.query.get(int(id))
 
     from auth.views import auth_blueprint
     from charity.views import charity_blueprint
