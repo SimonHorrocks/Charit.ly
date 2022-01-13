@@ -7,14 +7,17 @@ from flask_sqlalchemy import SQLAlchemy
 
 from helpers import setup_app
 
+# CONFIG
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'LongAndRandomSecretKey'
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///charityForum.db'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
+# initialise database
 db = SQLAlchemy(app)
 
 
+# RBAC FUNCTION
 def requires_roles(*roles):
     def wrapper(f):  # create wrapper
         @wraps(f)
@@ -35,21 +38,25 @@ def requires_roles(*roles):
     return wrapper
 
 
+# HOME PAGE VIEW
 @app.route('/')
 def index():
     return render_template('index.html')
 
 
+# EXPLORE PAGE VIEW
 @app.route('/explore')
 def explore():
     return render_template('explore.html')
 
 
+# EVENT MAP PAGE VIEW
 @app.route('/map')
 def map():
     return render_template('map.html')
 
 
+# PROFILE
 @app.route('/profile')
 @login_required
 def profile():
@@ -74,11 +81,4 @@ def internal_error(error):
 
 if __name__ == '__main__':
     setup_app(app, db)
-
-    # import blueprints
-    from admin.views import admin_blueprint
-
-    # register blueprints with app
-    app.register_blueprint(admin_blueprint)
-
     app.run()

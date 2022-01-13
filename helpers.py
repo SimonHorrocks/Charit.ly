@@ -19,6 +19,8 @@ def setup_app(app, db):
 
     from auth.views import auth_blueprint
     from charity.views import charity_blueprint
+    from admin.views import admin_blueprint
 
     app.register_blueprint(auth_blueprint)
     app.register_blueprint(charity_blueprint)
+    app.register_blueprint(admin_blueprint)
