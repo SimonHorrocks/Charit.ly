@@ -7,7 +7,7 @@ from geopy import distance
 
 from app import db
 from charity.forms import PostForm, SearchForm
-from models import Post, User, Tag, Event
+from models import Post, User, Tag, Event, Page
 
 charity_blueprint = Blueprint("charity", __name__, template_folder="templates")
 
@@ -76,8 +76,8 @@ def nearby(coords, threshold):
     lon, lat = map(float, coords.split(":"))
     events = list(filter(lambda event: distance.distance((event.lat, event.lon), (lat, lon)).miles < threshold,
                          Event.query.all()))
-    return {"events": list(map(lambda event: {"id": event.id, "name": event.name, "lat": event.lat, "lon": event.lon}, events))}
-
+    return {"events": list(
+        map(lambda event: {"id": event.id, "name": event.name, "lat": event.lat, "lon": event.lon}, events))}
 
 
 # Takes user search query, searches for a charity with a matching name, and charities with matching tags.
@@ -94,7 +94,7 @@ def search():
         search_text = form.search.data.strip()
 
         # Query database for charities with a matching username
-        charity = User.query.filter_by(username=search_text, roleID="charity").first()
+        charity = Page.query.filter_by(name=search_text).first()
         # split search text into individual words
 
         words = search_text.split(" ")
@@ -106,7 +106,10 @@ def search():
                 search_tags.append(tag)
 
         # Get list of charities with tags matching those in the list
-        charities = [tag.users.filter_by(roleID="charity").first() for tag in search_tags]
+        charities = []
+        for tag in search_tags:
+            for page in tag.pages:
+                charities.append(page)
 
         # Create final list of results
         results = list(filter(lambda x: x is not None, [charity] + charities))

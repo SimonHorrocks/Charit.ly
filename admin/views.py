@@ -8,9 +8,6 @@ from models import User
 # CONFIG
 admin_blueprint = Blueprint('admin', __name__, template_folder='templates')
 
-user = User.query.first()
-
-
 # VIEWS
 # view admin homepage
 @admin_blueprint.route('/admin')
