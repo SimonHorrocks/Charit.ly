@@ -2,22 +2,38 @@ import copy
 from datetime import datetime
 
 from flask import Blueprint, render_template
-from sqlalchemy import desc
 from geopy import distance
+from sqlalchemy import desc
 
 from app import db
-from charity.forms import PostForm, SearchForm
-from models import Post, User, Tag, Event, Page
+from charity.forms import PostForm, SearchForm, NewEventForm
+from models import Page
+from models import Post, Tag, Event
 
 charity_blueprint = Blueprint("charity", __name__, template_folder="templates")
 
 
 # TODO: fix blueprint not working for update and delete pages
-
 @charity_blueprint.route('/blog')
 def blog():
+    form = NewEventForm()
+
+    # if request method is POST and form is valid
+    if form.validate_on_submit():
+
+        # create a new user with the form data
+        new_event = Event(name=form.name.data,
+                          description=form.description.data,
+                          time=form.time.data,
+                          page="placeholder",
+                          lat=form.lat.data,
+                          lon=form.lon.data)
+
+        # add the new user to the database
+        db.session.add(new_event)
+        db.session.commit()
     posts = Post.query.order_by(desc('id')).all()
-    return render_template('charity_profile.html', posts=posts)
+    return render_template('charity_profile.html', posts=posts, form=form)
 
 
 @charity_blueprint.route('/create', methods=('GET', 'POST'))
@@ -68,6 +84,12 @@ def delete(id):
     db.session.commit()
 
     return blog()
+
+
+@charity_blueprint.route('/<int:id>/view')
+def view(id):
+    post = Post.query.filter_by(id=id).first()
+    return render_template('post.html', post=post)
 
 
 # returns json list of all events within a certain distance of the coords

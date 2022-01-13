@@ -15,6 +15,7 @@
         </form>
     </div>
 
+    <div id="results">
     {% if results %}
         {% for result in results %}
             {{ result.name }}
@@ -24,4 +25,5 @@
         No results.
     {% endif %}
 
+    </div>
 {% endblock %}
