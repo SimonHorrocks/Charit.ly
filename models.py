@@ -12,6 +12,12 @@ class User(db.Model):
 
     tags = db.relationship('Tag', secondary='interests', lazy='subquery', backref=db.backref('users', lazy=True))
 
+    def __init__(self, username, email, password, roleID):
+        self.username = username
+        self.email = email
+        self.password = generate_password_hash(password)
+        self.roleID = roleID
+
     def __repr__(self):
         return f"User('{self.username})', '{self.email}' , '{self.role}')"
 
@@ -57,7 +63,8 @@ class Event(db.Model):
     time = db.Column(db.DateTime)
     time_created = db.Column(db.DateTime)
     Page = db.Column(db.Integer, db.ForeignKey(Page.id), nullable=False)
-    location = db.Column(db.String(100))
+    lat = db.Column(db.Float)
+    lon = db.Column(db.Float)
 
 
 # Tags for pages to help with searching, user interests etc.
