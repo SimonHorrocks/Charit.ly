@@ -83,6 +83,7 @@ input {
     border: none;
     font-size: 20px;
     border-radius: 2px;
+    color: #3f4238;
 }
 
 /*error messages in forms*/
@@ -157,7 +158,6 @@ input {
 }
 
 /* new post button*/
-
 .tabcontent button{
     border: none;
     color: #3f4238;
@@ -184,13 +184,26 @@ textarea{
     height: 250px;
     font-size: 15px;
     border-radius: 3px;
+    color: #3f4238;
 }
 /* TODO: make it appear on bottom*/
+
 /*update and delete buttons*/
 #post-navbar{
     text-align: left;
     background: #D4C7B0;
     padding: 5px;
+}
+
+/* search results */
+#results{
+    background-color: #A5A58D;
+    color: #3f4238;
+    text-align: center;
+    width: 400px;
+    margin: 20px auto 20px auto;
+    padding: 20px 150px;
+
 }
  /* unvisited link */
 a:link {
@@ -207,7 +220,7 @@ a:hover {
 
 /*mobile view for max 850px */
 @media screen and (max-width: 850px){
-        .box{
+    .box #results{
         padding: 20px 60px;
     }
     #navbarMenuHeroA{
@@ -237,8 +250,12 @@ a:hover {
 
 /*mobile view for max 650px */
 @media screen and (max-width: 650px){
-    .box{
-        padding:0;
+    .box {
+        padding: 20px;
+        width: 350px;
+    }
+    #results{
+        padding: 20px;
         width: 350px;
     }
     #navbarMenuHeroA{
@@ -271,6 +288,7 @@ a:hover {
     text-align: center;
   }
 }
+
 
 
 /*TODO: work on the color palette */
