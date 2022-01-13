@@ -12,7 +12,6 @@ from models import Post, User, Tag, Event
 charity_blueprint = Blueprint("charity", __name__, template_folder="templates")
 
 
-
 # TODO: fix blueprint not working for update and delete pages
 
 @charity_blueprint.route('/blog')
@@ -75,24 +74,39 @@ def delete(id):
 @charity_blueprint.route('/<string:coords>/<int:threshold>/nearby')
 def nearby(coords, threshold):
     lon, lat = filter(float, coords.split(":"))
-    return list(filter(lambda event: distance.distance((event.lat, event.lon), (lat, lon)).miles < threshold, Event.query.all()))
+    return list(filter(lambda event: distance.distance((event.lat, event.lon), (lat, lon)).miles < threshold,
+                       Event.query.all()))
 
 
+# takes user search query, searches for a charity with a matching name, and charities with matching tags.
 @charity_blueprint.route('/search', methods=["GET", "POST"])
 def search():
+    # Create search form
     form = SearchForm()
+    # Initialise list of results
     results = []
 
+    # if request method is POST or form is valid
     if form.validate_on_submit():
+        # removes whitespace at the beginning and end of search query
         search_text = form.search.data.strip()
+
+        # query database for charities with a matching username
         charity = User.query.filter_by(username=search_text, roleID="charity").first()
+        # split search text into individual words
+
         words = search_text.split(" ")
+        # initialise list of tags
         search_tags = []
         for word in words:
             for tag in Tag.query.filter_by(subject=word).all():
+                # If a word in the search query matches an existing tag, then add the tag to the list
                 search_tags.append(tag)
 
+        # Get list of charities with tags matching those in the list
         charities = [tag.users.filter_by(roleID="charity").first() for tag in search_tags]
+
+        # Create final list of results
         results = list(filter(lambda x: x is not None, [charity] + charities))
 
     return render_template('search.html', form=form, results=results)
