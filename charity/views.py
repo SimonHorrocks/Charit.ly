@@ -70,6 +70,10 @@ def delete(id):
 
     return blog()
 
+@charity_blueprint.route('/<int:id>/view')
+def view(id):
+    post = Post.query.filter_by(id=id).first()
+    return render_template('post.html', post=post)
 
 # returns json list of all events within a certain distance of the coords
 @charity_blueprint.route('/<string:coords>/<int:threshold>/nearby')
