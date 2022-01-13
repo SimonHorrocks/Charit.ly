@@ -12,7 +12,6 @@ from models import Post, User, Tag, Event
 charity_blueprint = Blueprint("charity", __name__, template_folder="templates")
 
 
-
 # TODO: fix blueprint not working for update and delete pages
 
 @charity_blueprint.route('/blog')
@@ -74,8 +73,10 @@ def delete(id):
 # returns json list of all events within a certain distance of the coords
 @charity_blueprint.route('/<string:coords>/<int:threshold>/nearby')
 def nearby(coords, threshold):
-    lon, lat = filter(float, coords.split(":"))
-    return list(filter(lambda event: distance.distance((event.lat, event.lon), (lat, lon)).miles < threshold, Event.query.all()))
+    lon, lat = map(float, coords.split(":"))
+    events = list(filter(lambda event: distance.distance((event.lat, event.lon), (lat, lon)).miles < threshold,
+                         Event.query.all()))
+    return {"events": list(map(lambda event: {"id": event.id, "name": event.name, "lat": event.lat, "lon": event.lon}, events))}
 
 
 @charity_blueprint.route('/search', methods=["GET", "POST"])

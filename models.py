@@ -39,7 +39,7 @@ class User(db.Model, UserMixin):
 
 
 class Page(db.Model):
-    id = db.Column(db.Integer, primary_key=True, autoincrement=True)
+    id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(100), nullable=False)
     description = db.Column(db.String(100))
     user_id = db.Column(db.Integer, db.ForeignKey(User.id), nullable=False)
@@ -62,7 +62,7 @@ class Page(db.Model):
 
 
 class Post(db.Model):
-    id = db.Column(db.Integer, primary_key=True, autoincrement=True)
+    id = db.Column(db.Integer, primary_key=True)
     title = db.Column(db.VARCHAR(100), nullable=False)
     content = db.Column(db.VARCHAR(100))
     page = db.Column(db.Integer, db.ForeignKey(Page.id), nullable=False)
@@ -73,7 +73,7 @@ class Post(db.Model):
 
 
 class Event(db.Model):
-    id = db.Column(db.Integer, primary_key=True, autoincrement=True)
+    id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(100))
     description = db.Column(db.String(100))
     time = db.Column(db.DateTime)
@@ -94,7 +94,7 @@ class Event(db.Model):
 
 # Tags for pages to help with searching, user interests etc.
 class Tag(db.Model):
-    id = db.Column(db.Integer, primary_key=True, autoincrement=True)
+    id = db.Column(db.Integer, primary_key=True)
     subject = db.Column(db.String(100), unique=True, nullable=False)
 
 
