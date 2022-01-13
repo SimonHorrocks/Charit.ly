@@ -78,7 +78,7 @@ def nearby(coords, threshold):
                        Event.query.all()))
 
 
-# takes user search query, searches for a charity with a matching name, and charities with matching tags.
+# Takes user search query, searches for a charity with a matching name, and charities with matching tags.
 @charity_blueprint.route('/search', methods=["GET", "POST"])
 def search():
     # Create search form
@@ -86,17 +86,17 @@ def search():
     # Initialise list of results
     results = []
 
-    # if request method is POST or form is valid
+    # If request method is POST or form is valid
     if form.validate_on_submit():
-        # removes whitespace at the beginning and end of search query
+        # Removes whitespace at the beginning and end of search query
         search_text = form.search.data.strip()
 
-        # query database for charities with a matching username
+        # Query database for charities with a matching username
         charity = User.query.filter_by(username=search_text, roleID="charity").first()
         # split search text into individual words
 
         words = search_text.split(" ")
-        # initialise list of tags
+        # Initialise list of tags
         search_tags = []
         for word in words:
             for tag in Tag.query.filter_by(subject=word).all():
