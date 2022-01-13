@@ -3,26 +3,58 @@
 {% block content %}
 
     <h1 class="title is-2">Admin</h1>
-    <div class="box", id="allUsers">
-        {% for user in users %}
-                    <div class="row", id="userRow">
-                        <div class="column", id="userColumn">
-                            <h2>ID</h2>
-                            <p>{{ user.id }}</p>
-                        </div>
-                        <div class="column", id="userColumn">
+    <div class="tab">
+        <button class="tablink" onclick="tabView('Profile')" id="default">Profile</button>
+        <button class="tablink" onclick="tabView('AllUsers')">All Users</button>
+        <button class="tablink" onclick="tabView('Logs')">Logs</button>
+
+        <div id="Profile" class="tabcontent">
+            <h3> Profile </h3>
+        </div>
+
+        <div id="AllUsers" class="tabcontent">
+            <h3> Users </h3>
+            <div class="box" id="allUsers">
+                {% for user in users %}
+                    <div class="row" , id="userRow">
+                        <div class="column" id="userColumn">
                             <h2>Name</h2>
                             <p>{{ user.username }}</p>
                         </div>
-                        <div class="column", id="userColumn">
+                        <div class="column" id="userColumn">
                             <h2>Email</h2>
                             <p>{{ user.email }}</p>
                         </div>
-                        <div class="column", id="userColumn">
+                        <div class="column" id="userColumn">
                             <h2>Role</h2>
                             <p>{{ user.roleID }}</p>
                         </div>
+                        <div class="column" id="userColumn">
+                            <h2>Change Role</h2>
+                            {# TODO: Add code for changing roles #}
+                            <form action="/change_role.php">
+                                <div class="select">
+                                    <select name="roleID" id="roleID">
+                                        <option value="user">User</option>
+                                        <option value="charity">Charity</option>
+                                        <option value="admin">Admin</option>
+                                    </select>
+                                </div>
+                                <input type="submit" value="Submit">
+
+                            </form>
+                        </div>
                     </div>
-        {% endfor %}
+                {% endfor %}
+            </div>
+        </div>
+
+        <div id="Logs" class="tabcontent">
+            <h3> Logs </h3>
+        </div>
     </div>
+    <script>
+        document.getElementById("default").click();
+    </script>
+
 {% endblock %}
