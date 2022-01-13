@@ -18,17 +18,5 @@
         </library>
       </libraries>
     </data-source>
-    <data-source source="LOCAL" name="charityForum [2]" uuid="5d961400-ff9a-4bd4-8e76-228ed4b69e62">
-      <driver-ref>sqlite.xerial</driver-ref>
-      <synchronize>true</synchronize>
-      <jdbc-driver>org.sqlite.JDBC</jdbc-driver>
-      <jdbc-url>jdbc:sqlite:C:\Users\joeir\PycharmProjects\CSC2033-Team13-Charity\charityForum.db</jdbc-url>
-      <working-dir>$ProjectFileDir$</working-dir>
-      <libraries>
-        <library>
-          <url>file://$APPLICATION_CONFIG_DIR$/jdbc-drivers/Xerial SQLiteJDBC/3.34.0/sqlite-jdbc-3.34.0.jar</url>
-        </library>
-      </libraries>
-    </data-source>
   </component>
 </project>
