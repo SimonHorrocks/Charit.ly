@@ -24,7 +24,7 @@
                     <article class="media">
                         <div class="media-content">
                             <div class="content">
-                                <h4>{{ post.title }}</h4>
+                                <a href="{{ url_for('charity.view', id=post.id) }}">{{ post.title }}</a>
                                 <p>
                                     <strong>{{ post.username }}</strong>
                                     <small>{{ post.time_created.strftime('%d-%m-%Y %H:%M') }}</small>
@@ -47,10 +47,13 @@
             </div>
         </div>
 
+        <div id="NewEvent" class="tabcontent">
+            <h3> New Event </h3>
+        </div>
+
         <div id="Settings" class="tabcontent">
             <h3> Settings </h3>
         </div>
-
     </div>
      <script>
         document.getElementById("default").click();
