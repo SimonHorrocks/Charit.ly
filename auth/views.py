@@ -89,7 +89,7 @@ def login():
 
             if user.roleID == 'admin':
                 # if user is admin redirect to admin page
-                return redirect(url_for('auth.admin'))
+                return redirect(url_for('admin.admin'))
             else:
                 # otherwise redirect to profile
                 return redirect(url_for('profile'))

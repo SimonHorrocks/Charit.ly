@@ -74,4 +74,11 @@ def internal_error(error):
 
 if __name__ == '__main__':
     setup_app(app, db)
+
+    # import blueprints
+    from admin.views import admin_blueprint
+
+    # register blueprints with app
+    app.register_blueprint(admin_blueprint)
+
     app.run()
