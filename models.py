@@ -1,5 +1,6 @@
 from sqlalchemy.orm import backref
 from sqlalchemy.orm.collections import attribute_mapped_collection
+import datetime
 
 from app import db
 from werkzeug.security import generate_password_hash
@@ -51,6 +52,12 @@ class Post(db.Model):
 
     def __repr__(self):
         return f"Post('{self.title})', '{self.content}')"
+
+    def __init__(self, title, content, page):
+        self.PostTitle = title
+        self.PostContent = content
+        self.Page = page
+        self.TimeCreated = datetime.now()
 
 
 class Event(db.Model):
