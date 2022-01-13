@@ -62,7 +62,7 @@ class Post(db.Model):
     def __init__(self, title, content, page):
         self.title = title
         self.content = content
-        self.post = page
+        self.page = page
         self.time_created = datetime.now()
 
 
@@ -75,6 +75,15 @@ class Event(db.Model):
     Page = db.Column(db.Integer, db.ForeignKey(Page.id), nullable=False)
     lat = db.Column(db.Float)
     lon = db.Column(db.Float)
+
+    def __init__(self, name, description, page, time, lat, long):
+        self.name = name
+        self.description = description
+        self.page = page
+        self.time = time
+        self.lat = lat
+        self.long = long
+        self.time_created = datetime.now()
 
 
 # Tags for pages to help with searching, user interests etc.
