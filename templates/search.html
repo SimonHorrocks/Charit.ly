@@ -3,6 +3,17 @@
 {% block content %}
 
     <h1 class="title is-1">Search</h1>
+    <div class="box">
+        <form method="POST">
+            {{ form.csrf_token() }}
+            <div class="control">
+                {{ form.search(class="input", placeholder='Search...') }}
+                {% for error in form.search.errors %}
+                    {{ error }}
+                {% endfor %}
+            </div>
+        </form>
+    </div>
 
     {% if results %}
         {% for result in results %}

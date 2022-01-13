@@ -79,21 +79,36 @@ def nearby(coords, threshold):
     return {"events": list(map(lambda event: {"id": event.id, "name": event.name, "lat": event.lat, "lon": event.lon}, events))}
 
 
+
+# Takes user search query, searches for a charity with a matching name, and charities with matching tags.
 @charity_blueprint.route('/search', methods=["GET", "POST"])
 def search():
+    # Create search form
     form = SearchForm()
+    # Initialise list of results
     results = []
 
+    # If request method is POST or form is valid
     if form.validate_on_submit():
+        # Removes whitespace at the beginning and end of search query
         search_text = form.search.data.strip()
+
+        # Query database for charities with a matching username
         charity = User.query.filter_by(username=search_text, roleID="charity").first()
+        # split search text into individual words
+
         words = search_text.split(" ")
+        # Initialise list of tags
         search_tags = []
         for word in words:
             for tag in Tag.query.filter_by(subject=word).all():
+                # If a word in the search query matches an existing tag, then add the tag to the list
                 search_tags.append(tag)
 
+        # Get list of charities with tags matching those in the list
         charities = [tag.users.filter_by(roleID="charity").first() for tag in search_tags]
+
+        # Create final list of results
         results = list(filter(lambda x: x is not None, [charity] + charities))
 
     return render_template('search.html', form=form, results=results)
