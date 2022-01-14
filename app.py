@@ -56,13 +56,6 @@ def map():
     return render_template('map.html')
 
 
-# PROFILE
-@app.route('/profile')
-@login_required
-def profile():
-    return render_template('profile.html')
-
-
 # ERROR PAGE VIEWS
 @app.errorhandler(403)
 def page_forbidden(error):
