@@ -19,6 +19,7 @@
             <form method="POST">
                 <h2 class="title">Change Role</h2>
                 <div class="field">
+                    {{ form.hidden_tag() }}
                     <div class="control">
                         {{ form.email(class="input", placeholder="Email") }}
                     </div>
