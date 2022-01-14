@@ -90,6 +90,9 @@ def login():
             if user.roleID == 'admin':
                 # if user is admin redirect to admin page
                 return redirect(url_for('admin.admin'))
+            elif user.roleID == 'charity':
+                # if user is charity redirect to charity page
+                return redirect(url_for('charity.blog'))
             else:
                 # otherwise redirect to profile
                 return redirect(url_for('profile'))
