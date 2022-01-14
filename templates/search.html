@@ -18,9 +18,10 @@
     <div id="results">
     {% if results %}
         {% for result in results %}
-            {{ result.name }}
+            <p><a href="{{ url_for('charity.page', id=result.id) }}">
+                {{ result.name }}
+            </a></p>
         {% endfor %}
-
     {% else %}
         No results.
     {% endif %}

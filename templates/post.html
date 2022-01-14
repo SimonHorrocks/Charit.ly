@@ -15,14 +15,16 @@
                             <br>
                             {{ post.content }}
                             <br>
-                        <div id="post-navbar" class="navbar-menu">
-                            <div class="navbar-start">
-                                <a class="navbar-item"
-                                   href="{{ url_for('charity.update', id=post.id) }}">Update</a>
-                                <a class="navbar-item"
-                                   href="{{ url_for('charity.delete', id=post.id) }}">Delete</a>
-                            </div>
-                        </div>
+                        {% if page in current_user.pages %}
+                                <div id="post-navbar" class="navbar-menu">
+                                    <div class="navbar-start">
+                                        <a class="navbar-item"
+                                           href="{{ url_for('charity.update', id=post.id) }}">Update</a>
+                                        <a class="navbar-item"
+                                           href="{{ url_for('charity.delete', id=post.id) }}">Delete</a>
+                                    </div>
+                                </div>
+                        {% endif %}
                         </p>
                     </div>
                 </div>

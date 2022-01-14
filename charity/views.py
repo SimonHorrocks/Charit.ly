@@ -2,6 +2,7 @@ import copy
 from datetime import datetime
 
 from flask import Blueprint, render_template
+from flask_login import current_user
 from geopy import distance
 from sqlalchemy import desc
 
@@ -14,7 +15,7 @@ charity_blueprint = Blueprint("charity", __name__, template_folder="templates")
 
 
 # TODO: fix blueprint not working for update and delete pages
-@charity_blueprint.route('/blog',  methods=['GET', 'POST'])
+@charity_blueprint.route('/blog', methods=['GET', 'POST'])
 def blog():
     form = NewEventForm()
 
@@ -33,22 +34,29 @@ def blog():
         db.session.commit()
 
     posts = Post.query.order_by(desc('id')).all()
-    return render_template('charity_profile.html', posts=posts, form=form)
+    return render_template('charity_page.html', posts=posts, form=form)
 
 
-@charity_blueprint.route('/create', methods=('GET', 'POST'))
-def create():
+@charity_blueprint.route('/<int:id>/page', methods=['GET', 'POST'])
+def page(id):
+    form = NewEventForm()
+    charity_page = Page.query.get(id)
+    return render_template('charity_page.html', posts=charity_page.posts, form=form, page=charity_page)
+
+
+@charity_blueprint.route('/<int:page_id>/create', methods=('GET', 'POST'))
+def create(page_id):
     form = PostForm()
 
     if form.validate_on_submit():
         time = datetime.now()
-        new_post = Post(id=None, title=form.title.data, content=form.content.data, page="placeholder",
+        new_post = Post(title=form.title.data, content=form.content.data, page=page_id,
                         time_created=time)
 
         db.session.add(new_post)
         db.session.commit()
 
-        return blog()
+        return page(page_id)
     return render_template('create.html', form=form)
 
 
@@ -61,12 +69,12 @@ def update(id):
     form = PostForm()
 
     if form.validate_on_submit():
-        Post.query.filter_by(id=id).update({"title": form.title.data})
-        Post.query.filter_by(id=id).update({"content": form.content.data})
+        post.title = form.title.data
+        post.content = form.content.data
 
         db.session.commit()
 
-        return blog()
+        return page(post.page)
 
         # creates a copy of post object which is independent of database.
     post_copy = copy.deepcopy(post)
@@ -80,10 +88,12 @@ def update(id):
 
 @charity_blueprint.route('/<int:id>/delete')
 def delete(id):
+    post = Post.query.filter_by(id=id).first()
+    page_id = post.page
     Post.query.filter_by(id=id).delete()
     db.session.commit()
 
-    return blog()
+    return page(page_id)
 
 
 @charity_blueprint.route('/<int:id>/view')

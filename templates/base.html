@@ -34,9 +34,6 @@
                             Search
                         </a>
                         {% if current_user.is_authenticated and current_user.roleID=='charity' %}
-                            <a href="{{ url_for('charity.blog') }}" class="navbar-item">
-                                Charity Page
-                            </a>
                             <a href="{{ url_for('charity_user.charity_profile') }}" class="navbar-item">
                                 Profile
                             </a>

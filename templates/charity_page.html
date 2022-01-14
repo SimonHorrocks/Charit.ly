@@ -2,24 +2,25 @@
 
 {% block content %}
 
-    <h1 class="title is-1">Profile</h1>
+    <h1 class="title is-1">{{ page.name }}</h1>
 
     <div class="tab">
         <button class="tablink" onclick="tabView('Profile')" id="default">Profile</button>
         <button class="tablink" onclick="tabView('Posts')">Posts</button>
+        {% if current_user.id == page.user_id %}
         <button class="tablink" onclick="tabView('NewEvent')">New Event</button>
         <button class="tablink" onclick="tabView('Settings')">Settings</button>
-
+        {% endif %}
         <div id="Profile" class="tabcontent">
             <h3> Profile </h3>
         </div>
 
         <div id="Posts" class="tabcontent">
-            <h3> MyCharities </h3>
-            <a href="{{ url_for('charity.create') }}" class="button2">
+        {% if page in current_user.pages %}
+            <a href="{{ url_for('charity.create', page_id=page.id) }}" class="button2">
                 <button>New Post</button>
             </a>
-
+        {% endif %}
             <div class="box">
                 {% for post in posts %}
                     <article class="media">
@@ -32,6 +33,7 @@
                                     <br>
                                     {{ post.content }}
                                     <br>
+                                {% if page in current_user.pages %}
                                 <div id="post-navbar" class="navbar-menu">
                                     <div class="navbar-start">
                                         <a class="navbar-item"
@@ -40,6 +42,7 @@
                                            href="{{ url_for('charity.delete', id=post.id) }}">Delete</a>
                                     </div>
                                 </div>
+                                {% endif %}
                                 </p>
                             </div>
                         </div>
@@ -47,7 +50,7 @@
                 {% endfor %}
             </div>
         </div>
-
+        {% if current_user.id == page.user_id %}
         <div id="NewEvent" class="tabcontent">
             <h3> New Event </h3>
             <div class="column is-5 is-offset-4">
@@ -127,6 +130,7 @@
             <h3> Settings </h3>
         </div>
     </div>
+    {% endif %}
     <script>
         document.getElementById("default").click();
     </script>

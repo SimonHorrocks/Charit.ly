@@ -18,31 +18,32 @@ charity_user_blueprint = Blueprint('charity_user', __name__, template_folder='te
 @login_required
 @requires_roles('charity')
 def charity_profile():
-    return render_template('charityuser.html')
+    return render_template('charity_user.html', pages=current_user.pages)
+
 
 @charity_user_blueprint.route('/newcharity', methods=['GET', 'POST'])
 @login_required
 @requires_roles('charity')
-def newCharity():
+def new_charity():
     form = NewCharityPage()
     if form.validate_on_submit():
         page = Page.query.filter_by(name=form.name.data).first()
-        # if this returns a user, then the email already exists in database
+        # if this returns a page, then the name already exists in database
 
-        # if email already exists redirect user back to signup page with error message so user can try again
+        # if name already exists redirect user back to new charity page with error message so user can try again
         if page:
             flash('Charity with this name already exists')
-            return render_template("newcharity.html", form=form)
+            return render_template("new_charity.html", form=form)
 
-        # create a new user with the form data
+        # create a new page with the form data
         new_charity = Page(name=form.name.data,
                            description=form.description.data,
                            user_id=current_user.id,
                            )
 
-        # add the new user to the database
+        # add the new page to the database
         db.session.add(new_charity)
         db.session.commit()
         return charity_profile()
 
-    return render_template('newcharity.html', form=form)
+    return render_template('new_charity.html', form=form)

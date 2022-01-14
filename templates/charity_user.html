@@ -14,7 +14,16 @@
         </div>
         <div id="MyCharities" class="tabcontent">
             <h3> My Charities </h3>
-            <a href="{{ url_for('charity_user.newCharity') }}" class="button2">
+            {% if pages %}
+                <div class="content">
+                    {% for page in pages %}
+                    <p><a href="{{ url_for('charity.page', id=page.id) }}">
+                        <h4>{{ page.name }}</h4>
+                    </a></p>
+                    {% endfor %}
+                </div>
+            {% endif %}
+            <a href="{{ url_for('charity_user.new_charity') }}" class="button2">
                 <button>New Charity</button>
             </a>
 
