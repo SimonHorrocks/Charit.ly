@@ -75,15 +75,17 @@ class Event(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(100))
     description = db.Column(db.String(100))
-    time = db.Column(db.DateTime)
+    date = db.Column(db.Date)
+    time = db.Column(db.Time)
     time_created = db.Column(db.DateTime)
     page = db.Column(db.Integer, db.ForeignKey(Page.id), nullable=False)
     lat = db.Column(db.Float)
     lon = db.Column(db.Float)
 
-    def __init__(self, name, description, time, page, lat, lon):
+    def __init__(self, name, description, date, time, page, lat, lon):
         self.name = name
         self.description = description
+        self.date = date
         self.time = time
         self.time_created = datetime.now()
         self.page = page
