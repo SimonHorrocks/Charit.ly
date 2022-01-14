@@ -6,14 +6,18 @@
 
     <div class="tab">
         <button class="tablink" onclick="tabView('Profile')" id="default">Profile</button>
-        <button class="tablink" onclick="tabView('Following')">Following</button>
+        <button class="tablink" onclick="tabView('MyCharities')">My Charities</button>
         <button class="tablink" onclick="tabView('Settings')">Settings</button>
 
         <div id="Profile" class="tabcontent">
             <h3> Profile </h3>
         </div>
-        <div id="Following" class="tabcontent">
-            <h3> Following </h3>
+        <div id="MyCharities" class="tabcontent">
+            <h3> My Charities </h3>
+            <a href="{{ url_for('charity_user.newCharity') }}" class="button2">
+                <button>New Charity</button>
+            </a>
+
         </div>
         <div id="Settings" class="tabcontent">
             <h3> Settings </h3>

@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+    <div class="column is-5 is-offset-4">
+        <div class="box">
+            <form method="POST">
+                <h2 class="title">Register</h2>
+                <div class="field">
+                    {{ form.hidden_tag() }}
+                    <div class="control">
+                        {{ form.name(class="input", placeholder="Charity name") }}
+                    </div>
+                    <div class="error">
+                        {% for error in form.name.errors %}
+                            {{ error }}
+                        {% endfor %}
+                    </div>
+                </div>
+                <div class="field">
+                    <div class="control">
+                        {{ form.description(class="input", placeholder="Charity description") }}
+                    </div>
+                    <div class="error">
+                        {% for error in form.description.errors %}
+                            {{ error }}
+                        {% endfor %}
+                    </div>
+                </div>
+                <div>
+                    {{ form.submit(class="button is-info is-centered") }}
+                </div>
+            </form>
+        </div>
+    </div>
+
+{% endblock %}
