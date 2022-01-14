@@ -4,6 +4,7 @@ from flask import Blueprint, redirect, url_for, render_template, flash, request,
 from flask_login import login_user, current_user, logout_user, login_required
 from werkzeug.security import check_password_hash
 
+import charity_user.views
 from app import db
 from auth.forms import RegisterForm, LoginForm
 from models import User
@@ -90,6 +91,9 @@ def login():
             if user.roleID == 'admin':
                 # if user is admin redirect to admin page
                 return redirect(url_for('admin.admin'))
+            elif user.roleID == 'charity':
+                # if user is a charity profile redirect to charity profile
+                return redirect(url_for('charity_user.charity_profile'))
             else:
                 # otherwise redirect to profile
                 return redirect(url_for('profile'))
