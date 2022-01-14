@@ -25,7 +25,7 @@
                     <article class="media">
                         <div class="media-content">
                             <div class="content">
-                                <a href="{{ url_for('charity.view', id=post.id) }}">{{ post.title }}</a>
+                                <a href="{{ url_for('charity.view', name=post.page, id=post.id) }}">{{ post.title }}</a>
                                 <p>
                                     <strong>{{ post.username }}</strong>
                                     <small>{{ post.time_created.strftime('%d-%m-%Y %H:%M') }}</small>
@@ -35,9 +35,9 @@
                                 <div id="post-navbar" class="navbar-menu">
                                     <div class="navbar-start">
                                         <a class="navbar-item"
-                                           href="{{ url_for('charity.update', id=post.id) }}">Update</a>
+                                           href="{{ url_for('charity.update', name=post.page, id=post.id) }}">Update</a>
                                         <a class="navbar-item"
-                                           href="{{ url_for('charity.delete', id=post.id) }}">Delete</a>
+                                           href="{{ url_for('charity.delete', name=post.page, id=post.id) }}">Delete</a>
                                     </div>
                                 </div>
                                 </p>

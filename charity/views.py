@@ -1,7 +1,8 @@
 import copy
 from datetime import datetime
 
-from flask import Blueprint, render_template
+from flask import Blueprint, render_template, redirect, url_for
+from flask_login import current_user
 from geopy import distance
 from sqlalchemy import desc
 
@@ -13,11 +14,10 @@ from models import Post, Tag, Event
 charity_blueprint = Blueprint("charity", __name__, template_folder="templates")
 
 
-# TODO: fix blueprint not working for update and delete pages
-@charity_blueprint.route('/blog',  methods=['GET', 'POST'])
-def blog():
+@charity_blueprint.route('/<string:name>/blog',  methods=['GET', 'POST'])
+def blog(name):
     form = NewEventForm()
-
+    page = Page.query.filter_by(user_id=current_user.id).first()
     # if request method is POST and form is valid
     if form.validate_on_submit():
         # create a new user with the form data
@@ -25,35 +25,35 @@ def blog():
                           description=form.description.data,
                           date=form.date.data,
                           time=form.time.data,
-                          page="placeholder",
+                          page=page.id,
                           lat=form.lat.data,
                           lon=form.lon.data)
         # add the new user to the database
         db.session.add(new_event)
         db.session.commit()
 
-    posts = Post.query.order_by(desc('id')).all()
+    posts = Post.query.filter_by(page=page.id).order_by(desc('id')).all()
     return render_template('charity_profile.html', posts=posts, form=form)
 
 
 @charity_blueprint.route('/create', methods=('GET', 'POST'))
 def create():
     form = PostForm()
-
+    page = Page.query.filter_by(user_id=current_user.id).first()
     if form.validate_on_submit():
         time = datetime.now()
-        new_post = Post(id=None, title=form.title.data, content=form.content.data, page="placeholder",
+        new_post = Post(id=None, title=form.title.data, content=form.content.data, page=page.id,
                         time_created=time)
 
         db.session.add(new_post)
         db.session.commit()
 
-        return blog()
+        return blog(name=page.name)
     return render_template('create.html', form=form)
 
 
-@charity_blueprint.route('/<int:id>/update', methods=('GET', 'POST'))
-def update(id):
+@charity_blueprint.route('/<string:name>/<int:id>/update', methods=('GET', 'POST'))
+def update(name, id):
     post = Post.query.filter_by(id=id).first()
     if not post:
         return render_template('500.html')
@@ -78,12 +78,12 @@ def update(id):
     return render_template('update.html', form=form)
 
 
-@charity_blueprint.route('/<int:id>/delete')
-def delete(id):
+@charity_blueprint.route('/<string:name>/<int:id>/delete')
+def delete(name, id):
     Post.query.filter_by(id=id).delete()
     db.session.commit()
 
-    return blog()
+    return blog(name)
 
 
 @charity_blueprint.route('/<int:id>/view')
