@@ -14,7 +14,7 @@ charity_blueprint = Blueprint("charity", __name__, template_folder="templates")
 
 
 # TODO: fix blueprint not working for update and delete pages
-@charity_blueprint.route('/blog')
+@charity_blueprint.route('/blog',  methods=['GET', 'POST'])
 def blog():
     form = NewEventForm()
 
@@ -32,6 +32,8 @@ def blog():
         # add the new user to the database
         db.session.add(new_event)
         db.session.commit()
+
+        return blog()
     posts = Post.query.order_by(desc('id')).all()
     return render_template('charity_profile.html', posts=posts, form=form)
 

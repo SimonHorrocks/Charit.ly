@@ -14,7 +14,7 @@ admin_blueprint = Blueprint('admin', __name__, template_folder='templates')
 
 # VIEWS
 # view admin homepage
-@admin_blueprint.route('/admin')
+@admin_blueprint.route('/admin', methods=['GET', 'POST'])
 @login_required
 @requires_roles('admin')
 def admin():
