@@ -7,5 +7,16 @@
       <jdbc-driver>org.mariadb.jdbc.Driver</jdbc-driver>
       <jdbc-url>jdbc:mariadb://cs-db.ncl.ac.uk:3306/csc2033_team13</jdbc-url>
     </data-source>
+    <data-source source="LOCAL" name="charityForum" uuid="6a583ccc-8b2a-4b8d-a567-27bb2bce3a3e">
+      <driver-ref>sqlite.xerial</driver-ref>
+      <synchronize>true</synchronize>
+      <jdbc-driver>org.sqlite.JDBC</jdbc-driver>
+      <jdbc-url>jdbc:sqlite:C:\Users\SeaOf\PycharmProjects\CSC2033-Team13-Charity\charityForum.db</jdbc-url>
+      <libraries>
+        <library>
+          <url>file://$APPLICATION_CONFIG_DIR$/jdbc-drivers/Xerial SQLiteJDBC/3.34.0/sqlite-jdbc-3.34.0.jar</url>
+        </library>
+      </libraries>
+    </data-source>
   </component>
 </project>

@@ -99,6 +99,14 @@ class Tag(db.Model):
     subject = db.Column(db.String(100), unique=True, nullable=False)
 
 
+class Comment(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    post = db.Column(db.Integer, db.ForeignKey(Post.id))
+    original = db.Column(db.Integer, db.ForeignKey('comment.id'), nullable=True)
+    replies = db.relationship('Comment')
+    text = db.Column(db.String(100), nullable=False)
+
+
 # Junction table for tags and pages
 tags = db.Table('tags',
                 db.Column('tag_id', db.Integer, db.ForeignKey(Tag.id), primary_key=True),
