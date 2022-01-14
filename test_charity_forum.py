@@ -61,19 +61,18 @@ def test_search(client):
     response = client.post("/search", data=dict(search="anything"))
     assert "No results." in response.data.decode("utf-8")
     test_charity = create_test_user("charity")
-    response = client.post("/search", data=dict(search="test"))
-    assert test_charity.username in response.data.decode("utf-8")
+    test_page = Page(name="test_page",
+                     description="a test page for testing purposes",
+                     user_id=test_charity.id)
+    response = client.post("/search", data=dict(search="test_page"))
+    assert test_page.name in response.data.decode("utf-8")
     test_tag = Tag(subject="foo")
-    tagged_charity = User(email="tagged@email.com",
-                          username="tagged",
-                          password="Password1!",
-                          roleID="charity")
-    tagged_charity.tags.append(test_tag)
+    test_page.tags.append(test_tag)
     db.session.add(test_tag)
-    db.session.add(tagged_charity)
+    db.session.add(test_page)
     db.session.commit()
     response = client.post("/search", data=dict(search="foo"))
-    assert tagged_charity.username in response.data.decode("utf-8")
+    assert test_page.name in response.data.decode("utf-8")
 
 
 def test_nearby(client):

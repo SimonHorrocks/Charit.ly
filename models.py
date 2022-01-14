@@ -1,5 +1,4 @@
-import datetime
-
+from datetime import datetime
 from flask_login import UserMixin
 from werkzeug.security import generate_password_hash
 
@@ -30,7 +29,7 @@ class User(db.Model, UserMixin):
         self.email = email
         self.password = generate_password_hash(password)
         self.roleID = roleID
-        self.registered_on = datetime.datetime.now()
+        self.registered_on = datetime.now()
         self.last_logged_in = None
         self.current_logged_in = None
 
@@ -55,7 +54,7 @@ class Page(db.Model):
         self.name = name
         self.description = description
         self.user_id = user_id
-        self.time_created = datetime.datetime.now()
+        self.time_created = datetime.now()
 
     def __repr__(self):
         return f"Page('{self.name})', '{self.description}' , '{self.followers}')"
@@ -86,7 +85,7 @@ class Event(db.Model):
         self.name = name
         self.description = description
         self.time = time
-        self.time_created = datetime.datetime.now()
+        self.time_created = datetime.now()
         self.page = page
         self.lat = lat
         self.lon = lon

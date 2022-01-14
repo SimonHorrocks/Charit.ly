@@ -2,22 +2,38 @@ import copy
 from datetime import datetime
 
 from flask import Blueprint, render_template
-from sqlalchemy import desc
 from geopy import distance
+from sqlalchemy import desc
 
 from app import db
-from charity.forms import PostForm, SearchForm
-from models import Post, User, Tag, Event
+from charity.forms import PostForm, SearchForm, NewEventForm
+from models import Page
+from models import Post, Tag, Event
 
 charity_blueprint = Blueprint("charity", __name__, template_folder="templates")
 
 
 # TODO: fix blueprint not working for update and delete pages
-
 @charity_blueprint.route('/blog')
 def blog():
+    form = NewEventForm()
+
+    # if request method is POST and form is valid
+    if form.validate_on_submit():
+
+        # create a new user with the form data
+        new_event = Event(name=form.name.data,
+                          description=form.description.data,
+                          time=form.time.data,
+                          page="placeholder",
+                          lat=form.lat.data,
+                          lon=form.lon.data)
+
+        # add the new user to the database
+        db.session.add(new_event)
+        db.session.commit()
     posts = Post.query.order_by(desc('id')).all()
-    return render_template('charity_profile.html', posts=posts)
+    return render_template('charity_profile.html', posts=posts, form=form)
 
 
 @charity_blueprint.route('/create', methods=('GET', 'POST'))
@@ -70,14 +86,20 @@ def delete(id):
     return blog()
 
 
+@charity_blueprint.route('/<int:id>/view')
+def view(id):
+    post = Post.query.filter_by(id=id).first()
+    return render_template('post.html', post=post)
+
+
 # returns json list of all events within a certain distance of the coords
 @charity_blueprint.route('/<string:coords>/<int:threshold>/nearby')
 def nearby(coords, threshold):
     lon, lat = map(float, coords.split(":"))
     events = list(filter(lambda event: distance.distance((event.lat, event.lon), (lat, lon)).miles < threshold,
                          Event.query.all()))
-    return {"events": list(map(lambda event: {"id": event.id, "name": event.name, "lat": event.lat, "lon": event.lon}, events))}
-
+    return {"events": list(
+        map(lambda event: {"id": event.id, "name": event.name, "lat": event.lat, "lon": event.lon}, events))}
 
 
 # Takes user search query, searches for a charity with a matching name, and charities with matching tags.
@@ -94,7 +116,7 @@ def search():
         search_text = form.search.data.strip()
 
         # Query database for charities with a matching username
-        charity = User.query.filter_by(username=search_text, roleID="charity").first()
+        charity = Page.query.filter_by(name=search_text).first()
         # split search text into individual words
 
         words = search_text.split(" ")
@@ -106,7 +128,10 @@ def search():
                 search_tags.append(tag)
 
         # Get list of charities with tags matching those in the list
-        charities = [tag.users.filter_by(roleID="charity").first() for tag in search_tags]
+        charities = []
+        for tag in search_tags:
+            for page in tag.pages:
+                charities.append(page)
 
         # Create final list of results
         results = list(filter(lambda x: x is not None, [charity] + charities))
