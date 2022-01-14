@@ -1,47 +1,26 @@
 import copy
 from datetime import datetime
 
-from flask import Blueprint, render_template
+from flask import Blueprint, render_template, redirect, url_for
 from flask_login import current_user
 from geopy import distance
 from sqlalchemy import desc
 
-from app import db
-from charity.forms import PostForm, SearchForm, NewEventForm
-from models import Page
+from app import db, requires_roles
+from charity.forms import PostForm, SearchForm, NewEventForm, TagForm
+from models import Page, tags
 from models import Post, Tag, Event
 
 charity_blueprint = Blueprint("charity", __name__, template_folder="templates")
 
 
 # TODO: fix blueprint not working for update and delete pages
-@charity_blueprint.route('/blog', methods=['GET', 'POST'])
-def blog():
-    form = NewEventForm()
-
-    # if request method is POST and form is valid
-    if form.validate_on_submit():
-        # create a new user with the form data
-        new_event = Event(name=form.name.data,
-                          description=form.description.data,
-                          date=form.date.data,
-                          time=form.time.data,
-                          page="placeholder",
-                          lat=form.lat.data,
-                          lon=form.lon.data)
-        # add the new user to the database
-        db.session.add(new_event)
-        db.session.commit()
-
-    posts = Post.query.order_by(desc('id')).all()
-    return render_template('charity_page.html', posts=posts, form=form)
-
-
 @charity_blueprint.route('/<int:id>/page', methods=['GET', 'POST'])
 def page(id):
     form = NewEventForm()
     charity_page = Page.query.get(id)
-    return render_template('charity_page.html', posts=charity_page.posts, form=form, page=charity_page)
+    return render_template('charity_page.html', posts=charity_page.posts, form=form, page=charity_page,
+                           add_tag_form=TagForm(), remove_tag_form=TagForm())
 
 
 @charity_blueprint.route('/<int:page_id>/create', methods=('GET', 'POST'))
@@ -140,10 +119,42 @@ def search():
         # Get list of charities with tags matching those in the list
         charities = []
         for tag in search_tags:
-            for page in tag.pages:
-                charities.append(page)
+            for tag_page in tag.pages:
+                charities.append(tag_page)
 
         # Create final list of results
         results = list(filter(lambda x: x is not None, [charity] + charities))
 
     return render_template('search.html', form=form, results=results)
+
+
+@charity_blueprint.route("/<int:page_id>/tag", methods=["POST"])
+@requires_roles("charity")
+def add_tag(page_id):
+    form = TagForm()
+
+    if form.validate_on_submit:
+        tag = Tag.query.filter_by(subject=form.subject.data).first()
+        if not tag:
+            tag = Tag(subject=form.subject.data)
+            db.session.add(tag)
+            db.session.commit()
+        current_page = Page.query.get(page_id)
+        current_page.tags.append(tag)
+        db.session.commit()
+
+    return redirect(url_for("charity.page", id=page_id))
+
+
+@charity_blueprint.route("/<int:page_id>/removetag", methods=["POST"])
+@requires_roles("charity")
+def remove_tag(page_id):
+    form = TagForm()
+
+    if form.validate_on_submit:
+        tag = Tag.query.filter_by(subject=form.subject.data).first()
+        current_page = Page.query.get(page_id)
+        current_page.tags.remove(tag)
+        db.session.commit()
+
+    return redirect(url_for("charity.page", id=page_id))

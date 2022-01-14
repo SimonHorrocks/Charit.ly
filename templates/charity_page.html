@@ -128,6 +128,22 @@
 
         <div id="Settings" class="tabcontent">
             <h3> Settings </h3>
+            <h3> Tags </h3>
+            {% for tag in page.tags %}
+                <p>{{ tag.subject }}</p>
+            {% endfor %}
+            <h3> Add Tags </h3>
+            <form method="POST" action="{{ url_for('charity.add_tag', page_id=page.id) }}">
+                {{ add_tag_form.hidden_tag() }}
+                {{ add_tag_form.subject() }}
+                {{ add_tag_form.submit() }}
+            </form>
+            <h3> Remove Tags </h3>
+            <form method="POST" action="{{ url_for('charity.remove_tag', page_id=page.id) }}">
+                {{ remove_tag_form.hidden_tag() }}
+                {{ remove_tag_form.subject() }}
+                {{ remove_tag_form.submit() }}
+            </form>
         </div>
     </div>
     {% endif %}

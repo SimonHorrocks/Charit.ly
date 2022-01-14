@@ -23,3 +23,8 @@ class NewEventForm(FlaskForm):
     lat = FloatField(validators=[DataRequired()])
     lon = FloatField(validators=[DataRequired()])
     submit = SubmitField()
+
+
+class TagForm(FlaskForm):
+    subject = StringField(validators=[DataRequired()])
+    submit = SubmitField()
