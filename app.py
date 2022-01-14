@@ -26,7 +26,7 @@ def requires_roles(*roles):
                 # log unauthorised access attempt
                 logging.warning('SECURITY - Unauthorised access attempt [%s, %s, %s, %s]',
                                 current_user.id,
-                                current_user.firstname,
+                                current_user.username,
                                 current_user.roleID,
                                 request.remote_addr)
                 # Redirect the user to an unauthorised notice!

@@ -83,9 +83,11 @@ def test_nearby(client):
     db.session.add(test_user)
     db.session.add(test_page)
     db.session.commit()
+    date_time = datetime.datetime.fromisoformat("2022-01-01 19:00")
     test_event = Event(name="test_event",
                        description="a test event for testing purposes",
-                       time=datetime.datetime.fromisoformat("2022-01-01 19:00"),
+                       time=date_time.time(),
+                       date=date_time.date(),
                        page=test_page.id,
                        lat=0.1,
                        lon=0.1)
