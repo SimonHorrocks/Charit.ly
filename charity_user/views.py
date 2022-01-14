@@ -2,6 +2,7 @@
 
 from flask_login import login_required, current_user
 from flask import Blueprint, render_template, flash
+from sqlalchemy import asc
 
 from app import db, requires_roles
 from models import Page
@@ -18,7 +19,9 @@ charity_user_blueprint = Blueprint('charity_user', __name__, template_folder='te
 @login_required
 @requires_roles('charity')
 def charity_profile():
-    return render_template('charityuser.html')
+    charities = Page.query.filter_by(user_id=current_user.id).order_by(asc('name')).all()
+    return render_template('charityuser.html', charities=charities)
+
 
 @charity_user_blueprint.route('/newcharity', methods=['GET', 'POST'])
 @login_required
