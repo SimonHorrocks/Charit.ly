@@ -14,6 +14,38 @@
 
         <div id="AllUsers" class="tabcontent">
             <h3> Users </h3>
+        <div class="column is-5 is-offset-4">
+        <div class="box">
+            <form method="POST">
+                <h2 class="title">Change Role</h2>
+                <div class="field">
+                    <div class="control">
+                        {{ form.email(class="input", placeholder="Email") }}
+                    </div>
+                    <div class="error">
+                        {% for error in form.email.errors %}
+                            {{ error }}
+                        {% endfor %}
+
+                    </div>
+                </div>
+                <div class="field">
+                    <div class="control">
+                        {{ form.role(class="input", placeholder="New Role") }}
+                    </div>
+                    <div class="error">
+                        {% for error in form.role.errors %}
+                            {{ error }}
+                        {% endfor %}
+                    </div>
+                </div>
+                <div>
+                    {{ form.submit(class="button is-info is-centered") }}
+                </div>
+            </form>
+        </div>
+    </div>
+
             <div class="box" id="allUsers">
                 {% for user in users %}
                     <div class="row" , id="userRow">
@@ -28,21 +60,6 @@
                         <div class="column" id="userColumn">
                             <h2>Role</h2>
                             <p>{{ user.roleID }}</p>
-                        </div>
-                        <div class="column" id="userColumn">
-                            <h2>Change Role</h2>
-                            {# TODO: Add code for changing roles #}
-                            <form action="/change_role.php">
-                                <div class="select">
-                                    <select name="roleID" id="roleID">
-                                        <option value="user">User</option>
-                                        <option value="charity">Charity</option>
-                                        <option value="admin">Admin</option>
-                                    </select>
-                                </div>
-                                <input type="submit" value="Submit">
-
-                            </form>
                         </div>
                     </div>
                 {% endfor %}
