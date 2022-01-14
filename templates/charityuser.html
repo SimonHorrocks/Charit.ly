@@ -17,7 +17,9 @@
             <a href="{{ url_for('charity_user.newCharity') }}" class="button2">
                 <button>New Charity</button>
             </a>
-
+            {% for charity in charities %}
+                <a href="{{ url_for('charity.blog', name=charity.name) }}">{{ charity.name }}</a>
+            {% endfor %}
         </div>
         <div id="Settings" class="tabcontent">
             <h3> Settings </h3>
