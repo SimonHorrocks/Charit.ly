@@ -1,5 +1,5 @@
 from flask_wtf import FlaskForm
-from wtforms import StringField, SubmitField, TextAreaField, DecimalField, IntegerField, DateTimeField, DateField, FloatField
+from wtforms import StringField, SubmitField, TextAreaField, TimeField, DateField, FloatField
 
 from wtforms.validators import DataRequired
 
@@ -18,7 +18,8 @@ class SearchForm(FlaskForm):
 class NewEventForm(FlaskForm):
     name = StringField(validators=[DataRequired()])
     description = TextAreaField(validators=[DataRequired()])
-    time = DateField(format='%d%m%Y', validators=[DataRequired()])
+    date = DateField(validators=[DataRequired()])
+    time = TimeField()
     lat = FloatField(validators=[DataRequired()])
     lon = FloatField(validators=[DataRequired()])
     submit = SubmitField()

@@ -54,7 +54,6 @@
                 <div class="box">
                     <form method="POST">
                         <h2 class="title">New Event</h2>
-
                         <div class="field">
                             {{ form.hidden_tag() }}
                             <div class="control">
@@ -76,7 +75,17 @@
                                 {% endfor %}
                             </div>
                         </div>
-                        <div class="field">
+                    <div class="field">
+                            <div class="control">
+                                {{ form.date(class="input", placeholder="Date") }}
+                            </div>
+                            <div class="error">
+                                {% for error in form.date.errors %}
+                                    {{ error }}
+                                {% endfor %}
+                            </div>
+                        </div>
+                       <div class="field">
                             <div class="control">
                                 {{ form.time(class="input", placeholder="Time") }}
                             </div>
@@ -84,7 +93,6 @@
                                 {% for error in form.time.errors %}
                                     {{ error }}
                                 {% endfor %}
-
                             </div>
                         </div>
                         <div class="field">

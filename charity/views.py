@@ -20,20 +20,18 @@ def blog():
 
     # if request method is POST and form is valid
     if form.validate_on_submit():
-
         # create a new user with the form data
         new_event = Event(name=form.name.data,
                           description=form.description.data,
+                          date=form.date.data,
                           time=form.time.data,
                           page="placeholder",
                           lat=form.lat.data,
                           lon=form.lon.data)
-
         # add the new user to the database
         db.session.add(new_event)
         db.session.commit()
 
-        return blog()
     posts = Post.query.order_by(desc('id')).all()
     return render_template('charity_profile.html', posts=posts, form=form)
 
