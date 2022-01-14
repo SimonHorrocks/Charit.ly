@@ -48,18 +48,26 @@
     </div>
 
             <div class="box" id="allUsers">
+                <div class="row" id="userRow">
+                    <div class="column" id="userColumn">
+                        <h2>Name</h2>
+                    </div>
+                    <div class="column" id="userColumn">
+                        <h2>Email</h2>
+                    </div>
+                    <div class="column" id="userColumn">
+                        <h2>Role</h2>
+                    </div>
+                </div>
                 {% for user in users %}
                     <div class="row" id="userRow">
                         <div class="column" id="userColumn">
-                            <h2>Name</h2>
                             <p>{{ user.username }}</p>
                         </div>
                         <div class="column" id="userColumn">
-                            <h2>Email</h2>
                             <p>{{ user.email }}</p>
                         </div>
                         <div class="column" id="userColumn">
-                            <h2>Role</h2>
                             <p>{{ user.roleID }}</p>
                         </div>
                     </div>
