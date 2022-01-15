@@ -2,9 +2,7 @@ import copy
 from datetime import datetime
 
 from flask import Blueprint, render_template, redirect, url_for
-from flask_login import current_user
 from geopy import distance
-from sqlalchemy import desc
 
 from app import db, requires_roles
 from charity.forms import PostForm, SearchForm, NewEventForm, TagForm
@@ -29,7 +27,6 @@ def create(page_id):
 
     if form.validate_on_submit():
         time = datetime.now()
-        new_post = Post(id=None, title=form.title.data, content=form.content.data, page=page.id,
         new_post = Post(title=form.title.data, content=form.content.data, page=page_id,
                         time_created=time)
 

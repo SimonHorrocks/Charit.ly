@@ -10,7 +10,7 @@
                     <div class="content">
                         <a href="{{ url_for('charity.view', id=post.id) }}">{{ post.title }}</a>
                         <p>
-                            <strong>{{ post.username }}</strong>
+                            <strong>{{ post.page }}</strong>
                             <small>{{ post.time_created.strftime('%d-%m-%Y %H:%M') }}</small>
                             <br>
                             {{ post.content }}
