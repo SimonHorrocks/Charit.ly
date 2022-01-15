@@ -29,6 +29,7 @@ def create(page_id):
 
     if form.validate_on_submit():
         time = datetime.now()
+        new_post = Post(id=None, title=form.title.data, content=form.content.data, page=page.id,
         new_post = Post(title=form.title.data, content=form.content.data, page=page_id,
                         time_created=time)
 
