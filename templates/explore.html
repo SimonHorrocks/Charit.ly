@@ -4,4 +4,72 @@
 
     <h1 class="title is-1">Explore</h1>
 
+
+    <div class="tab">
+        {# TODO:make charities a deafult tab - for some reason not working rn #}
+        <button class="tablink" onclick="tabView('Charities')" id="default">Charities</button>
+        <button class="tablink" onclick="tabView('Posts')">Posts</button>
+        <button class="tablink" onclick="tabView('Events')">Events</button>
+
+        <div id="Charities" class="tabcontent">
+            <h3> Charities </h3>
+            {% for charity in charities %}
+                <a href="{{ url_for('charity.page', id=charity.id) }}">{{ charity.name }}</a>
+            {% endfor %}
+        </div>
+        <div id="Posts" class="tabcontent">
+            <h3> Posts </h3>
+            <div class="box">
+                {% for post in posts %}
+                    <article class="media">
+                        <div class="media-content">
+                            <div class="content">
+                                <a href="{{ url_for('charity.view', name=post.page, id=post.id) }}">{{ post.title }}</a>
+                                <p>
+                                    <strong>{{ post.page }}</strong>
+                                    <small>{{ post.time_created.strftime('%d-%m-%Y %H:%M') }}</small>
+                                    <br>
+                                    {{ post.content }}
+                                    <br>
+                                    {% if page in current_user.pages %}
+                                        <div id="post-navbar" class="navbar-menu">
+                                            <div class="navbar-start">
+                                                <a class="navbar-item"
+                                                   href="{{ url_for('charity.update', name=post.page, id=post.id) }}">Update</a>
+                                                <a class="navbar-item"
+                                                   href="{{ url_for('charity.delete', name=post.page, id=post.id) }}">Delete</a>
+                                            </div>
+                                        </div>
+                                    {% endif %}
+                                </p>
+                            </div>
+                        </div>
+                    </article>
+                {% endfor %}
+            </div>
+        </div>
+        <div id="Events" class="tabcontent">
+            <h3> Events </h3>
+            <div class="box">
+                {% for event in events %}
+                    <article class="media">
+                        <div class="media-content">
+                            <div class="content">
+                                <h4>{{ event.name }}</h4>
+                                <p>
+                                    <strong>{{ event.page }}</strong>
+                                    <small>{{ event.date.strftime('%d-%m-%Y %H:%M') }}</small>
+                                    <small>{{ event.time.strftime('%H:%M') }}</small>
+                                    <br>
+                                    {{ event.description }}
+                                    <br>
+                                </p>
+                            </div>
+                        </div>
+                    </article>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+
 {% endblock %}

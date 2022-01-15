@@ -4,10 +4,12 @@ from functools import wraps
 from flask import Flask, render_template, request
 from flask_login import current_user, login_required
 from flask_sqlalchemy import SQLAlchemy
+from sqlalchemy import desc
 
 from helpers import setup_app
 
 # CONFIG
+
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'LongAndRandomSecretKey'
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///charityForum.db'
@@ -47,7 +49,11 @@ def index():
 # EXPLORE PAGE VIEW
 @app.route('/explore')
 def explore():
-    return render_template('explore.html')
+    from models import Page, Post, Event
+    charities = Page.query.order_by(desc("id")).all()
+    posts = Post.query.order_by(desc("id")).all()
+    events = Event.query.order_by(desc("id")).all()
+    return render_template('explore.html', posts=posts, charities=charities, events=events)
 
 
 # EVENT MAP PAGE VIEW
