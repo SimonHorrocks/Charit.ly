@@ -86,6 +86,14 @@
         {% if current_user.id == page.user_id %}
             <div id="Settings" class="tabcontent">
                 <h3> Settings </h3>
+            <h3>Name</h3>
+            <p>{{ page.name }}</p>
+            <h5>Change Name</h5>
+             <form method="POST" action="{{ url_for('charity.change_name', page_id=page.id) }}">
+                    {{ change_name_form.hidden_tag() }}
+                    {{ change_name_form.name() }}
+                    {{ change_name_form.submit() }}
+                </form>
                 <h3>Description</h3>
             <p>{{ page.description }}</p>
             <h5>Change Description</h5>

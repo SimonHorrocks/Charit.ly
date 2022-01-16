@@ -34,3 +34,8 @@ class DescriptionForm(FlaskForm):
     description = TextAreaField(validators=[DataRequired()])
     submit = SubmitField()
 
+
+class NameForm(FlaskForm):
+    name = StringField(validators=[DataRequired()])
+    submit = SubmitField()
+

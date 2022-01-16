@@ -332,7 +332,9 @@ textarea{
     display: table;
     clear: both;
 }
-
+p{
+    font-size: 15px;
+}
 ::-webkit-scrollbar {
   width: 15px;
 }
