@@ -1,6 +1,7 @@
 html {
     background-color: #A5A58D;
     font-family: monospace;
+    align-content: center;
 }
 body {
     width: auto;
@@ -30,18 +31,16 @@ h4{
     text-align: center;
     color: #3f4238;
     font-size: 30px;
-    padding: 5px;
     background: #D4C7B0;
-    border-top-left-radius: 5px;
-    border-top-right-radius: 5px;
-
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    margin-bottom: 0;
 }
 
 /*  navigation bar */
 #navbarMenuHeroA{
     background-color: #D4C7B0;
     padding:10px;
-    width: 100%;
 }
 
 #navbarMenuHeroA a{
@@ -149,8 +148,6 @@ input {
     background-color: #3f4238;
     color: #A5A58D;
 }
-
-
 /* blog posts */
 .content{
     color: #3f4238;
@@ -158,8 +155,8 @@ input {
     background-color: #A5A58D;
     width: 600px;
     margin-bottom: 20px;
-    padding: 20px;
     font-size: 15px;
+    padding-bottom: 5px;
 }
 
 .tabcontent a:hover{
@@ -171,7 +168,6 @@ input {
     font-size: 25px;
     text-decoration: none;
 }
-
 
 /* new post button*/
 .tabcontent button{
@@ -240,15 +236,13 @@ textarea{
 /* all charities view */
 #allCharities{
     width: 800px;
-    color:#3f4238;
-    padding:10px 20px;
-    background-color: #A5A58D;
+        padding:10px 20px;
+
 }
 #allCharities a:link, a:visited{
     color:#3f4238;
     font-weight: bolder;
     text-decoration: none;
-
 }
 #allCharities a:hover{
     color: #555c47;
@@ -257,7 +251,7 @@ textarea{
 #charityColumn {
     float: left;
     margin-bottom: 5px;
-
+    padding-left: 5px;
     text-align: left;
     width: 33%;
     font-size: 20px;
@@ -269,8 +263,13 @@ textarea{
     font-size: 15px;
     color:#3f4238;
 }
-
-
+#charityRow{
+        color:#3f4238;
+    background-color: #A5A58D;
+    margin-bottom: 20px;
+    padding: 10px;
+    border-radius: 5px;
+}
 .row:after {
     content: "";
     display: table;
@@ -278,7 +277,26 @@ textarea{
 
 }
 
+::-webkit-scrollbar {
+  width: 15px;
+}
 
+/* Track */
+::-webkit-scrollbar-track {
+  border-radius: 10px;
+
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #3f4238;
+  border-radius: 10px;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background:  #555c47;
+}
 /*mobile view for max 850px */
 @media screen and (max-width: 850px){
     .box #results{
