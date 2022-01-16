@@ -18,7 +18,7 @@
                 <div class="content">
                     {% for page in pages %}
                     <p><a href="{{ url_for('charity.page', id=page.id) }}">
-                        <h4>{{ page.name }}</h4>
+                    {{ page.name }}
                     </a></p>
                     {% endfor %}
                 </div>

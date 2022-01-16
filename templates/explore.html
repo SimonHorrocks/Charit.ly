@@ -13,9 +13,23 @@
 
         <div id="Charities" class="tabcontent">
             <h3> Charities </h3>
-            {% for charity in charities %}
-                <a href="{{ url_for('charity.page', id=charity.id) }}">{{ charity.name }}</a>
-            {% endfor %}
+            <div class="box" id="allCharities">
+                {% for charity in charities %}
+
+                    <div class="row" id="charityRow">
+                        <div class="column" id="charityColumn">
+                            <p><a href="{{ url_for('charity.page', id=charity.id) }}">{{ charity.name }}</a></p>
+                        </div>
+                        <div class="column" id="smallCharityColumn">
+                            <p>{{ charity.description }}</p>
+                        </div>
+                        {# TODO: Show charity tags #}
+                        <div class="column" id="smallCharityColumn">
+                            <p></p>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
         </div>
         <div id="Posts" class="tabcontent">
             <h3> Posts </h3>
@@ -41,7 +55,6 @@
                                             </div>
                                         </div>
                                     {% endif %}
-                                </p>
                             </div>
                         </div>
                     </article>

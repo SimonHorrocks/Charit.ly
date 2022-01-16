@@ -36,26 +36,27 @@ h4{
     border-top-right-radius: 5px;
 
 }
-#navbarMenuHeroA {
-    width: 100%;
-}
+
 /*  navigation bar */
 #navbarMenuHeroA{
     background-color: #D4C7B0;
     padding:10px;
+    width: 100%;
 }
 
 #navbarMenuHeroA a{
-    text-align: left;
+    text-align: center;
     padding:10px;
+    color:#3f4238;
     background-color: #D4C7B0;
     font-size: 20px;
     font-weight: bolder;
     text-decoration: none;
-
 }
+
 #navbarMenuHeroA a:hover{
     background-color:  #3f4238;
+    color: #D4C7B0;
     padding:10px;
     transition: 0.5s;
 }
@@ -137,6 +138,7 @@ input {
     padding: 10px 20px;
 
 }
+
 .tablink:hover{
     background-color: #3f4238;
     color: #A5A58D;
@@ -220,17 +222,45 @@ textarea{
     color: #D4C7B0;
 }
 
- /* unvisited link */
-a:link {
+/* all charities view */
+#allCharities{
+    width: 800px;
+    color:#3f4238;
+    padding:10px 20px;
+    background-color: #A5A58D;
+}
+#allCharities a:link, a:visited{
+    color:#3f4238;
+    font-weight: bolder;
+    text-decoration: none;
+
+}
+#allCharities a:hover{
+    color: #555c47;
+    transition: 0.5s;
+}
+#charityColumn {
+    float: left;
+    margin-bottom: 5px;
+
+    text-align: left;
+    width: 33%;
+    font-size: 20px;
+}
+#smallCharityColumn{
+    float: left;
+    text-align: left;
+    width: 33%;
+    font-size: 15px;
     color:#3f4238;
 }
- /* visited link */
-a:visited {
-    color: #3f4238;
-}
- /* hovering over link */
-a:hover {
-    color: #D4C7B0;
+
+
+.row:after {
+    content: "";
+    display: table;
+    clear: both;
+
 }
 
 /*mobile view for max 850px */
