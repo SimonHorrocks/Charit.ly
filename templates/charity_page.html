@@ -7,42 +7,71 @@
     <div class="tab">
         <button class="tablink" onclick="tabView('Profile')" id="default">Profile</button>
         <button class="tablink" onclick="tabView('Posts')">Posts</button>
+        <button class="tablink" onclick="tabView('Events')">Events</button>
         {% if current_user.id == page.user_id %}
-        <button class="tablink" onclick="tabView('NewEvent')">New Event</button>
-        <button class="tablink" onclick="tabView('Settings')">Settings</button>
+            <button class="tablink" onclick="tabView('Settings')">Settings</button>
         {% endif %}
         <div id="Profile" class="tabcontent">
             <h3> Profile </h3>
+            {% if page in current_user.pages %}
+                <a href="{{ url_for('charity.create', page_id=page.id) }}" class="button2">
+                    <button>New Post</button>
+                </a>
+                <a href="{{ url_for('charity.new_event', page_id=page.id) }}" class="button2">
+                    <button>New Event</button>
+                </a>
+            {% endif %}
         </div>
 
+
         <div id="Posts" class="tabcontent">
-        {% if page in current_user.pages %}
-            <a href="{{ url_for('charity.create', page_id=page.id) }}" class="button2">
-                <button>New Post</button>
-            </a>
-        {% endif %}
             <div class="box">
                 {% for post in posts %}
                     <article class="media">
                         <div class="media-content">
                             <div class="content">
-                                <a href="{{ url_for('charity.view', name=post.page, id=post.id) }}">{{ post.title }}</a>
+                                <h4>
+                                    <a href="{{ url_for('charity.view', name=post.page, id=post.id) }}">{{ post.title }}</a>
+                                </h4>
                                 <p>
+                                    {# TODO: Change page id to page name #}
                                     <strong>{{ post.page }}</strong>
                                     <small>{{ post.time_created.strftime('%d-%m-%Y %H:%M') }}</small>
                                     <br>
                                     {{ post.content }}
                                     <br>
-                                {% if page in current_user.pages %}
-                                <div id="post-navbar" class="navbar-menu">
-                                    <div class="navbar-start">
-                                        <a class="navbar-item"
-                                           href="{{ url_for('charity.update', name=post.page, id=post.id) }}">Update</a>
-                                        <a class="navbar-item"
-                                           href="{{ url_for('charity.delete', name=post.page, id=post.id) }}">Delete</a>
-                                    </div>
-                                </div>
-                                {% endif %}
+                                    {% if page in current_user.pages %}
+                                        <div id="post-navbar" class="navbar-menu">
+                                            <div class="navbar-start">
+                                                <a class="navbar-item" id="update-navbar"
+                                                   href="{{ url_for('charity.update', name=post.page, id=post.id) }}">Update</a>
+                                                <a class="navbar-item" id="update-navbar"
+                                                   href="{{ url_for('charity.delete', name=post.page, id=post.id) }}">Delete</a>
+                                            </div>
+                                        </div>
+                                    {% endif %}
+                                </p>
+                            </div>
+                        </div>
+                    </article>
+                {% endfor %}
+            </div>
+        </div>
+        <div id="Events" class="tabcontent">
+            <div class="box">
+                {% for event in events %}
+                    <article class="media">
+                        <div class="media-content">
+                            <div class="content">
+                                <h4>{{ event.name }}</h4>
+                                <p>
+                                    <strong>{{ event.page }}</strong>
+                                    <small>{{ event.date.strftime('%d-%m-%Y') }}</small>
+                                    <small>{{ event.time.strftime('%H:%M') }}</small>
+                                    <small>{{ event.lat, event.lon }}</small>
+                                    <br>
+                                    {{ event.description }}
+                                    <br>
                                 </p>
                             </div>
                         </div>
@@ -51,102 +80,26 @@
             </div>
         </div>
         {% if current_user.id == page.user_id %}
-        <div id="NewEvent" class="tabcontent">
-            <h3> New Event </h3>
-            <div class="column is-5 is-offset-4">
-                <div class="box">
-                    <form method="POST">
-                        <h2 class="title">New Event</h2>
-                        <div class="field">
-                            {{ form.hidden_tag() }}
-                            <div class="control">
-                                {{ form.name(class="input", placeholder="Name") }}
-                            </div>
-                            <div class="error">
-                                {% for error in form.name.errors %}
-                                    {{ error }}
-                                {% endfor %}
-                            </div>
-                        </div>
-                        <div class="field">
-                            <div class="control">
-                                {{ form.description(class="input", placeholder="Description") }}
-                            </div>
-                            <div class="error">
-                                {% for error in form.description.errors %}
-                                    {{ error }}
-                                {% endfor %}
-                            </div>
-                        </div>
-                    <div class="field">
-                            <div class="control">
-                                {{ form.date(class="input", placeholder="Date") }}
-                            </div>
-                            <div class="error">
-                                {% for error in form.date.errors %}
-                                    {{ error }}
-                                {% endfor %}
-                            </div>
-                        </div>
-                       <div class="field">
-                            <div class="control">
-                                {{ form.time(class="input", placeholder="Time") }}
-                            </div>
-                            <div class="error">
-                                {% for error in form.time.errors %}
-                                    {{ error }}
-                                {% endfor %}
-                            </div>
-                        </div>
-                        <div class="field">
-                            <div class="control">
-                                {{ form.lat(class="input", placeholder="Lattitute") }}
-                            </div>
-                            <div class="error">
-                                {% for error in form.lat.errors %}
-                                    {{ error }}
-                                {% endfor %}
-                            </div>
-                        </div>
-                        <div class="field">
-                            <div class="control">
-                                {{ form.lon(class="input", placeholder="Longtitute") }}
-                            </div>
-                            <div class="error">
-                                {% for error in form.lon.errors %}
-                                    {{ error }}
-                                {% endfor %}
-                            </div>
-                        </div>
-                        <div>
-                            {{ form.submit(class="button is-info is-centered") }}
-                        </div>
-                    </form>
-                </div>
+            <div id="Settings" class="tabcontent">
+                <h3> Tags </h3>
+                {% for tag in page.tags %}
+                    <p>{{ tag.subject }}</p>
+                {% endfor %}
+                <h3> Add Tags </h3>
+                <form method="POST" action="{{ url_for('charity.add_tag', page_id=page.id) }}">
+                    {{ add_tag_form.hidden_tag() }}
+                    {{ add_tag_form.subject() }}
+                    {{ add_tag_form.submit() }}
+                </form>
+                <h3> Remove Tags </h3>
+                <form method="POST" action="{{ url_for('charity.remove_tag', page_id=page.id) }}">
+                    {{ remove_tag_form.hidden_tag() }}
+                    {{ remove_tag_form.subject() }}
+                    {{ remove_tag_form.submit() }}
+                </form>
             </div>
-        </div>
-
-        <div id="Settings" class="tabcontent">
-            <h3> Settings </h3>
-            <h3> Tags </h3>
-            {% for tag in page.tags %}
-                <p>{{ tag.subject }}</p>
-            {% endfor %}
-            <h3> Add Tags </h3>
-            <form method="POST" action="{{ url_for('charity.add_tag', page_id=page.id) }}">
-                {{ add_tag_form.hidden_tag() }}
-                {{ add_tag_form.subject() }}
-                {{ add_tag_form.submit() }}
-            </form>
-            <h3> Remove Tags </h3>
-            <form method="POST" action="{{ url_for('charity.remove_tag', page_id=page.id) }}">
-                {{ remove_tag_form.hidden_tag() }}
-                {{ remove_tag_form.subject() }}
-                {{ remove_tag_form.submit() }}
-            </form>
-        </div>
-    </div>
-    {% endif %}
+            </div>
+        {% endif %}
     <script>
         document.getElementById("default").click();
     </script>
