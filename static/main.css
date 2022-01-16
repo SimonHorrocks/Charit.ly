@@ -139,6 +139,7 @@ input {
 
 }
 
+
 .tablink:hover{
     background-color: #3f4238;
     color: #A5A58D;
@@ -149,14 +150,28 @@ input {
     color: #A5A58D;
 }
 
+
 /* blog posts */
 .content{
     color: #3f4238;
     border-radius: 10px;
     background-color: #A5A58D;
-    height: 200px;
     width: 600px;
+    margin-bottom: 20px;
+    padding: 20px;
+    font-size: 15px;
 }
+
+.tabcontent a:hover{
+    color: #555c47;
+    transition: 0.5s;
+}
+.tabcontent a:link, a:visited{
+    color: #3f4238;
+    font-size: 25px;
+    text-decoration: none;
+}
+
 
 /* new post button*/
 .tabcontent button{
@@ -262,6 +277,7 @@ textarea{
     clear: both;
 
 }
+
 
 /*mobile view for max 850px */
 @media screen and (max-width: 850px){
