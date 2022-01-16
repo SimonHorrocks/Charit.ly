@@ -17,6 +17,9 @@ h1 {
     font-size: 30px;
 }
 h2 {
+    background-color: #555c47;
+    padding: 5px 10px;
+    border-radius: 5px;
     text-align: center;
     color: #D4C7B0;
     font-size: 30px;
@@ -94,26 +97,35 @@ input {
 
 /*button*/
 .button {
-    background: #FFE8D6;
-    border: none;
-    color: #B98B73;
+    background: #A5A58D;
+    color: #555c47;
     width: auto;
+    border: none;
     padding: 10px 20px;
     text-align: center;
     border-radius: 2px;
     margin: 10px auto;
 
+
 }
 
 .button:hover{
-    background: #B98B73;
-    color: #FFE8D6;
+    background: #555c47;
+    color: #A5A58D;
     transition: 0.5s;
 }
 .button:active{
-    background: #B98B73;
-    color: #FFE8D6;
+    background: #555c47;
+    color: #A5A58D;
     transition: 0.5s;
+}
+
+.dropdown{
+    font-size: 25px;
+    border: none;
+    color: #555c47;
+    background-color: #A5A58D;
+    padding: 5px 10px;
 }
 
 /* tab view */
@@ -198,8 +210,8 @@ textarea{
     border-radius: 3px;
     color: #3f4238;
 }
-/* TODO: make it appear on bottom*/
 
+/* TODO: make it appear on bottom*/
 /* update and delete buttons */
 #post-navbar{
     text-align: left;
@@ -231,6 +243,17 @@ textarea{
 
 #userRow{
     color: #D4C7B0;
+    margin-bottom: 20px;
+    padding: 10px;
+    border-radius: 5px;
+}
+
+#topUserRow{
+    color: #D4C7B0;
+    background-color: #555c47;
+    margin-bottom: 20px;
+    padding: 10px;
+    border-radius: 5px;
 }
 
 /* all charities view */
@@ -264,7 +287,7 @@ textarea{
     color:#3f4238;
 }
 #charityRow{
-        color:#3f4238;
+    color:#3f4238;
     background-color: #A5A58D;
     margin-bottom: 20px;
     padding: 10px;
@@ -274,7 +297,6 @@ textarea{
     content: "";
     display: table;
     clear: both;
-
 }
 
 ::-webkit-scrollbar {

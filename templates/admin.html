@@ -1,23 +1,20 @@
 {% extends "base.html" %}
 
 {% block content %}
-
-    <h1 class="title is-2">Admin</h1>
     <div class="tab">
         <button class="tablink" onclick="tabView('Profile')" id="default">Profile</button>
         <button class="tablink" onclick="tabView('AllUsers')">All Users</button>
         <button class="tablink" onclick="tabView('Logs')">Logs</button>
 
         <div id="Profile" class="tabcontent">
-            <h3> Profile </h3>
+            <h3> {{ current_user.username }} </h3>
         </div>
 
         <div id="AllUsers" class="tabcontent">
-            <h3> Users </h3>
         <div class="column is-5 is-offset-4">
         <div class="box">
             <form method="POST">
-                <h2 class="title">Change Role</h2>
+                <h2 class="title">Change User's Role</h2>
                 <div class="field">
                     {{ form.hidden_tag() }}
                     <div class="control">
@@ -32,7 +29,7 @@
                 </div>
                 <div class="field">
                     <div class="control">
-                        {{ form.role(class="input", placeholder="New Role") }}
+                        {{ form.role(class="dropdown", placeholder="New Role") }}
                     </div>
                     <div class="error">
                         {% for error in form.role.errors %}
@@ -48,7 +45,7 @@
     </div>
 
             <div class="box" id="allUsers">
-                <div class="row" id="userRow">
+                <div class="row" id="topUserRow">
                     <div class="column" id="userColumn">
                         <h2>Name</h2>
                     </div>
