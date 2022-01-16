@@ -1,0 +1,77 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+            <div class="column is-5 is-offset-4">
+                <div class="box">
+                    <form method="POST">
+                        <h2 class="title">New Event</h2>
+                        <div class="field">
+                            {{ form.hidden_tag() }}
+                            <div class="control">
+                                {{ form.name(class="input", placeholder="Name") }}
+                            </div>
+                            <div class="error">
+                                {% for error in form.name.errors %}
+                                    {{ error }}
+                                {% endfor %}
+                            </div>
+                        </div>
+                        <div class="field">
+                            <div class="control">
+                                {{ form.description(class="input", placeholder="Description") }}
+                            </div>
+                            <div class="error">
+                                {% for error in form.description.errors %}
+                                    {{ error }}
+                                {% endfor %}
+                            </div>
+                        </div>
+                    <div class="field">
+                            <div class="control">
+                                {{ form.date(class="input", placeholder="Date") }}
+                            </div>
+                            <div class="error">
+                                {% for error in form.date.errors %}
+                                    {{ error }}
+                                {% endfor %}
+                            </div>
+                        </div>
+                       <div class="field">
+                            <div class="control">
+                                {{ form.time(class="input", placeholder="Time") }}
+                            </div>
+                            <div class="error">
+                                {% for error in form.time.errors %}
+                                    {{ error }}
+                                {% endfor %}
+                            </div>
+                        </div>
+                        <div class="field">
+                            <div class="control">
+                                {{ form.lat(class="input", placeholder="Lattitute") }}
+                            </div>
+                            <div class="error">
+                                {% for error in form.lat.errors %}
+                                    {{ error }}
+                                {% endfor %}
+                            </div>
+                        </div>
+                        <div class="field">
+                            <div class="control">
+                                {{ form.lon(class="input", placeholder="Longtitute") }}
+                            </div>
+                            <div class="error">
+                                {% for error in form.lon.errors %}
+                                    {{ error }}
+                                {% endfor %}
+                            </div>
+                        </div>
+                        <div>
+                            {{ form.submit(class="button is-info is-centered") }}
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+{% endblock %}

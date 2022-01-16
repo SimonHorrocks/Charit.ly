@@ -2,6 +2,7 @@ import copy
 from datetime import datetime
 
 from flask import Blueprint, render_template, redirect, url_for
+from flask_login import current_user
 from geopy import distance
 
 from app import db, requires_roles
@@ -12,13 +13,12 @@ from models import Post, Tag, Event
 charity_blueprint = Blueprint("charity", __name__, template_folder="templates")
 
 
-# TODO: fix blueprint not working for update and delete pages
 @charity_blueprint.route('/<int:id>/page', methods=['GET', 'POST'])
 def page(id):
-    form = NewEventForm()
     charity_page = Page.query.get(id)
-    return render_template('charity_page.html', posts=charity_page.posts, form=form, page=charity_page,
-                           add_tag_form=TagForm(), remove_tag_form=TagForm())
+    events = Event.query.filter_by(page=charity_page.id).all()
+    return render_template('charity_page.html', posts=charity_page.posts, page=charity_page,
+                           add_tag_form=TagForm(), remove_tag_form=TagForm(), events=events)
 
 
 @charity_blueprint.route('/<int:page_id>/create', methods=('GET', 'POST'))
@@ -156,3 +156,24 @@ def remove_tag(page_id):
         db.session.commit()
 
     return redirect(url_for("charity.page", id=page_id))
+
+
+@charity_blueprint.route('/<int:page_id>/new_event', methods=['GET', 'POST'])
+def new_event(page_id):
+    form = NewEventForm()
+    if form.validate_on_submit():
+        # create a new event from inputted data
+        newevent = Event(page=page_id,
+                         name=form.name.data,
+                         description=form.description.data,
+                         time=form.time.data,
+                         date=form.date.data,
+                         lat=form.lat.data,
+                         lon=form.lon.data,
+                         )
+        # add the new user to the database
+        db.session.add(newevent)
+        db.session.commit()
+
+        return redirect(url_for("charity.page", id=page_id))
+    return render_template('event.html', form=form)
