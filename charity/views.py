@@ -6,7 +6,7 @@ from flask_login import current_user
 from geopy import distance
 
 from app import db, requires_roles
-from charity.forms import PostForm, SearchForm, NewEventForm, TagForm
+from charity.forms import PostForm, SearchForm, NewEventForm, TagForm, DescriptionForm
 from models import Page, tags
 from models import Post, Tag, Event
 
@@ -18,7 +18,7 @@ def page(id):
     charity_page = Page.query.get(id)
     events = Event.query.filter_by(page=charity_page.id).all()
     return render_template('charity_page.html', posts=charity_page.posts, page=charity_page,
-                           add_tag_form=TagForm(), remove_tag_form=TagForm(), events=events)
+                           add_tag_form=TagForm(), remove_tag_form=TagForm(), events=events, change_desc_form=DescriptionForm())
 
 
 @charity_blueprint.route('/<int:page_id>/create', methods=('GET', 'POST'))
@@ -153,6 +153,17 @@ def remove_tag(page_id):
         tag = Tag.query.filter_by(subject=form.subject.data).first()
         current_page = Page.query.get(page_id)
         current_page.tags.remove(tag)
+        db.session.commit()
+
+    return redirect(url_for("charity.page", id=page_id))
+
+
+@charity_blueprint.route("/<int:page_id>/change_desc", methods=["POST"])
+@requires_roles("charity")
+def change_desc(page_id):
+    form = DescriptionForm()
+    if form.validate_on_submit:
+        Page.query.update({"description": form.description.data})
         db.session.commit()
 
     return redirect(url_for("charity.page", id=page_id))

@@ -12,7 +12,8 @@
             <button class="tablink" onclick="tabView('Settings')">Settings</button>
         {% endif %}
         <div id="Profile" class="tabcontent">
-            <h3> Profile </h3>
+            <h3>              {{ page.name }} </h3>
+                            <p>{{ page.description }}</p>
             {% if page in current_user.pages %}
                 <a href="{{ url_for('charity.create', page_id=page.id) }}" class="button2">
                     <button>New Post</button>
@@ -21,10 +22,12 @@
                     <button>New Event</button>
                 </a>
             {% endif %}
+
         </div>
 
 
         <div id="Posts" class="tabcontent">
+                    <h3> Posts </h3>
             <div class="box">
                 {% for post in posts %}
                     <article class="media">
@@ -58,6 +61,7 @@
             </div>
         </div>
         <div id="Events" class="tabcontent">
+                    <h3> Events </h3>
             <div class="box">
                 {% for event in events %}
                     <article class="media">
@@ -81,17 +85,26 @@
         </div>
         {% if current_user.id == page.user_id %}
             <div id="Settings" class="tabcontent">
+                <h3> Settings </h3>
+                <h3>Description</h3>
+            <p>{{ page.description }}</p>
+            <h5>Change Description</h5>
+             <form method="POST" action="{{ url_for('charity.change_desc', page_id=page.id) }}">
+                    {{ change_desc_form.hidden_tag() }}
+                    {{ change_desc_form.description() }}
+                    {{ change_desc_form.submit() }}
+                </form>
                 <h3> Tags </h3>
                 {% for tag in page.tags %}
                     <p>{{ tag.subject }}</p>
                 {% endfor %}
-                <h3> Add Tags </h3>
+                <h5> Add Tags </h5>
                 <form method="POST" action="{{ url_for('charity.add_tag', page_id=page.id) }}">
                     {{ add_tag_form.hidden_tag() }}
                     {{ add_tag_form.subject() }}
                     {{ add_tag_form.submit() }}
                 </form>
-                <h3> Remove Tags </h3>
+                <h5> Remove Tags </h5>
                 <form method="POST" action="{{ url_for('charity.remove_tag', page_id=page.id) }}">
                     {{ remove_tag_form.hidden_tag() }}
                     {{ remove_tag_form.subject() }}

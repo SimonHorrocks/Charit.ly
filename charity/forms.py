@@ -28,3 +28,9 @@ class NewEventForm(FlaskForm):
 class TagForm(FlaskForm):
     subject = StringField(validators=[DataRequired()])
     submit = SubmitField()
+
+
+class DescriptionForm(FlaskForm):
+    description = TextAreaField(validators=[DataRequired()])
+    submit = SubmitField()
+
