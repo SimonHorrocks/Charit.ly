@@ -211,14 +211,39 @@ textarea{
     color: #3f4238;
 }
 
-/* TODO: make it appear on bottom*/
-/* update and delete buttons */
+/*
+!* TODO: make it appear on bottom*!
+!* update and delete buttons *!
 #post-navbar{
     text-align: left;
     background: #D4C7B0;
     padding: 5px;
+    position: absolute;
+    border-radius: 0 0 10px 10px;
+}
+*/
+
+#post-navbar {
+    padding: 5px;
+    text-align: left;
+
+}
+#update-navbar{
+    margin-left: 5px;
+    font-size: 20px;
+    border-radius: 3px;
 }
 
+#update-navbar:link{
+    color: #555c47;
+    background-color: #D4C7B0;
+    padding: 5px;
+}
+#update-navbar:hover{
+    color: #D4C7B0;
+    background-color: #555c47;
+    transition: 0.5s;
+}
 /* search results */
 #results{
     background-color: #A5A58D;
