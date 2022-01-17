@@ -8,7 +8,7 @@
                     <div class="content">
                         <h4><a href="{{ url_for('charity.view', id=post.id) }}">{{ post.title }}</a></h4>
                         <p>
-                            <strong>{{ post.page }}</strong>
+                            <strong>{{ post.page.name }}</strong>
                             <small>{{ post.time_created.strftime('%d-%m-%Y %H:%M') }}</small>
                             <br>
                             {{ post.content }}
@@ -18,9 +18,9 @@
                                 <div id="post-navbar" class="navbar-menu">
                                     <div class="navbar-start">
                                         <a class="navbar-item"
-                                           href="{{ url_for('charity.update', name=post.page, id=post.id) }}">Update</a>
+                                           href="{{ url_for('charity.update', name=post.page_id, id=post.id) }}">Update</a>
                                         <a class="navbar-item"
-                                           href="{{ url_for('charity.delete', name=post.page, id=post.id) }}">Delete</a>
+                                           href="{{ url_for('charity.delete', name=post.page_id, id=post.id) }}">Delete</a>
                                     </div>
                                 </div>
                         {% endif %}
@@ -42,7 +42,7 @@
                 </div>
             </form>
                     {% for comment in comments %}
-{#   TODO: author's username                 <strong>{{ comment.page }}</strong>#}
+                            {{ comment.commentor.username }}  <strong>{{ post.page.name }}</strong>
                             <br>
                             {{ comment.text }}
                             <br>

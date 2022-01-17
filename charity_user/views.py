@@ -18,7 +18,7 @@ charity_user_blueprint = Blueprint('charity_user', __name__, template_folder='te
 @login_required
 @requires_roles('charity')
 def charity_profile():
-    return render_template('charity_user.html', pages=current_user.pages, change_name_form=NameForm(), following=current_user.following)
+    return render_template('charity_user.html', pages=current_user.pages, change_name_form=NameForm(), following=current_user.followed_pages)
 
 
 @charity_user_blueprint.route('/newcharity', methods=['GET', 'POST'])

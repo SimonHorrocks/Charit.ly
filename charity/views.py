@@ -19,11 +19,10 @@ def page(id):
     charity_page = Page.query.get(id)
     form=FollowForm()
     if form.validate_on_submit():
-        current_user.following.append(charity_page)
         charity_page.followers.append(current_user)
         db.session.commit()
 
-    events = Event.query.filter_by(page=charity_page.id).all()
+    events = Event.query.filter_by(page_id=charity_page.id).all()
     return render_template('charity_page.html', form=form, posts=charity_page.posts, page=charity_page,
                            add_tag_form=TagForm(), remove_tag_form=TagForm(), events=events,
                            change_desc_form=DescriptionForm(), change_name_form=NameForm())
@@ -35,7 +34,7 @@ def create(page_id):
 
     if form.validate_on_submit():
         time = datetime.now()
-        new_post = Post(title=form.title.data, content=form.content.data, page=page_id,
+        new_post = Post(title=form.title.data, content=form.content.data, page_id=page_id,
                         time_created=time)
 
         db.session.add(new_post)
@@ -59,7 +58,7 @@ def update(id):
 
         db.session.commit()
 
-        return page(post.page)
+        return page(post.page_id)
 
     # creates a copy of post object which is independent of database.
     post_copy = copy.deepcopy(post)
@@ -74,7 +73,7 @@ def update(id):
 @charity_blueprint.route('/<int:id>/delete')
 def delete(id):
     post = Post.query.filter_by(id=id).first()
-    page_id = post.page
+    page_id = post.page_id
     Post.query.filter_by(id=id).delete()
     db.session.commit()
 
@@ -225,7 +224,7 @@ def new_event(page_id):
 @charity_blueprint.route('/<int:id>/delete_event')
 def delete_event(id):
     event = Event.query.filter_by(id=id).first()
-    page_id = event.page
+    page_id = event.page_id
     Event.query.filter_by(id=id).delete()
     db.session.commit()
 

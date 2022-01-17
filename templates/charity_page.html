@@ -44,11 +44,10 @@
                         <div class="media-content">
                             <div class="content">
                                 <h4>
-                                    <a href="{{ url_for('charity.view', name=post.page, id=post.id) }}">{{ post.title }}</a>
+                                    <a href="{{ url_for('charity.view', name=post.page_id, id=post.id) }}">{{ post.title }}</a>
                                 </h4>
                                 <p>
-                                    {# TODO: Change page id to page name #}
-                                    <strong>{{ post.page }}</strong>
+                                    <strong>{{ post.page.name }}</strong>
                                     <small>{{ post.time_created.strftime('%d-%m-%Y %H:%M') }}</small>
                                     <br>
                                     {{ post.content }}
@@ -79,7 +78,7 @@
                             <div class="content">
                                 <h4>{{ event.name }}</h4>
                                 <p>
-                                    <strong>{{ event.page }}</strong>
+                                    <strong>{{ event.page.name }}</strong>
                                     <small>{{ event.date.strftime('%d-%m-%Y') }}</small>
                                     <small>{{ event.time.strftime('%H:%M') }}</small>
                                     <small>{{ event.lat, event.lon }}</small>
