@@ -24,7 +24,6 @@ class User(db.Model, UserMixin):
     pages = db.relationship('Page', backref='author', lazy=True)
     tags = db.relationship('Tag', secondary='interests', lazy='subquery', backref=db.backref('users', lazy='dynamic'))
     comments = db.relationship('Comment', backref='commentor')
-    following = db.relationship('Page', backref='following')
 
     def __init__(self, username, email, password, roleID):
         self.username = username
