@@ -15,7 +15,7 @@
         <div id="MyCharities" class="tabcontent">
             <h3> My Charities </h3>
             {% if pages %}
-                <div class="content">
+                <div class="content" id="mycharities">
                     {% for page in pages %}
                     <p><a href="{{ url_for('charity.page', id=page.id) }}">
                     {{ page.name }}
