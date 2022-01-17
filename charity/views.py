@@ -6,8 +6,9 @@ from flask_login import current_user
 from geopy import distance
 
 from app import db, requires_roles
-from charity.forms import PostForm, SearchForm, NewEventForm, TagForm, DescriptionForm, NameForm, CommentForm
-from models import Page, tags, Comment
+from charity.forms import PostForm, SearchForm, NewEventForm, TagForm, DescriptionForm, NameForm, CommentForm, \
+    FollowForm
+from models import Page, tags, Comment, User
 from models import Post, Tag, Event
 
 charity_blueprint = Blueprint("charity", __name__, template_folder="templates")
@@ -16,8 +17,14 @@ charity_blueprint = Blueprint("charity", __name__, template_folder="templates")
 @charity_blueprint.route('/<int:id>/page', methods=['GET', 'POST'])
 def page(id):
     charity_page = Page.query.get(id)
+    form=FollowForm()
+    if form.validate_on_submit():
+        current_user.following.append(charity_page)
+        charity_page.followers.append(current_user)
+        db.session.commit()
+
     events = Event.query.filter_by(page=charity_page.id).all()
-    return render_template('charity_page.html', posts=charity_page.posts, page=charity_page,
+    return render_template('charity_page.html', form=form, posts=charity_page.posts, page=charity_page,
                            add_tag_form=TagForm(), remove_tag_form=TagForm(), events=events,
                            change_desc_form=DescriptionForm(), change_name_form=NameForm())
 
@@ -79,16 +86,18 @@ def view(id):
     post = Post.query.filter_by(id=id).first()
     form = CommentForm()
     comments = Comment.query.filter_by(post=post.id)
+    users = User.query.all()
     if form.validate_on_submit():
+
         new_comment = Comment(
             commentor_id=current_user.id,
             post=post.id,
             text=form.text.data,
         )
-
         db.session.add(new_comment)
         db.session.commit()
-    return render_template('post.html', post=post, form=form, comments=comments)
+
+    return render_template('post.html', post=post, form=form, comments=comments, users=users)
 
 
 # returns json list of all events within a certain distance of the coords

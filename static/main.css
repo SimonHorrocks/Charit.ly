@@ -47,6 +47,13 @@ h4{
     border-top-right-radius: 10px;
     margin-bottom: 0;
 }
+h4 a:link{
+    text-decoration: none;
+}
+h4 a:hover{
+    color: #555c47;
+    transition: 0.5s;
+}
 h5{
     text-align: left;
     color: #D4C7B0;
@@ -239,7 +246,7 @@ input {
 /* TODO: Add padding and make contents centered */
 textarea{
     background: #A5A58D;
-    width: 100%;
+    width: 99%;
     height: 250px;
     font-size: 15px;
     border-radius: 3px;
@@ -349,6 +356,21 @@ textarea{
 p{
     font-size: 15px;
 }
+/* comments */
+#comments{
+    text-align: left;
+    padding: 15px;
+    font-size: 20px;
+    border-top: 5px solid #555c47;
+}
+#comment_username{
+    background-color: #D4C7B0;
+    padding:3px;
+    margin-bottom: 10px;
+    border-radius: 3px;
+}
+
+/* map view*/
 #changeDis{
     background-color: #555c47;
       margin: auto auto 15px auto;

@@ -13,7 +13,17 @@
         {% endif %}
         <div id="Profile" class="tabcontent">
             <h3>              {{ page.name }} </h3>
-                            <p>{{ page.description }}</p>
+            <p>{{ page.description }}</p>
+                <div class="box">
+            <form method="POST">
+                <div class="field">
+                    {{ form.hidden_tag() }}
+                <div>
+                    {{ form.submit(class="button is-info is-centered") }}
+                </div>
+                </div>
+            </form>
+                </div>
             {% if page in current_user.pages %}
                 <a href="{{ url_for('charity.create', page_id=page.id) }}" class="button2">
                     <button>New Post</button>
@@ -27,7 +37,7 @@
 
 
         <div id="Posts" class="tabcontent">
-                    <h3> Posts </h3>
+            <h3> Posts </h3>
             <div class="box">
                 {% for post in posts %}
                     <article class="media">
@@ -61,7 +71,7 @@
             </div>
         </div>
         <div id="Events" class="tabcontent">
-                    <h3> Events </h3>
+            <h3> Events </h3>
             <div class="box">
                 {% for event in events %}
                     <article class="media">
@@ -94,18 +104,18 @@
         {% if current_user.id == page.user_id %}
             <div id="Settings" class="tabcontent">
                 <h3> Settings </h3>
-            <h3>Name</h3>
-            <p>{{ page.name }}</p>
-            <h5>Change Name</h5>
-             <form method="POST" action="{{ url_for('charity.change_name', page_id=page.id) }}">
+                <h3>Name</h3>
+                <p>{{ page.name }}</p>
+                <h5>Change Name</h5>
+                <form method="POST" action="{{ url_for('charity.change_name', page_id=page.id) }}">
                     {{ change_name_form.hidden_tag() }}
                     {{ change_name_form.name() }}
                     {{ change_name_form.submit() }}
                 </form>
                 <h3>Description</h3>
-            <p>{{ page.description }}</p>
-            <h5>Change Description</h5>
-             <form method="POST" action="{{ url_for('charity.change_desc', page_id=page.id) }}">
+                <p>{{ page.description }}</p>
+                <h5>Change Description</h5>
+                <form method="POST" action="{{ url_for('charity.change_desc', page_id=page.id) }}">
                     {{ change_desc_form.hidden_tag() }}
                     {{ change_desc_form.description() }}
                     {{ change_desc_form.submit() }}
