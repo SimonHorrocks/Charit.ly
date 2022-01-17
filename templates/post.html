@@ -1,14 +1,12 @@
 {% extends "base.html" %}
 
 {% block content %}
-    {#  TODO: Change layout #}
-    <h1 class="title is-1">Post</h1>
 
     <div class="box">
             <article class="media">
                 <div class="media-content">
                     <div class="content">
-                        <a href="{{ url_for('charity.view', id=post.id) }}">{{ post.title }}</a>
+                        <h4><a href="{{ url_for('charity.view', id=post.id) }}">{{ post.title }}</a></h4>
                         <p>
                             <strong>{{ post.page }}</strong>
                             <small>{{ post.time_created.strftime('%d-%m-%Y %H:%M') }}</small>
