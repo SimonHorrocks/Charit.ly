@@ -15,6 +15,14 @@
         </div>
         <div id="Settings" class="tabcontent">
             <h3> Settings </h3>
+            <h3>Username</h3>
+                <p>{{ current_user.username }}</p>
+                <h5>Change Username</h5>
+                <form method="POST" action="{{ url_for('user.change_name') }}">
+                    {{ change_name_form.hidden_tag() }}
+                    {{ change_name_form.name() }}
+                    {{ change_name_form.submit() }}
+                </form>
         </div>
 
     </div>
