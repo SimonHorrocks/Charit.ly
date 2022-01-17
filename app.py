@@ -79,5 +79,39 @@ def internal_error(error):
 
 
 if __name__ == '__main__':
+    # LOGGING, don't include in setup so tests don't save logs
+    # filter for logging security issues
+    class SecurityFilter(logging.Filter):
+        def filter(self, record):
+            return "SECURITY" in record.getMessage()
+
+
+    # filter for logging everything else
+    class ConsoleFilter(logging.Filter):
+        def filter(self, record):
+            return "SECURITY" not in record.getMessage()
+
+
+    # create file handler to log security messages to file
+    fh = logging.FileHandler('charity_forum.log', mode='w')
+    fh.setLevel(logging.WARNING)
+    fh.addFilter(SecurityFilter())
+    fh_formatter = logging.Formatter('%(asctime)s : %(message)s', '%m/%d/%Y %I:%M:%S %p')
+    fh.setFormatter(fh_formatter)
+
+    # create stream handler to log non security messages to console
+    ch = logging.StreamHandler()
+    ch.setLevel(logging.DEBUG)
+    ch.addFilter(ConsoleFilter())
+    ch_formatter = logging.Formatter('%(asctime)s - %(name)s - %(levelname)s - %(message)s')
+    ch.setFormatter(ch_formatter)
+
+    # add handlers to root logger
+    logger = logging.getLogger()
+    logger.addHandler(fh)
+    logger.addHandler(ch)
+    # stop handler messages being sent to root logger
+    logger.propagate = False
+
     setup_app(app, db)
     app.run()

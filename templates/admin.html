@@ -74,6 +74,9 @@
 
         <div id="Logs" class="tabcontent">
             <h3> Logs </h3>
+            {% for log in logs %}
+            <p>{{ log }}</p>
+            {% endfor %}
         </div>
     </div>
     <script>

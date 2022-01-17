@@ -1,7 +1,8 @@
 # IMPORTS
+import logging
 
 from flask_login import login_required, current_user
-from flask import Blueprint, render_template, flash, redirect, url_for
+from flask import Blueprint, render_template, flash, redirect, url_for, request
 
 import app
 from app import db, requires_roles
@@ -24,7 +25,9 @@ def profile():
 def change_name():
     form = NameForm()
     if form.validate_on_submit:
+        name_before = User.query.filter_by(id=current_user.id).first().username
         User.query.filter_by(id=current_user.id).update({"username": form.name.data})
         db.session.commit()
+        logging.warning('SECURITY - Username Change [%s, %s, %s, %s]', current_user.id, name_before, current_user.username, request.remote_addr)
 
     return redirect(url_for("user.profile"))

@@ -1,7 +1,9 @@
 # IMPORTS
 import copy
-from flask_login import login_required
-from flask import Blueprint, render_template
+import logging
+
+from flask_login import login_required, current_user
+from flask import Blueprint, render_template, request
 from sqlalchemy import asc
 
 from admin.forms import RolesForm
@@ -22,5 +24,9 @@ def admin():
     if form.validate_on_submit():
         User.query.filter_by(email=form.email.data).update({"roleID": form.role.data})
         db.session.commit()
+        logging.warning('SECURITY - Privilege Modification [%s, %s, %s, %s]', current_user.email, form.email.data, form.role.data, request.remote_addr)
+    with open("charity_forum.log", "r") as f:  # open log file for reading
+        content = f.read().splitlines()[-10:]  # read the last ten lines
+        content.reverse()  # reverse them into order
     users = User.query.order_by(asc('username')).all()
-    return render_template('admin.html', users=users, form=form)
+    return render_template('admin.html', users=users, form=form, logs=content)
