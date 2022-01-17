@@ -339,6 +339,27 @@ textarea{
 p{
     font-size: 15px;
 }
+#changeDis{
+    background-color: #555c47;
+      margin: auto auto 15px auto;
+     width: 50%;
+  padding: 10px;
+    border-radius: 5px;
+    text-align: center;
+}
+
+label{
+    color: #D4C7B0;
+    font-size: 25px;
+display: block;
+
+}
+#map{
+    border: 6px solid #555c47;
+}
+.notification{
+    color: #D4C7B0;
+}
 ::-webkit-scrollbar {
   width: 15px;
 }
