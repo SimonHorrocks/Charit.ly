@@ -97,7 +97,7 @@ def view(id):
         db.session.add(new_comment)
         db.session.commit()
 
-    return render_template('post.html', post=post, form=form, comments=comments, users=users)
+    return render_template('post.html', post=post, form=form, comments=Comment.walk(comments), users=users)
 
 
 # returns json list of all events within a certain distance of the coords

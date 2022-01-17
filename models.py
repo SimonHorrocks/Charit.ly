@@ -108,6 +108,14 @@ class Comment(db.Model):
     replies = db.relationship('Comment')
     text = db.Column(db.String(100), nullable=False)
 
+    @staticmethod
+    def walk(comments, indent=0):
+        for comment in comments:
+            print(comment.text, indent)
+            yield comment, indent
+            if comment.replies:
+                yield from Comment.walk(comment.replies, indent=indent+1)
+
 
 # Junction table for tags and pages
 tags = db.Table('tags',

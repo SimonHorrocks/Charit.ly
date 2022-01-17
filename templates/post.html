@@ -47,12 +47,14 @@
                             document.getElementById("to").value = id;
                         }
                     </script>
-                    {% for comment in comments %}
+                    {% for comment, indent in comments %}
+                        <div style="margin-left: {{ indent*2 }}em;">
                             {{ comment.commentor.username }}  <strong>{{ post.parent_page.name }}</strong>
                             <br>
                             {{ comment.text }}
                             <br>
                             <button onclick="switchTo({{ comment.id }})">reply</button>
+                        </div>
                     {% endfor %}
                         </p>
                     </div>
