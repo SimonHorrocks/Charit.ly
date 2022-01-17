@@ -54,7 +54,7 @@ def update(id):
 
         return page(post.page)
 
-        # creates a copy of post object which is independent of database.
+    # creates a copy of post object which is independent of database.
     post_copy = copy.deepcopy(post)
 
     # set update form with title and body of copied post object
