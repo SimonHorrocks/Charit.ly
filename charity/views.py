@@ -6,8 +6,8 @@ from flask_login import current_user
 from geopy import distance
 
 from app import db, requires_roles
-from charity.forms import PostForm, SearchForm, NewEventForm, TagForm, DescriptionForm, NameForm
-from models import Page, tags
+from charity.forms import PostForm, SearchForm, NewEventForm, TagForm, DescriptionForm, NameForm, CommentForm
+from models import Page, tags, Comment
 from models import Post, Tag, Event
 
 charity_blueprint = Blueprint("charity", __name__, template_folder="templates")
@@ -74,10 +74,20 @@ def delete(id):
     return page(page_id)
 
 
-@charity_blueprint.route('/<int:id>/view')
+@charity_blueprint.route('/<int:id>/view', methods=('GET', 'POST'))
 def view(id):
     post = Post.query.filter_by(id=id).first()
-    return render_template('post.html', post=post)
+    form = CommentForm()
+    comments = Comment.query.filter_by(post=post.id)
+    if form.validate_on_submit():
+        new_comment = Comment(
+            post=post.id,
+            text=form.text.data,
+        )
+
+        db.session.add(new_comment)
+        db.session.commit()
+    return render_template('post.html', post=post, form=form, comments=comments)
 
 
 # returns json list of all events within a certain distance of the coords

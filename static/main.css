@@ -1,3 +1,6 @@
+/*TODO: my charities*/
+
+
 html {
     background-color: #A5A58D;
     font-family: monospace;
@@ -130,7 +133,18 @@ input {
     color: #A5A58D;
     transition: 0.5s;
 }
+#comment_submit{
+    border: none;
+    color: #D4C7B0;
+    background: #3f4238;
+    padding: 10px 20px;
+    font-size: 20px;
+}
 
+#comment_submit:hover{
+    background: #555c47;
+    transition: 0.5s;
+}
 .dropdown{
     font-size: 25px;
     border: none;
@@ -205,6 +219,7 @@ input {
     background: #A5A58D;
     transition: 0.5s;
 }
+
 /* create page */
 .field {
     padding: 5px;
@@ -220,17 +235,6 @@ textarea{
     color: #3f4238;
 }
 
-/*
-!* TODO: make it appear on bottom*!
-!* update and delete buttons *!
-#post-navbar{
-    text-align: left;
-    background: #D4C7B0;
-    padding: 5px;
-    position: absolute;
-    border-radius: 0 0 10px 10px;
-}
-*/
 
 #post-navbar {
     padding: 5px;
@@ -424,10 +428,3 @@ p{
     text-align: center;
   }
 }
-
-
-
-/*TODO: work on the color palette */
-/*TODO: background */
-/*TODO: potentially change the look of the button*/
-/*TODO: make forms' error messages more compact */

@@ -15,6 +15,7 @@
                             <br>
                             {{ post.content }}
                             <br>
+
                         {% if page in current_user.pages %}
                                 <div id="post-navbar" class="navbar-menu">
                                     <div class="navbar-start">
@@ -25,6 +26,29 @@
                                     </div>
                                 </div>
                         {% endif %}
+                         <form method="POST">
+                <h2 class="title">Comment</h2>
+                <div class="field" id="comment">
+                    {{ form.hidden_tag() }}
+                    <div class="control">
+                        {{ form.text(class="input", placeholder="Comment") }}
+                    </div>
+                    <div class="error">
+                        {% for error in form.text.errors %}
+                            {{ error }}
+                        {% endfor %}
+                    </div>
+                </div>
+                <div>
+                    {{ form.submit(class="button is-info is-centered", id="comment_submit") }}
+                </div>
+            </form>
+                    {% for comment in comments %}
+{#   TODO: author's username                 <strong>{{ comment.page }}</strong>#}
+                            <br>
+                            {{ comment.text }}
+                            <br>
+{% endfor %}
                         </p>
                     </div>
                 </div>

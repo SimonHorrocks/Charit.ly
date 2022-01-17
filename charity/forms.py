@@ -39,3 +39,7 @@ class NameForm(FlaskForm):
     name = StringField(validators=[DataRequired()])
     submit = SubmitField()
 
+
+class CommentForm(FlaskForm):
+    text = TextAreaField(validators=[DataRequired()])
+    submit = SubmitField()

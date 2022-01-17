@@ -95,7 +95,7 @@ def login():
                 return redirect(url_for('charity_user.charity_profile'))
             else:
                 # otherwise redirect to profile
-                return redirect(url_for('profile'))
+                return redirect(url_for('user.profile'))
 
     return render_template('login.html', form=form)
 
