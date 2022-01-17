@@ -200,3 +200,13 @@ def new_event(page_id):
 
         return redirect(url_for("charity.page", id=page_id))
     return render_template('event.html', form=form)
+
+
+@charity_blueprint.route('/<int:id>/delete_event')
+def delete_event(id):
+    event = Event.query.filter_by(id=id).first()
+    page_id = event.page
+    Event.query.filter_by(id=id).delete()
+    db.session.commit()
+
+    return page(page_id)
