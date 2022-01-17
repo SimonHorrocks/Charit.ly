@@ -1,13 +1,13 @@
 # IMPORTS
 
 from flask_login import login_required, current_user
-from flask import Blueprint, render_template, flash
+from flask import Blueprint, render_template, flash, url_for, redirect
 
 from app import db, requires_roles
-from models import Page
+from models import Page, User
 
 # CONFIG
-from charity_user.forms import NewCharityPage
+from charity_user.forms import NewCharityPage, NameForm
 
 charity_user_blueprint = Blueprint('charity_user', __name__, template_folder='templates')
 
@@ -18,7 +18,7 @@ charity_user_blueprint = Blueprint('charity_user', __name__, template_folder='te
 @login_required
 @requires_roles('charity')
 def charity_profile():
-    return render_template('charity_user.html', pages=current_user.pages)
+    return render_template('charity_user.html', pages=current_user.pages, change_name_form=NameForm())
 
 
 @charity_user_blueprint.route('/newcharity', methods=['GET', 'POST'])
@@ -47,3 +47,14 @@ def new_charity():
         return charity_profile()
 
     return render_template('new_charity.html', form=form)
+
+
+@charity_user_blueprint.route("/change_name", methods=["POST"])
+@requires_roles("charity")
+def change_name():
+    form = NameForm()
+    if form.validate_on_submit:
+        User.query.filter_by(id=current_user.id).update({"username": form.name.data})
+        db.session.commit()
+
+    return redirect(url_for("charity_user.charity_profile"))
