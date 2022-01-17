@@ -19,7 +19,7 @@
                                     <a href="{{ url_for('charity.view', name=post.page, id=post.id) }}">{{ post.title }}</a>
                                 </h4>
                                 <p>
-                                    <strong>{{ post.page }}</strong>
+                                    <strong>{{ post.page }}</strong> {# bit weird having the page id here #}
                                     <small>{{ post.time_created.strftime('%d-%m-%Y %H:%M') }}</small>
                                     <br>
                                     {{ post.content }}
@@ -53,12 +53,11 @@
                             <p>{{ charity.description }}</p>
                         </div>
 
-                        {#
- TODO: Show charity tags
-#}
-
                         <div class="column" id="smallCharityColumn">
-                            <p>{{ charity.tags }}</p>
+                            {% for tag in charity.tags %}
+                                <p>{{ tag.subject }}</p>
+                            {% endfor %}
+
                         </div>
                     </div>
                 {% endfor %}

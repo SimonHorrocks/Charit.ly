@@ -23,6 +23,7 @@ class User(db.Model, UserMixin):
     roleID = db.Column(db.String(100), nullable=False, default='user')
     pages = db.relationship('Page', backref='author', lazy=True)
     tags = db.relationship('Tag', secondary='interests', lazy='subquery', backref=db.backref('users', lazy='dynamic'))
+    comments = db.relationship("Comment", backref="author")
 
     def __init__(self, username, email, password, roleID):
         self.username = username
@@ -101,6 +102,7 @@ class Tag(db.Model):
 
 class Comment(db.Model):
     id = db.Column(db.Integer, primary_key=True)
+    author_id = db.Column(db.Integer, db.ForeignKey(User.id))
     post = db.Column(db.Integer, db.ForeignKey(Post.id))
     original = db.Column(db.Integer, db.ForeignKey('comment.id'), nullable=True)
     replies = db.relationship('Comment')
