@@ -81,7 +81,7 @@ def view(id):
     comments = Comment.query.filter_by(post=post.id)
     if form.validate_on_submit():
         new_comment = Comment(
-            author_id=current_user.id,
+            commentor_id=current_user.id,
             post=post.id,
             text=form.text.data,
         )
