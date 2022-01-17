@@ -84,7 +84,7 @@ def delete(id):
 def view(id):
     post = Post.query.filter_by(id=id).first()
     form = CommentForm()
-    comments = Comment.query.filter_by(post=post.id)
+    comments = Comment.query.filter_by(post=post.id, original=None)
     users = User.query.all()
     if form.validate_on_submit():
 
@@ -92,6 +92,7 @@ def view(id):
             commentor_id=current_user.id,
             post=post.id,
             text=form.text.data,
+            original=int(form.reply_to.data) if form.reply_to.data != "" else None
         )
         db.session.add(new_comment)
         db.session.commit()

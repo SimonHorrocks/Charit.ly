@@ -8,7 +8,7 @@
                     <div class="content">
                         <h4><a href="{{ url_for('charity.view', id=post.id) }}">{{ post.title }}</a></h4>
                         <p>
-                            <strong>{{ post.page.name }}</strong>
+                            <strong>{{ post.parent_page.name }}</strong>
                             <small>{{ post.time_created.strftime('%d-%m-%Y %H:%M') }}</small>
                             <br>
                             {{ post.content }}
@@ -24,9 +24,10 @@
                                     </div>
                                 </div>
                         {% endif %}
-                         <form method="POST">
+                         <form method="POST" id="comment_form">
                 <h2 class="title">Comment</h2>
                 <div class="field" id="comment">
+                    {{ form.reply_to(id="to") }}
                     {{ form.hidden_tag() }}
                     <div class="control">
                         {{ form.text(class="input", placeholder="Comment") }}
@@ -41,12 +42,18 @@
                     {{ form.submit(class="button is-info is-centered", id="comment_submit") }}
                 </div>
             </form>
+                    <script>
+                        function switchTo(id) {
+                            document.getElementById("to").value = id;
+                        }
+                    </script>
                     {% for comment in comments %}
-                            {{ comment.commentor.username }}  <strong>{{ post.page.name }}</strong>
+                            {{ comment.commentor.username }}  <strong>{{ post.parent_page.name }}</strong>
                             <br>
                             {{ comment.text }}
                             <br>
-{% endfor %}
+                            <button onclick="switchTo({{ comment.id }})">reply</button>
+                    {% endfor %}
                         </p>
                     </div>
                 </div>

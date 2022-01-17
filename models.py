@@ -66,7 +66,6 @@ class Post(db.Model):
     title = db.Column(db.VARCHAR(100), nullable=False)
     content = db.Column(db.VARCHAR(100))
     page_id = db.Column(db.Integer, db.ForeignKey(Page.id), nullable=False)
-    page = db.relationship('Page', backref=db.backref('Post', uselist=False))
     time_created = db.Column(db.DateTime)
 
     def __repr__(self):
@@ -81,7 +80,6 @@ class Event(db.Model):
     time = db.Column(db.Time)
     time_created = db.Column(db.DateTime)
     page_id = db.Column(db.Integer, db.ForeignKey(Page.id), nullable=False)
-    page = db.relationship('Page', backref=db.backref('Event', uselist=False))
     lat = db.Column(db.Float)
     lon = db.Column(db.Float)
 

@@ -7,7 +7,7 @@
       <jdbc-driver>org.mariadb.jdbc.Driver</jdbc-driver>
       <jdbc-url>jdbc:mariadb://cs-db.ncl.ac.uk:3306/csc2033_team13</jdbc-url>
     </data-source>
-    <data-source source="LOCAL" name="charityForum" uuid="6a583ccc-8b2a-4b8d-a567-27bb2bce3a3e">
+    <data-source source="LOCAL" name="charityForum" uuid="77d09749-c108-4323-b38f-ae96739552d9">
       <driver-ref>sqlite.xerial</driver-ref>
       <synchronize>true</synchronize>
       <jdbc-driver>org.sqlite.JDBC</jdbc-driver>
