@@ -23,7 +23,7 @@ class User(db.Model, UserMixin):
     roleID = db.Column(db.String(100), nullable=False, default='user')
     pages = db.relationship('Page', backref='author', lazy=True)
     tags = db.relationship('Tag', secondary='interests', lazy='subquery', backref=db.backref('users', lazy='dynamic'))
-    comments = db.relationship("Comment", backref="author")
+    comments = db.relationship('Comment', backref='commentor')
 
     def __init__(self, username, email, password, roleID):
         self.username = username
@@ -44,12 +44,12 @@ class Page(db.Model):
     description = db.Column(db.String(100))
     user_id = db.Column(db.Integer, db.ForeignKey(User.id), nullable=False)
     time_created = db.Column(db.DateTime)
-    followers = db.Column(db.Integer, nullable=False, default=0)
 
     posts = db.relationship('Post', backref='parent_page', lazy=True)
     # relationships
     tags = db.relationship('Tag', secondary='tags', lazy='subquery', backref=db.backref('pages', lazy=True))
     events = db.relationship('Event', backref='event_page', lazy=True)
+    followers = db.relationship('User', secondary='following', lazy=True, backref='followed_pages')
 
     def __init__(self, name, description, user_id):
         self.name = name
@@ -58,7 +58,7 @@ class Page(db.Model):
         self.time_created = datetime.now()
 
     def __repr__(self):
-        return f"Page('{self.name})', '{self.description}' , '{self.followers}')"
+        return f"Page('{self.name})', '{self.description}' , '{len(self.followers)}')"
 
 
 class Post(db.Model):
@@ -102,7 +102,7 @@ class Tag(db.Model):
 
 class Comment(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    author_id = db.Column(db.Integer, db.ForeignKey(User.id))
+    commentor_id = db.Column(db.Integer, db.ForeignKey(User.id))
     post = db.Column(db.Integer, db.ForeignKey(Post.id))
     original = db.Column(db.Integer, db.ForeignKey('comment.id'), nullable=True)
     replies = db.relationship('Comment')
@@ -120,6 +120,10 @@ interests = db.Table('interests',
                      db.Column('tag_id', db.Integer, db.ForeignKey(Tag.id), primary_key=True),
                      db.Column('user_id', db.Integer, db.ForeignKey(User.id), primary_key=True)
                      )
+
+following = db.Table('following',
+                     db.Column('follower_id', db.Integer, db.ForeignKey(User.id), primary_key=True),
+                     db.Column('page_id', db.Integer, db.ForeignKey(Page.id), primary_key=True))
 
 
 def init_db():
