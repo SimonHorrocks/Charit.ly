@@ -51,7 +51,7 @@ def create(page_id):
         db.session.add(new_post)
         db.session.commit()
 
-        return page(page_id)
+        return redirect(url_for("charity.page", id=page_id))
     return render_template('create.html', form=form)
 
 
@@ -71,7 +71,7 @@ def update(id):
 
         db.session.commit()
 
-        return page(post.page_id)
+        return redirect(url_for("charity.page", id=post.page_id))
 
     # creates a copy of post object which is independent of database.
     post_copy = copy.deepcopy(post)
@@ -93,7 +93,7 @@ def delete(id):
     Post.query.filter_by(id=id).delete()
     db.session.commit()
 
-    return page(page_id)
+    return redirect(url_for("charity.page", id=page_id))
 
 
 # view for individual posts
@@ -260,4 +260,4 @@ def delete_event(id):
     Event.query.filter_by(id=id).delete()
     db.session.commit()
 
-    return page(page_id)
+    return redirect(url_for("charity.page", id=page_id))
