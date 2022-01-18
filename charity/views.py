@@ -114,6 +114,7 @@ def view(id):
         # adds the comment to the database
         db.session.add(new_comment)
         db.session.commit()
+        return redirect(url_for("charity.view", id=post.id, post=post, form=form, comments=Comment.walk(comments), users=users ))
 
     return render_template('post.html', post=post, form=form, comments=Comment.walk(comments), users=users)
 
