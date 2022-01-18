@@ -3,45 +3,45 @@
 {% block content %}
 
     <div class="box">
-            <article class="media">
-                <div class="media-content">
-                    <div class="content">
-                        <h4><a href="{{ url_for('charity.view', id=post.id) }}">{{ post.title }}</a></h4>
-                        <p>
-                            <strong>{{ post.parent_page.name }}</strong>
-                            <small>{{ post.time_created.strftime('%d-%m-%Y %H:%M') }}</small>
-                            <br>
-                            {{ post.content }}
-                            <br>
+        <article class="media">
+            <div class="media-content">
+                <div class="content">
+                    <h4><a href="{{ url_for('charity.view', id=post.id) }}">{{ post.title }}</a></h4>
+                    <p>
+                        <strong>{{ post.parent_page.name }}</strong>
+                        <small>{{ post.time_created.strftime('%d-%m-%Y %H:%M') }}</small>
+                        <br>
+                        {{ post.content }}
+                        <br>
 
                         {% if page in current_user.pages %}
-                                <div id="post-navbar" class="navbar-menu">
-                                    <div class="navbar-start">
-                                        <a class="navbar-item"
-                                           href="{{ url_for('charity.update', name=post.page_id, id=post.id) }}">Update</a>
-                                        <a class="navbar-item"
-                                           href="{{ url_for('charity.delete', name=post.page_id, id=post.id) }}">Delete</a>
-                                    </div>
+                            <div id="post-navbar" class="navbar-menu">
+                                <div class="navbar-start">
+                                    <a class="navbar-item"
+                                       href="{{ url_for('charity.update', name=post.page_id, id=post.id) }}">Update</a>
+                                    <a class="navbar-item"
+                                       href="{{ url_for('charity.delete', name=post.page_id, id=post.id) }}">Delete</a>
                                 </div>
+                            </div>
                         {% endif %}
-                         <form method="POST" id="comment_form">
-                <h2 class="title">Comments</h2>
-                <div class="field" id="comment">
-                    {{ form.reply_to(id="to") }}
-                    {{ form.hidden_tag() }}
-                    <div class="control">
-                        {{ form.text(class="input", placeholder="Comment") }}
-                    </div>
-                    <div class="error">
-                        {% for error in form.text.errors %}
-                            {{ error }}
-                        {% endfor %}
-                    </div>
-                </div>
-                <div>
-                    {{ form.submit(class="button is-info is-centered", id="comment_submit") }}
-                </div>
-            </form>
+                    <form method="POST" id="comment_form">
+                        <h2 class="title">Comments</h2>
+                        <div class="field" id="comment">
+                            {{ form.reply_to(id="to") }}
+                            {{ form.hidden_tag() }}
+                            <div class="control">
+                                {{ form.text(class="input", placeholder="Comment") }}
+                            </div>
+                            <div class="error">
+                                {% for error in form.text.errors %}
+                                    {{ error }}
+                                {% endfor %}
+                            </div>
+                        </div>
+                        <div>
+                            {{ form.submit(class="button is-info is-centered", id="comment_submit") }}
+                        </div>
+                    </form>
                     <script>
                         function switchTo(id) {
                             document.getElementById("to").value = id;
@@ -49,16 +49,16 @@
                     </script>
                     {% for comment, indent in comments %}
                         <div style="margin-left: {{ indent*2 }}em;">
-                            {{ comment.commentor.username }}  <strong>{{ post.parent_page.name }}</strong>
+                            {{ comment.commentor.username }} <strong>{{ post.parent_page.name }}</strong>
                             <br>
                             {{ comment.text }}
                             <br>
-                            <button onclick="switchTo({{ comment.id }})">reply</button>
+                                <button onclick="switchTo({{ comment.id }})" class="replybutton">reply</button>
                         </div>
                     {% endfor %}
-                        </p>
-                    </div>
+                    </p>
                 </div>
-            </article>
+            </div>
+        </article>
     </div>
 {% endblock %}
