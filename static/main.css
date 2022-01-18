@@ -440,9 +440,24 @@ footer a:hover{
 }
 
 .replying {
-    background-color: red;
+    background-color: #D4C7B0;
+    transition: 0.25s;
 }
+input#submit.button3{
+    position: relative;
+    text-align: left;
+}
+input#submit.button3:hover{
+    text-align: left;
+    transition: 0.5s;
+    color: #A5A58D;
+    background-color: #555c47;
 
+}
+.follow{
+    text-align: left;
+    margin-bottom: 10px;
+}
 /* scrollbar */
 ::-webkit-scrollbar {
   width: 15px;

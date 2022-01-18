@@ -14,18 +14,17 @@
         <div id="Profile" class="tabcontent">
             <h3>              {{ page.name }} </h3>
             <p>{{ page.description }}</p>
-                <div class="box">
             <form method="POST">
                 <div class="field">
                     {{ form.hidden_tag() }}
-                <div>
+                <div class="follow">
                     {% if page in current_user.followed_pages %}
-                        {{ form.submit(class="button is-info is-centered", value="Unfollow") }}
+                        {{ form.submit(class="button3", value="Unfollow") }}
                     {% else %}
-                        {{ form.submit(class="button is-info is-centered", value="Follow") }}
+                        {{ form.submit(class="button3", value="Follow") }}
                     {% endif %}
                 </div>
-                </div>
+
             </form>
                 </div>
             {% if page in current_user.pages %}
