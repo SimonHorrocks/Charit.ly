@@ -28,7 +28,6 @@
                     <form method="POST" id="comment_form">
                         <h2 class="title">Comments</h2>
                         <div class="field" id="comment">
-                            {{ form.reply_to(id="to") }}
                             {{ form.hidden_tag() }}
                             <div class="control">
                                 {{ form.text(class="input", placeholder="Comment") }}
@@ -45,11 +44,20 @@
                     </form>
                     <script>
                         function switchTo(id) {
-                            document.getElementById("to").value = id;
+                            let reply_value = document.getElementById("reply_to");
+                            let highlighted_comment = document.getElementById(reply_value.value);
+                            if (highlighted_comment != null) highlighted_comment.classList.remove("replying");
+                            if (reply_value.value === id) {
+                                reply_value.value = "";
+                            } else {
+                                reply_value.value = id;
+                                document.getElementById(id).classList.add("replying");
+                            }
+
                         }
                     </script>
                     {% for comment, indent in comments %}
-                        <div style="margin-left: {{ indent*2 }}em;">
+                        <div id="{{ comment.id }}" style="margin-left: {{ indent*2 }}em;">
                             {{ comment.commentor.username }} <strong>{{ post.parent_page.name }}</strong>
                             <br>
                             {{ comment.text }}

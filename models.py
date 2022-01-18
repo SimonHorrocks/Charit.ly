@@ -143,3 +143,27 @@ def init_db():
                  roleID='admin')
     db.session.add(admin)
     db.session.commit()
+    user = User(username='user',
+                 email='user@email.com',
+                 password='Admin1!',
+                 roleID='user')
+    db.session.add(user)
+    db.session.commit()
+    user2 = User(username='user2',
+                 email='user2@email.com',
+                 password='Admin1!',
+                 roleID='user')
+    db.session.add(user2)
+    db.session.commit()
+    charity = User(username='charity',
+                 email='charity@email.com',
+                 password='Admin1!',
+                 roleID='charity')
+    db.session.add(charity)
+    db.session.commit()
+    charity2 = User(username='charity2',
+                 email='charity2@email.com',
+                 password='Admin1!',
+                 roleID='charity')
+    db.session.add(charity2)
+    db.session.commit()
