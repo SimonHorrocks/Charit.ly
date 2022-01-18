@@ -50,6 +50,7 @@ def new_charity():
 
 
 @charity_user_blueprint.route("/change_name", methods=["POST"])
+@login_required
 @requires_roles("charity")
 def change_name():
     form = NameForm()

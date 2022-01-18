@@ -21,6 +21,7 @@ def profile():
 
 
 @user_blueprint.route("/user_change_name", methods=["POST"])
+@login_required
 @requires_roles("user")
 def change_name():
     form = NameForm()
