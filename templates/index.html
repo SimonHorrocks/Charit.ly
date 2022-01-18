@@ -2,9 +2,10 @@
 
 {% block content %}
 
-    <h1 class="title is-1">Charity Website</h1>
+    <h1 class="title is-1">Charit.ly</h1>
     <h2 class="subtitle is-2">Give a helping hand</h2>
-
+<div class="box">
+<h2>Posts</h2>
     {% for post in posts %}
     <article class="media">
         <div class="media-content">
@@ -32,6 +33,7 @@
         </div>
     </article>
     {% endfor %}
+</div>
 
 
 {% endblock %}
