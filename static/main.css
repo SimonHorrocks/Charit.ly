@@ -426,27 +426,38 @@ display: block;
     color: #D4C7B0;
 }
 
-
+footer{
+    color: #3f4238;
+}
+footer a:link{
+    color: #555c47;
+    text-decoration: underline;
+}
+footer a:hover{
+    color: #3f4238;
+}
+/* scrollbar */
 ::-webkit-scrollbar {
   width: 15px;
 }
 
-/* Track */
+/* track */
 ::-webkit-scrollbar-track {
   border-radius: 10px;
 
 }
 
-/* Handle */
+/* handle */
 ::-webkit-scrollbar-thumb {
   background: #3f4238;
   border-radius: 10px;
 }
 
-/* Handle on hover */
+/* handle on hover */
 ::-webkit-scrollbar-thumb:hover {
   background:  #555c47;
 }
+
 /*mobile view for max 850px */
 @media screen and (max-width: 850px){
     .box #results{
