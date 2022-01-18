@@ -12,6 +12,9 @@
         </div>
         <div id="Following" class="tabcontent">
             <h3> Following </h3>
+            {% for following in following %}
+                    <p><a href="{{ url_for('charity.page', id=following.id) }}" id="following">{{ following.name }}</a></p>
+                {% endfor %}
         </div>
         <div id="Settings" class="tabcontent">
             <h3> Settings </h3>

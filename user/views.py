@@ -17,7 +17,7 @@ user_blueprint = Blueprint('user', __name__, template_folder='templates')
 @login_required
 @requires_roles('user')
 def profile():
-    return render_template('profile.html', change_name_form=NameForm())
+    return render_template('profile.html', change_name_form=NameForm(), following=current_user.followed_pages)
 
 
 @user_blueprint.route("/user_change_name", methods=["POST"])
