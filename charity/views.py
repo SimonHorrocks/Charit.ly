@@ -2,7 +2,7 @@ import copy
 from datetime import datetime
 
 from flask import Blueprint, render_template, redirect, url_for
-from flask_login import current_user
+from flask_login import current_user, login_required
 from geopy import distance
 
 from app import db, requires_roles
@@ -35,6 +35,8 @@ def page(id):
 
 # view for post creation page
 @charity_blueprint.route('/<int:page_id>/create', methods=('GET', 'POST'))
+@login_required
+@requires_roles('charity')
 def create(page_id):
     form = PostForm()
 
@@ -55,6 +57,8 @@ def create(page_id):
 
 # view for post update page
 @charity_blueprint.route('/<int:id>/update', methods=('GET', 'POST'))
+@login_required
+@requires_roles('charity')
 def update(id):
     post = Post.query.filter_by(id=id).first()
     if not post:
@@ -81,6 +85,8 @@ def update(id):
 
 # deletes a post
 @charity_blueprint.route('/<int:id>/delete')
+@login_required
+@requires_roles('charity')
 def delete(id):
     post = Post.query.filter_by(id=id).first()
     page_id = post.page_id
@@ -161,6 +167,7 @@ def search():
 
 # adds a charity tag based on inputted data
 @charity_blueprint.route("/<int:page_id>/tag", methods=["POST"])
+@login_required
 @requires_roles("charity")
 def add_tag(page_id):
     form = TagForm()
@@ -180,6 +187,7 @@ def add_tag(page_id):
 
 # removes a charity tag based on inputted data
 @charity_blueprint.route("/<int:page_id>/removetag", methods=["POST"])
+@login_required
 @requires_roles("charity")
 def remove_tag(page_id):
     form = TagForm()
@@ -195,6 +203,7 @@ def remove_tag(page_id):
 
 # changes charity's description based on inputted data
 @charity_blueprint.route("/<int:page_id>/change_desc", methods=["POST"])
+@login_required
 @requires_roles("charity")
 def change_desc(page_id):
     form = DescriptionForm()
@@ -207,6 +216,7 @@ def change_desc(page_id):
 
 # changes charity's name based on inputted data
 @charity_blueprint.route("/<int:page_id>/change_name", methods=["POST"])
+@login_required
 @requires_roles("charity")
 def change_name(page_id):
     form = NameForm()
@@ -218,6 +228,8 @@ def change_name(page_id):
 
 
 @charity_blueprint.route('/<int:page_id>/new_event', methods=['GET', 'POST'])
+@login_required
+@requires_roles('charity')
 def new_event(page_id):
     form = NewEventForm()
     if form.validate_on_submit():
@@ -240,6 +252,8 @@ def new_event(page_id):
 
 # deletes an event
 @charity_blueprint.route('/<int:id>/delete_event')
+@login_required
+@requires_roles('charity')
 def delete_event(id):
     event = Event.query.filter_by(id=id).first()
     page_id = event.page_id
