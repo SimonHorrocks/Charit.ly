@@ -23,7 +23,8 @@ def page(id):
     form = FollowForm()
     if form.validate_on_submit():
         # adds user to charity's followers
-        charity_page.followers.append(current_user)
+        charity_page.followers.remove(current_user) if current_user in charity_page.followers \
+            else charity_page.followers.append(current_user)
         db.session.commit()
 
     events = Event.query.filter_by(page_id=charity_page.id).all()

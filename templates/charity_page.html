@@ -19,7 +19,11 @@
                 <div class="field">
                     {{ form.hidden_tag() }}
                 <div>
-                    {{ form.submit(class="button is-info is-centered") }}
+                    {% if page in current_user.followed_pages %}
+                        {{ form.submit(class="button is-info is-centered", value="Unfollow") }}
+                    {% else %}
+                        {{ form.submit(class="button is-info is-centered", value="Follow") }}
+                    {% endif %}
                 </div>
                 </div>
             </form>
