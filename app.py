@@ -2,7 +2,7 @@ import logging
 from functools import wraps
 
 from flask import Flask, render_template, request
-from flask_login import current_user, login_required
+from flask_login import current_user
 from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy import desc
 
@@ -43,7 +43,12 @@ def requires_roles(*roles):
 # HOME PAGE VIEW
 @app.route('/')
 def index():
-    return render_template('index.html')
+    posts = []
+    if current_user.is_authenticated:
+        for page in current_user.followed_pages:
+            posts = posts + page.posts
+        posts.sort(key=lambda p: p.time_created)
+    return render_template('index.html', posts=posts)
 
 
 # EXPLORE PAGE VIEW

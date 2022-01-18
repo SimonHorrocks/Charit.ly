@@ -5,4 +5,33 @@
     <h1 class="title is-1">Charity Website</h1>
     <h2 class="subtitle is-2">Give a helping hand</h2>
 
+    {% for post in posts %}
+    <article class="media">
+        <div class="media-content">
+            <div class="content">
+                <h4>
+                    <a href="{{ url_for('charity.view', id=post.id) }}">{{ post.title }}</a>
+                </h4>
+                <p>
+                    <strong><a href="{{ url_for( 'charity.page', id=post.page_id)}}" id="pageName">{{ post.parent_page.name }}</a></strong>
+                    <small>{{ post.time_created.strftime('%d-%m-%Y %H:%M') }}</small>
+                    <br>
+                    {{ post.content }}
+                    <br>
+                    {% if page in current_user.pages %}
+                        <div id="post-navbar" class="navbar-menu">
+                            <div class="navbar-start">
+                                <a class="navbar-item"
+                                   href="{{ url_for('charity.update', id=post.id) }}">Update</a>
+                                <a class="navbar-item"
+                                   href="{{ url_for('charity.delete', id=post.id) }}">Delete</a>
+                            </div>
+                        </div>
+                    {% endif %}
+            </div>
+        </div>
+    </article>
+    {% endfor %}
+
+
 {% endblock %}
