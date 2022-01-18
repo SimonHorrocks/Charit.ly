@@ -22,8 +22,10 @@ admin_blueprint = Blueprint('admin', __name__, template_folder='templates')
 def admin():
     form = RolesForm()
     if form.validate_on_submit():
+        # updates the role of a user with inputted email
         User.query.filter_by(email=form.email.data).update({"roleID": form.role.data})
         db.session.commit()
+        # adds information about role change to the log
         logging.warning('SECURITY - Privilege Modification [%s, %s, %s, %s]', current_user.email, form.email.data, form.role.data, request.remote_addr)
     with open("charity_forum.log", "r") as f:  # open log file for reading
         content = f.read().splitlines()[-10:]  # read the last ten lines

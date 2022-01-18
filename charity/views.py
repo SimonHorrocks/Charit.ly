@@ -8,17 +8,21 @@ from geopy import distance
 from app import db, requires_roles
 from charity.forms import PostForm, SearchForm, NewEventForm, TagForm, DescriptionForm, NameForm, CommentForm, \
     FollowForm
-from models import Page, tags, Comment, User
-from models import Post, Tag, Event
+from models import Page, Comment, User, Post, Tag, Event
 
+
+# Blueprints
 charity_blueprint = Blueprint("charity", __name__, template_folder="templates")
 
 
+# VIEWS
+# view for charity's homepage
 @charity_blueprint.route('/<int:id>/page', methods=['GET', 'POST'])
 def page(id):
     charity_page = Page.query.get(id)
-    form=FollowForm()
+    form = FollowForm()
     if form.validate_on_submit():
+        # adds user to charity's followers
         charity_page.followers.append(current_user)
         db.session.commit()
 
@@ -28,15 +32,19 @@ def page(id):
                            change_desc_form=DescriptionForm(), change_name_form=NameForm())
 
 
+# view for post creation page
 @charity_blueprint.route('/<int:page_id>/create', methods=('GET', 'POST'))
 def create(page_id):
     form = PostForm()
 
     if form.validate_on_submit():
+
+        # creates a new post with the inputted data
         time = datetime.now()
         new_post = Post(title=form.title.data, content=form.content.data, page_id=page_id,
                         time_created=time)
 
+        # adds the new post to the database
         db.session.add(new_post)
         db.session.commit()
 
@@ -44,12 +52,12 @@ def create(page_id):
     return render_template('create.html', form=form)
 
 
+# view for post update page
 @charity_blueprint.route('/<int:id>/update', methods=('GET', 'POST'))
 def update(id):
     post = Post.query.filter_by(id=id).first()
     if not post:
         return render_template('500.html')
-
     form = PostForm()
 
     if form.validate_on_submit():
@@ -70,6 +78,7 @@ def update(id):
     return render_template('update.html', form=form)
 
 
+# deletes a post
 @charity_blueprint.route('/<int:id>/delete')
 def delete(id):
     post = Post.query.filter_by(id=id).first()
@@ -80,6 +89,7 @@ def delete(id):
     return page(page_id)
 
 
+# view for individual posts
 @charity_blueprint.route('/<int:id>/view', methods=('GET', 'POST'))
 def view(id):
     post = Post.query.filter_by(id=id).first()
@@ -87,13 +97,14 @@ def view(id):
     comments = Comment.query.filter_by(post=post.id, original=None)
     users = User.query.all()
     if form.validate_on_submit():
-
+        # creates a new comment with the inputted data
         new_comment = Comment(
             commentor_id=current_user.id,
             post=post.id,
             text=form.text.data,
             original=int(form.reply_to.data) if form.reply_to.data != "" else None
         )
+        # adds the comment to the database
         db.session.add(new_comment)
         db.session.commit()
 
@@ -147,6 +158,7 @@ def search():
     return render_template('search.html', form=form, results=results)
 
 
+# adds a charity tag based on inputted data
 @charity_blueprint.route("/<int:page_id>/tag", methods=["POST"])
 @requires_roles("charity")
 def add_tag(page_id):
@@ -165,6 +177,7 @@ def add_tag(page_id):
     return redirect(url_for("charity.page", id=page_id))
 
 
+# removes a charity tag based on inputted data
 @charity_blueprint.route("/<int:page_id>/removetag", methods=["POST"])
 @requires_roles("charity")
 def remove_tag(page_id):
@@ -179,6 +192,7 @@ def remove_tag(page_id):
     return redirect(url_for("charity.page", id=page_id))
 
 
+# changes charity's description based on inputted data
 @charity_blueprint.route("/<int:page_id>/change_desc", methods=["POST"])
 @requires_roles("charity")
 def change_desc(page_id):
@@ -190,6 +204,7 @@ def change_desc(page_id):
     return redirect(url_for("charity.page", id=page_id))
 
 
+# changes charity's name based on inputted data
 @charity_blueprint.route("/<int:page_id>/change_name", methods=["POST"])
 @requires_roles("charity")
 def change_name(page_id):
@@ -222,6 +237,7 @@ def new_event(page_id):
     return render_template('event.html', form=form)
 
 
+# deletes an event
 @charity_blueprint.route('/<int:id>/delete_event')
 def delete_event(id):
     event = Event.query.filter_by(id=id).first()

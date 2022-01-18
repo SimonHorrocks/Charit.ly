@@ -11,6 +11,8 @@ from models import User
 auth_blueprint = Blueprint("auth", __name__, template_folder="templates")
 
 
+# VIEWS
+# view registration page
 @auth_blueprint.route("/register", methods=["GET", "POST"])
 def register():
     form = RegisterForm()
@@ -44,6 +46,7 @@ def register():
     return render_template("register.html", form=form)
 
 
+# view login page
 @auth_blueprint.route("/login", methods=["GET", "POST"])
 def login():
     # create login form object

@@ -8,6 +8,7 @@ lowercase_characters = "abcdefghijklmnopqrstuvwxyz"
 digits = "0123456789"
 
 
+# checks if password contains special characters
 def check_password_special(form, field):
     data = field.data  # capture field data in variable
     for c in special_characters:  # iterate through and return if at least one special character in data
@@ -17,6 +18,7 @@ def check_password_special(form, field):
         f"Password must contain at least one special character ({special_characters}).")  # if none found show error message
 
 
+# checks if password contains an uppercase letter
 def check_password_upper(form, field):
     data = field.data  # capture field data in variable
     for c in uppercase_characters:  # iterate through and return if at least one upper case letter in data
@@ -25,6 +27,7 @@ def check_password_upper(form, field):
     raise ValidationError("Password must contain at least one uppercase character.")  # if none found show error message
 
 
+# checks if password contains a lowercase letter
 def check_password_lower(form, field):
     data = field.data  # capture field data in variable
     for c in lowercase_characters:  # iterate through and return if at least one lower case letter in data
@@ -33,6 +36,7 @@ def check_password_lower(form, field):
     raise ValidationError("Password must contain at least one lowercase character.")  # if none found show error message
 
 
+# checks if password contains a digit
 def check_password_digit(form, field):
     data = field.data  # capture field data in variable
     for c in digits:  # iterate through and return if at least one digit in data
@@ -41,6 +45,7 @@ def check_password_digit(form, field):
     raise ValidationError("Password must contain at least one digit.")  # if none found show error message
 
 
+# form for registering users
 class RegisterForm(FlaskForm):
     # Set up fields
     email = StringField(validators=[DataRequired(), Email()])
@@ -58,6 +63,7 @@ class RegisterForm(FlaskForm):
     submit = SubmitField()
 
 
+# form for users' logins
 class LoginForm(FlaskForm):
     # Set up fields
     email = StringField(validators=[DataRequired(), Email()])
