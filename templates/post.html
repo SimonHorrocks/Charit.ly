@@ -45,7 +45,16 @@
                     </form>
                     <script>
                         function switchTo(id) {
-                            document.getElementById("to").value = id;
+                            let reply_value = document.getElementById("to");
+                            let highlighted_comment = document.getElementById("comment-" + reply_value.value);
+                            highlighted_comment.classList.remove("replying");
+                            if (reply_value.value === id) {
+                                reply_value.value = "";
+                            } else {
+                                reply_value.value = id;
+                                document.getElementById("comment-" + id).classList.add("replying");
+                            }
+
                         }
                     </script>
                     {% for comment, indent in comments %}
@@ -54,7 +63,7 @@
                             <br>
                             {{ comment.text }}
                             <br>
-                                <button onclick="switchTo({{ comment.id }})" class="replybutton">reply</button>
+                                <button id="comment-{{ comment.id }}" onclick="switchTo({{ comment.id }})" class="replybutton">reply</button>
                         </div>
                     {% endfor %}
                     </p>
