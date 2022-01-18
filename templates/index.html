@@ -4,6 +4,7 @@
 
     <h1 class="title is-1">Charit.ly</h1>
     <h2 class="subtitle is-2">Give a helping hand</h2>
+{% if posts %}
 <div class="box">
 <h2>Posts</h2>
     {% for post in posts %}
@@ -34,6 +35,7 @@
     </article>
     {% endfor %}
 </div>
+{% endif %}
 
 
 {% endblock %}
