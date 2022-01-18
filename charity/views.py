@@ -121,7 +121,7 @@ def view(id):
 # returns json list of all events within a certain distance of the coords
 @charity_blueprint.route('/<string:coords>/<int:threshold>/nearby')
 def nearby(coords, threshold):
-    lon, lat = map(float, coords.split(":"))
+    lat, lon = map(float, coords.split(":"))
     events = list(filter(lambda event: distance.distance((event.lat, event.lon), (lat, lon)).miles < threshold,
                          Event.query.all()))
     return {"events": list(
