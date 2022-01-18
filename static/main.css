@@ -226,7 +226,7 @@ input {
     color: #555c47;
     transition: 0.5s;
 }
-.tabcontent a:link, a:visited{
+.tabcontent a:link{
     color: #3f4238;
     font-size: 25px;
     text-decoration: none;
@@ -258,7 +258,18 @@ input {
     width: 50%;
 
 }
-#mycharities a:link{
+#mycharities:link{
+    background-color: #A5A58D;
+    padding: 10px;
+    border-radius: 5px;
+    display: inline-block;
+}
+#following{
+    background: none;
+    padding: 10px;
+    width: 50%;
+}
+#following:link{
     background-color: #A5A58D;
     padding: 10px;
     border-radius: 5px;
@@ -306,6 +317,7 @@ textarea{
     padding: 20px 150px;
 
 }
+
 /* TODO: make width work better with different sizes */
 /* all users view */
 #allUsers{
@@ -414,27 +426,38 @@ display: block;
     color: #D4C7B0;
 }
 
-
+footer{
+    color: #3f4238;
+}
+footer a:link{
+    color: #555c47;
+    text-decoration: underline;
+}
+footer a:hover{
+    color: #3f4238;
+}
+/* scrollbar */
 ::-webkit-scrollbar {
   width: 15px;
 }
 
-/* Track */
+/* track */
 ::-webkit-scrollbar-track {
   border-radius: 10px;
 
 }
 
-/* Handle */
+/* handle */
 ::-webkit-scrollbar-thumb {
   background: #3f4238;
   border-radius: 10px;
 }
 
-/* Handle on hover */
+/* handle on hover */
 ::-webkit-scrollbar-thumb:hover {
   background:  #555c47;
 }
+
 /*mobile view for max 850px */
 @media screen and (max-width: 850px){
     .box #results{

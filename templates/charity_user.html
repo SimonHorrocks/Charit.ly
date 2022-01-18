@@ -14,18 +14,17 @@
             <h3> {{ current_user.username }} </h3>
         </div>
      <div id="Following" class="tabcontent">
-     {#   TODO: fix this#}
             <h3> Following </h3>
                 {% for following in following %}
-                    <p>{{ following }}</p>
+                    <p><a href="{{ url_for('charity.page', id=following.id) }}" id="following">{{ following.name }}</a></p>
                 {% endfor %}
         </div>
         <div id="MyCharities" class="tabcontent">
             <h3> My Charities </h3>
             {% if pages %}
-                <div class="content" id="mycharities">
+                <div class="content">
                     {% for page in pages %}
-                    <p><a href="{{ url_for('charity.page', id=page.id) }}">
+                    <p><a href="{{ url_for('charity.page', id=page.id)}}" , id="mycharities">
                     {{ page.name }}
                     </a></p>
                     {% endfor %}
