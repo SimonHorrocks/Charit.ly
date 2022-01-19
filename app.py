@@ -47,7 +47,7 @@ def index():
     if current_user.is_authenticated:
         for page in current_user.followed_pages:
             posts = posts + page.posts
-        posts.sort(key=lambda p: p.time_created)
+        posts.sort(key=lambda p: p.time_created, reverse=True)
     return render_template('index.html', posts=posts)
 
 
