@@ -5,9 +5,11 @@ html {
 }
 a:link{
     text-decoration: none;
-    color: #ffe6f3;
+    color: #261421;
 }
-
+a#pageName{
+    color: #261421;
+}
 body {
     width: auto;
     margin: 0;
@@ -19,12 +21,13 @@ body {
 /* website's name */
 h1 {
     text-align: center;
-    color: #261421;
+    color: #ffe6f3;
     font-size: 30px;
+        background-color: #751a2c;
+    padding: 10px;
 }
 
 h2 {
-    background-color: #751a2c;
     padding: 5px 10px;
     border-radius: 5px;
     text-align: center;
@@ -55,7 +58,7 @@ h4 a:link{
     text-decoration: none;
 }
 h4 a:hover{
-    color: #751a2c;
+    color: #ebc3cf;
     transition: 0.5s;
 }
 h5{
@@ -429,7 +432,7 @@ footer a:link{
     text-decoration: underline;
 }
 footer a:hover{
-    color: #261421;
+    color: #ebc3cf;
     transition: 0.5s;
 }
 
@@ -453,6 +456,13 @@ input#submit.button3:hover{
     text-align: left;
     margin-bottom: 10px;
 }
+
+strong a:link{
+    color: #261421;
+}
+strong a:visited{
+    color: #261421;
+}
 /* scrollbar */
 ::-webkit-scrollbar {
   width: 15px;
@@ -474,7 +484,6 @@ input#submit.button3:hover{
 ::-webkit-scrollbar-thumb:hover {
   background:  #751a2c;
 }
-
 
 /*mobile view for max 1250px */
 @media screen and (max-width: 1250px){
@@ -518,7 +527,7 @@ input#submit.button3:hover{
     background-color: #261421;
     padding:10px;
     }
-    #navbarMenuHeroA a:not(:nth-child(1), :nth-child(2), :nth-child(3), :nth-child(4), :nth-child(5)){
+    #navbarMenuHeroA a:not(:nth-child(1), :nth-child(2), :nth-child(3), :nth-child(4)){
         display: none;
     }
     #navbarMenuHeroA a.icon{
@@ -547,7 +556,7 @@ input#submit.button3:hover{
     background-color: #261421;
     padding:10px;
     }
-    #navbarMenuHeroA a:not(:nth-child(1), :nth-child(2), :nth-child(3), :nth-child(4), :nth-child(5)){
+    #navbarMenuHeroA a:not(:nth-child(1), :nth-child(2), :nth-child(3), :nth-child(4)){
         display: none;
     }
     #navbarMenuHeroA a.icon{
@@ -555,7 +564,8 @@ input#submit.button3:hover{
     }
 }
 @media screen and (max-width: 850px) {
-  #navbarMenuHeroA.responsive {position: relative;}
+  #navbarMenuHeroA.responsive {position: relative;
+  }
   #navbarMenuHeroA.responsive a.icon {
     position: relative;
   }
