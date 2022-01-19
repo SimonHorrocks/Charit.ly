@@ -465,7 +465,16 @@ strong a:visited{
     color: #261421;
 }
 
-
+p#introduction{
+    margin: 0 auto 0 auto;
+    width: 50%;
+    color: #ffe6f3;
+    background-color: #751a2c;
+    padding: 10px 20px;
+    border-radius: 5px;
+    text-align: center;
+    font-size: 18px;
+}
 /* scrollbar */
 ::-webkit-scrollbar {
   width: 15px;
@@ -554,6 +563,9 @@ strong a:visited{
 @media screen and (max-width: 850px){
     .box #results{
         padding: 20px 60px;
+    }
+    p#introduction{
+        width: 75%;
     }
     #navbarMenuHeroA{
     background-color: #261421;
