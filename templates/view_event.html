@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<div class="box">
+        <article class="media">
+            <div class="media-content">
+                <div class="content">
+                    <h4>{{ event.name }}</h4>
+                    <p>
+                        <strong><a href="{{ url_for('charity.page', id=event.id)}}">{{ event.event_page.name}}</a></strong>
+
+                        <small>{{ event.date.strftime('%d-%m-%Y') }}</small>
+                        <small>{{ event.time.strftime('%H:%M') }}</small>
+                        <small>{{ event.lat, event.lon }}</small>
+                        <br>
+                        {{ event.description }}
+                        <br>
+                    </p>
+                </div>
+            </div>
+        </article>
+</div>
+
+
+
+{% endblock %}

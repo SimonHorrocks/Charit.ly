@@ -262,3 +262,10 @@ def delete_event(id):
     db.session.commit()
 
     return redirect(url_for("charity.page", id=page_id))
+
+
+#view event
+@charity_blueprint.route('/<int:id>/view_event')
+def view_event(id):
+    event = Event.query.filter_by(id=id).first()
+    return render_template('view_event.html', event=event)

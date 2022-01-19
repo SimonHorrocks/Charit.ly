@@ -9,6 +9,10 @@ a:link{
 }
 a#pageName{
     color: #261421;
+    font-size: 20px;
+}
+a:hover#pageName{
+    color: #751a2c;
 }
 body {
     width: auto;
@@ -242,9 +246,6 @@ input {
     transition: 0.5s;
 }
 
-#pageName:link{
-    font-size: 15px;
-}
 /* new post button*/
 .tabcontent button{
     border: none;
@@ -463,6 +464,8 @@ strong a:link{
 strong a:visited{
     color: #261421;
 }
+
+
 /* scrollbar */
 ::-webkit-scrollbar {
   width: 15px;
