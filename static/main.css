@@ -1,53 +1,52 @@
-/*TODO: my charities*/
-
-
 html {
-    background-color: #A5A58D;
+    background-color: #ffe6f3;
     font-family: monospace;
     align-content: center;
 }
 a:link{
     text-decoration: none;
-    color: #3f4238;
+    color: #ffe6f3;
 }
 
 body {
     width: auto;
     margin: 0;
-    background-color: #ffe8d6;
-    border: 2px solid #3f4238;
+    background-color: #b33a3a;
+    border: 2px solid #261421;
     border-top: none;
 }
 
+/* website's name */
 h1 {
     text-align: center;
-    color: #3f4238;
+    color: #261421;
     font-size: 30px;
 }
+
 h2 {
-    background-color: #555c47;
+    background-color: #751a2c;
     padding: 5px 10px;
     border-radius: 5px;
     text-align: center;
-    color: #D4C7B0;
+    color: #ffe6f3;
     font-size: 30px;
 }
 h3{
-    background-color: #555c47;
+    background-color: #b33a3a;
     padding: 5px 15px;
     border-radius: 5px;
     text-align: left;
-    color: #D4C7B0;
+    color: #ffe6f3;
     font-size: 30px;
     display: table;
 }
 
-/*blog title*/
+/* post/event title */
 h4{
     text-align: center;
-    color: #3f4238;
+    color: #ffe6f3;
     font-size: 30px;
-    background: #D4C7B0;
+    background: #751a2c;
     border-top-left-radius: 10px;
     border-top-right-radius: 10px;
     margin-bottom: 0;
@@ -56,35 +55,36 @@ h4 a:link{
     text-decoration: none;
 }
 h4 a:hover{
-    color: #555c47;
+    color: #751a2c;
     transition: 0.5s;
 }
 h5{
     text-align: left;
-    color: #D4C7B0;
+    color: #ffe6f3;
     font-size: 30px;
     display: table;
 }
 
 /*  navigation bar */
 #navbarMenuHeroA{
-    background-color: #D4C7B0;
+    background-color: #261421;
     padding:10px;
 }
 
+/* links in the navigation bar */
 #navbarMenuHeroA a{
     text-align: center;
     padding:10px;
-    color:#3f4238;
-    background-color: #D4C7B0;
+    color:#ffe6f3;
+    background-color: #261421;
     font-size: 20px;
     font-weight: bolder;
     text-decoration: none;
 }
 
 #navbarMenuHeroA a:hover{
-    background-color:  #3f4238;
-    color: #D4C7B0;
+    background-color:  #ffe6f3;
+    color: #261421;
     padding:10px;
     transition: 0.5s;
 }
@@ -97,34 +97,35 @@ h5{
 .box {
     display: table;
     padding: 20px 150px;
-    background-color: #3f4238;
+    background-color: #261421;
     margin: 20px auto 20px auto;
     text-align: center;
     border-radius: 5px;
     width: 400px;
 }
+
 input {
     position: static;
     padding: 10px 30px;
-    background: #A5A58D;
+    background: #ffe6f3;
     margin-top: 10px;
     border: none;
     font-size: 20px;
     border-radius: 2px;
-    color: #3f4238;
+    color: #261421;
 }
 
 /*error messages in forms*/
 .error{
-    color:  #ffe8d6;
+    color:  #ffe6f3;
     display: inline;
     position: relative;
 }
 
-/*button*/
+/*submit button*/
 .button {
-    background: #A5A58D;
-    color: #555c47;
+    background: #b33a3a;
+    color: #ffe6f3;
     width: auto;
     border: none;
     padding: 10px 20px;
@@ -135,19 +136,21 @@ input {
 }
 
 .button:hover{
-    background: #555c47;
-    color: #A5A58D;
+    background: #ffe6f3;
+    color: #b33a3a;
     transition: 0.5s;
 }
 .button:active{
-    background: #555c47;
-    color: #A5A58D;
+    background: #ffe6f3;
+    color: #b33a3a;
     transition: 0.5s;
 }
+
+/* COMMENTS */
 /* reply button */
 .replybutton{
-    background: #555c47;
-    color: #A5A58D;
+    background: #261421;
+    color: #ffe6f3;
     width: auto;
     border: none;
     padding: 5px 10px;
@@ -155,49 +158,51 @@ input {
     border-radius: 2px;
     margin: 10px auto;
 }
+
 .replybutton:hover{
-    background: #3f4238;
-    color: #A5A58D;
+    background: #751a2c;
     transition: 0.5s;
 }
 
+/* submit comment button */
 #comment_submit{
     border: none;
-    color: #D4C7B0;
-    background: #3f4238;
+    color: #ffe6f3;
+    background: #261421;
     padding: 10px 20px;
     font-size: 20px;
 }
 
 #comment_submit:hover{
-    background: #555c47;
+    background: #751a2c;
     transition: 0.5s;
 }
+
 .dropdown{
     font-size: 25px;
     border: none;
-    color: #555c47;
-    background-color: #A5A58D;
+    color: #261421;
+    background-color: #ffe6f3;
     padding: 5px 10px;
 }
 
 /* tab view */
 .tabcontent{
-    background-color: #3f4238;
+    background-color: #261421;
     padding: 10px 20px;
     border-radius: 0 5px 5px 5px;
 }
 
 .tab {
     border: none;
-    color: #D4C7B0;
+    color: #ffe6f3;
     padding: 10px 20px;
 }
 .tablink {
-    color: #3f4238;
+    color: #261421;
     border-top-left-radius: 5px;
     border-top-right-radius: 5px;
-    background-color: #A5A58D;
+    background-color: #ffe6f3;
     border: none;
     padding: 10px 20px;
 
@@ -205,48 +210,49 @@ input {
 
 
 .tablink:hover{
-    background-color: #3f4238;
-    color: #A5A58D;
+    background-color: #261421;
+    color: #ffe6f3;
     transition: 0.5s;
 }
 .tablink:focus{
-    background-color: #3f4238;
-    color: #A5A58D;
+    background-color: #261421;
+    color: #ffe6f3;
 }
 /* blog posts */
 .content{
-    color: #3f4238;
+    color: #261421;
     border-radius: 10px;
-    background-color: #A5A58D;
+    background-color: #ffe6f3;
     width: 600px;
     margin-bottom: 20px;
     font-size: 15px;
     padding-bottom: 5px;
 }
-
-.tabcontent a:hover{
-    color: #555c47;
-    transition: 0.5s;
-}
 .tabcontent a:link{
-    color: #3f4238;
+    color: #ffe6f3;
     font-size: 25px;
     text-decoration: none;
 }
+
+.tabcontent a:hover{
+    color: #ebc3cf;
+    transition: 0.5s;
+}
+
 #pageName:link{
     font-size: 15px;
 }
 /* new post button*/
 .tabcontent button{
     border: none;
-    color: #3f4238;
-    background: #D4C7B0;
+    color: #ffe6f3;
+    background: #b33a3a;
     padding: 5px 10px;
     font-size: 15px;
 }
 
 .tabcontent button:hover{
-    background: #A5A58D;
+    background: #751a2c;
     transition: 0.5s;
 }
 
@@ -261,7 +267,7 @@ input {
 
 }
 #mycharities:link{
-    background-color: #A5A58D;
+    background-color: #ffe6f3;
     padding: 10px;
     border-radius: 5px;
     display: inline-block;
@@ -272,19 +278,19 @@ input {
     width: 50%;
 }
 #following:link{
-    background-color: #A5A58D;
+    background-color: #ffe6f3;
     padding: 10px;
     border-radius: 5px;
     display: inline-block;
 }
 /* TODO: Add padding and make contents centered */
 textarea{
-    background: #A5A58D;
+    background: #ffe6f3;
     width: 99%;
     height: 250px;
     font-size: 15px;
     border-radius: 3px;
-    color: #3f4238;
+    color: #261421;
 }
 
 
@@ -300,19 +306,19 @@ textarea{
 }
 
 #update-navbar:link{
-    color: #555c47;
-    background-color: #D4C7B0;
+    color: #ffe6f3;
+    background-color: #b33a3a;
     padding: 5px;
 }
 #update-navbar:hover{
-    color: #D4C7B0;
-    background-color: #555c47;
+    color: #ffe6f3;
+    background-color: #751a2c;
     transition: 0.5s;
 }
 /* search results */
 #results{
-    background-color: #A5A58D;
-    color: #3f4238;
+    background-color: #751a2c;
+    color: #ffe6f3;
     text-align: center;
     width: 400px;
     margin: 20px auto 20px auto;
@@ -320,7 +326,6 @@ textarea{
 
 }
 
-/* TODO: make width work better with different sizes */
 /* all users view */
 #allUsers{
     width: 800px;
@@ -332,15 +337,15 @@ textarea{
 }
 
 #userRow{
-    color: #D4C7B0;
+    color: #ffe6f3;
     margin-bottom: 20px;
     padding: 10px;
     border-radius: 5px;
 }
 
 #topUserRow{
-    color: #D4C7B0;
-    background-color: #555c47;
+    color: #ffe6f3;
+    background-color: #751a2c;
     margin-bottom: 20px;
     padding: 10px;
     border-radius: 5px;
@@ -349,16 +354,16 @@ textarea{
 /* all charities view */
 #allCharities{
     width: 800px;
-        padding:10px 20px;
+    padding:10px 20px;
 
 }
 #allCharities a:link, a:visited{
-    color:#3f4238;
+    color:#ffe6f3;
     font-weight: bolder;
     text-decoration: none;
 }
 #allCharities a:hover{
-    color: #555c47;
+    color: #ebc3cf;
     transition: 0.5s;
 }
 #charityColumn {
@@ -374,11 +379,11 @@ textarea{
     text-align: left;
     width: 33%;
     font-size: 15px;
-    color:#3f4238;
+    color:#ffe6f3;
 }
 #charityRow{
-    color:#3f4238;
-    background-color: #A5A58D;
+    color:#ffe6f3;
+    background-color: #751a2c;
     margin-bottom: 20px;
     padding: 10px;
     border-radius: 5px;
@@ -391,23 +396,10 @@ textarea{
 p{
     font-size: 15px;
 }
-/* comments */
-#comments{
-    text-align: left;
-    padding: 15px;
-    font-size: 20px;
-    border-top: 5px solid #555c47;
-}
-#comment_username{
-    background-color: #D4C7B0;
-    padding:3px;
-    margin-bottom: 10px;
-    border-radius: 3px;
-}
 
 /* map view*/
 #changeDis{
-    background-color: #555c47;
+    background-color: #261421;
       margin: auto auto 15px auto;
      width: 50%;
   padding: 10px;
@@ -416,31 +408,34 @@ p{
 }
 
 label{
-    color: #D4C7B0;
+    color: #ffe6f3;
     font-size: 25px;
 display: block;
 
 }
 #map{
-    border: 6px solid #555c47;
+    border: 6px solid #261421;
 }
 .notification{
-    color: #D4C7B0;
+    color: #ffe6f3;
 }
 
+/* footer */
 footer{
-    color: #3f4238;
+    color: #ffe6f3;
 }
 footer a:link{
-    color: #555c47;
+    color: #ffe6f3;
     text-decoration: underline;
 }
 footer a:hover{
-    color: #3f4238;
+    color: #261421;
+    transition: 0.5s;
 }
 
+/* comment that you are replying to */
 .replying {
-    background-color: #D4C7B0;
+    background-color: #ebc3cf;
     transition: 0.25s;
 }
 input#submit.button3{
@@ -450,8 +445,8 @@ input#submit.button3{
 input#submit.button3:hover{
     text-align: left;
     transition: 0.5s;
-    color: #A5A58D;
-    background-color: #555c47;
+    color: #261421;
+    background-color: #ffe6f3;
 
 }
 .follow{
@@ -471,13 +466,13 @@ input#submit.button3:hover{
 
 /* handle */
 ::-webkit-scrollbar-thumb {
-  background: #3f4238;
+  background: #261421;
   border-radius: 10px;
 }
 
 /* handle on hover */
 ::-webkit-scrollbar-thumb:hover {
-  background:  #555c47;
+  background:  #751a2c;
 }
 
 
@@ -520,7 +515,7 @@ input#submit.button3:hover{
         padding: 20px 60px;
     }
     #navbarMenuHeroA{
-    background-color: #D4C7B0;
+    background-color: #261421;
     padding:10px;
     }
     #navbarMenuHeroA a:not(:nth-child(1), :nth-child(2), :nth-child(3), :nth-child(4), :nth-child(5)){
@@ -549,7 +544,7 @@ input#submit.button3:hover{
         padding: 20px 60px;
     }
     #navbarMenuHeroA{
-    background-color: #D4C7B0;
+    background-color: #261421;
     padding:10px;
     }
     #navbarMenuHeroA a:not(:nth-child(1), :nth-child(2), :nth-child(3), :nth-child(4), :nth-child(5)){
@@ -579,7 +574,7 @@ input#submit.button3:hover{
         width: 350px;
     }
     #navbarMenuHeroA{
-    background-color: #D4C7B0;
+    background-color: #261421;
     padding:10px;
     }
 
