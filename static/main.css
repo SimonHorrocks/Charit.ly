@@ -14,6 +14,7 @@ a#pageName{
 a:hover#pageName{
     color: #751a2c;
 }
+
 body {
     width: auto;
     margin: 0;
@@ -284,8 +285,12 @@ input {
 #following:link{
     background-color: #ffe6f3;
     padding: 10px;
+    color: #261421;
     border-radius: 5px;
     display: inline-block;
+}
+#following:visited{
+    color: #261421;
 }
 /* TODO: Add padding and make contents centered */
 textarea{
